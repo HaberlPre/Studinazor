@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Studinazor</string>
+    <string name="todo_liste_string">ToDo-Liste</string>
+    <string name="einkaufsliste_string">Einkaufsliste</string>
+    <string name="stundenplan_string">Stundenplan</string>
+    <string name="startbildschirm_string">Startbildschirm</string>
+    <string name="todo_text_wip">ToDo</string>
+    <string name="einkauf_text_wip">einkauf</string>
+    <string name="stundenplan_text_wip">stundenplan</string>
+</resources>
