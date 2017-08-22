@@ -17,15 +17,15 @@ public class Stundenplan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stundenplan);
 
-        setupUi();
+        setupUI();
         setupListeners();
     }
 
     private void setupListeners() {
     }
 
-    private void setupUi() {
+    private void setupUI() {
         textView = (TextView) findViewById(R.id.stundenplan_text_wip);
-        textView.setText("fuck");
+        textView.setText("Hallo");
     }
 }
