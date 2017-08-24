@@ -7,4 +7,5 @@
     <string name="todo_text_wip">ToDo</string>
     <string name="einkauf_text_wip">einkauf</string>
     <string name="stundenplan_text_wip">stundenplan</string>
+    <string name="add_button">Add</string>
 </resources>
