@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -65,12 +67,29 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     private void addInputToList() {
-        EditText edit = (EditText) findViewById(R.id.item_edit_input);
-        String task = edit.getText().toString();
+        EditText num = (EditText) findViewById(R.id.item_edit_amount);
+        String amount = num.getText().toString();
 
-        if (!task.equals("")) {
-            edit.setText("");
-            addNewTask(task);
+        EditText item = (EditText) findViewById(R.id.item_edit_input);
+        String task = item.getText().toString();
+
+        Spinner spinner = (Spinner) findViewById(R.id.item_spinner_unit);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(Einkaufsliste.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        String unit = spinner.getSelectedItem().toString();
+
+        if (!task.equals("") && !amount.equals("")) {
+            item.setText("");
+            num.setText("");
+            addNewTask(amount, unit, task);
         }
     }
 
@@ -92,9 +111,9 @@ public class Einkaufsliste extends AppCompatActivity {
         list.setAdapter(shopItems_adapter);
     }
 
-    private void addNewTask(String task) {
+    private void addNewTask(String amount, String unit, String task) {
 
-        ShopItem newTask = new ShopItem(task);
+        ShopItem newTask = new ShopItem(amount, unit, task);
 
         shopDB.insertItem(newTask);
         refreshArrayList();

@@ -6,10 +6,21 @@ package com.gastell_gehr_haberl.studinazor;
 
 public class ShopItem implements Comparable<ShopItem> {
 
+    private String amount;
+    private String unit;
     private String name;
 
-    public ShopItem(String name){
+    public ShopItem(String amount, String unit, String name){
+        this.amount = amount;
+        this.unit = unit;
         this.name = name;
+    }
+
+    public String getAmount(){
+        return amount;
+    }
+    public String getUnit(){
+        return unit;
     }
 
     public String getName(){
@@ -23,6 +34,6 @@ public class ShopItem implements Comparable<ShopItem> {
 
     @Override
     public String toString() {
-        return "Name: " + getName();
+        return "Menge: " + getAmount() + "Einheit: " + getUnit() + "Name: " + getName();
     }
 }

@@ -37,12 +37,16 @@ public class EinkaufslisteAdapter extends ArrayAdapter<ShopItem> {
 
         }
 
-        ShopItem task = shopList.get(position);
+        ShopItem item = shopList.get(position);
 
-        if (task != null) {
-            TextView taskName = (TextView) v.findViewById(R.id.item_name);
+        if (item != null) {
+            TextView itemAmount = (TextView) v.findViewById(R.id.item_amount);
+            TextView itemUnit = (TextView) v.findViewById(R.id.item_unit);
+            TextView itemName = (TextView) v.findViewById(R.id.item_name);
 
-            taskName.setText(task.getName());
+            itemAmount.setText(item.getAmount());
+            itemUnit.setText(item.getUnit());
+            itemName.setText(item.getName());
         }
 
         return v;

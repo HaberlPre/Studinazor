@@ -1,11 +1,28 @@
 <resources>
+
+    // Startscreen
     <string name="app_name">Studinazor</string>
     <string name="todo_liste_string">ToDo-Liste</string>
     <string name="einkaufsliste_string">Einkaufsliste</string>
     <string name="stundenplan_string">Stundenplan</string>
     <string name="startbildschirm_string">Startbildschirm</string>
+
+    //To-Do-Liste
     <string name="todo_text_wip">ToDo</string>
-    <string name="einkauf_text_wip">einkauf</string>
+
+    //Stundeplan
     <string name="stundenplan_text_wip">stundenplan</string>
+
+    //Einkaufsliste
+    <string name="einkauf_text_wip">Einkaufsliste</string>
     <string name="add_button">Add</string>
+
+    <string-array name="units">
+        <item>Gramm</item>
+        <item>Kilogramm</item>
+        <item>Liter</item>
+        <item>Milliliter</item>
+        <item>Stück</item>
+        <item>Packungen</item>
+    </string-array>
 </resources>

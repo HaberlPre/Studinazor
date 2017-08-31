@@ -22,8 +22,12 @@ public class EinkaufslisteDatabase {
 
     public static final String KEY_ID = "_id";
     public static final String KEY_ITEM = "task";
+    public static final String KEY_AMOUNT = "amount";
+    public static final String KEY_UNIT = "unit";
 
-    public static final int COLUMN_TASK_INDEX = 1;
+    public static final int COLUMN_ITEM_INDEX = 3;
+    public static final int COLUMN_AMOUNT_INDEX = 1;
+    public static final int COLUMN_UNIT_INDEX = 2;
 
     private ToDoDBOpenHelper dbHelper;
 
@@ -48,6 +52,8 @@ public class EinkaufslisteDatabase {
 
     public long insertItem(ShopItem item) {
         ContentValues itemValues = new ContentValues();
+        itemValues.put(KEY_AMOUNT, item.getAmount());
+        itemValues.put(KEY_UNIT, item.getUnit());
         itemValues.put(KEY_ITEM, item.getName());
         return db.insert(DATABASE_TABLE, null, itemValues);
     }
@@ -62,25 +68,15 @@ public class EinkaufslisteDatabase {
 
     public ArrayList<ShopItem> getAllToDoItems() {
         ArrayList<ShopItem> items = new ArrayList<ShopItem>();
-        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_AMOUNT, KEY_UNIT,
                 KEY_ITEM}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                String task = cursor.getString(COLUMN_TASK_INDEX);
-                /*String date = cursor.getString(COLUMN_DATE_INDEX);
+                String amount = cursor.getString(COLUMN_AMOUNT_INDEX);
+                String unit = cursor.getString(COLUMN_UNIT_INDEX);
+                String item = cursor.getString(COLUMN_ITEM_INDEX);
 
-                Date formattedDate = null;
-                try {
-                    formattedDate = new SimpleDateFormat("dd.MM.yyyy",
-                            Locale.GERMAN).parse(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                Calendar cal = Calendar.getInstance(Locale.GERMAN);
-                cal.setTime(formattedDate);*/
-
-                items.add(new ShopItem(task));
+                items.add(new ShopItem(amount, unit, item));
 
             } while (cursor.moveToNext());
         }
@@ -90,7 +86,7 @@ public class EinkaufslisteDatabase {
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {
         private static final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID
-                + " integer primary key autoincrement, " + KEY_ITEM
+                + " integer primary key autoincrement, " + KEY_AMOUNT + " text " + KEY_UNIT + " text " + KEY_ITEM
                 + " text not null);";
 
         public ToDoDBOpenHelper(Context c, String dbname,
