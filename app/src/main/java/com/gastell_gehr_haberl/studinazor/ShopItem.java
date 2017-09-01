@@ -6,7 +6,6 @@ package com.gastell_gehr_haberl.studinazor;
 
 public class ShopItem implements Comparable<ShopItem> {
 
-    //neu alles mit amount und unit
     private String amount;
     private String unit;
     private String name;
