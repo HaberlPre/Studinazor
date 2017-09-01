@@ -16,6 +16,8 @@
     //Einkaufsliste
     <string name="einkauf_text_wip">Einkaufsliste</string>
     <string name="add_button">Add</string>
+    <string name="amount">Menge</string>
+    <string name="item">Ding</string>
 
     <string-array name="units">
         <item>Gramm</item>

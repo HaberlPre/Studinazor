@@ -23,6 +23,7 @@
         android:id="@+id/item_edit_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/amount"
         android:inputType="numberDecimal"/>
 
     <Spinner
@@ -34,7 +35,8 @@
     <EditText
         android:id="@+id/item_edit_input"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/item"/>
 
     <ListView
         android:id="@+id/shop_list"
