@@ -5,7 +5,7 @@ android:id="@+id/shoplist_itemlist"
 android:layout_width="match_parent"
 android:layout_height="?android:attr/listPreferredItemHeight"
 android:padding="12dp">
-
+//neu
     <TextView
         android:id="@+id/item_amount"
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@ android:padding="12dp">
         android:padding="5dp"
         android:maxLines="1"
         android:textSize="16sp" />
-
+//neu
     <TextView
         android:id="@+id/item_unit"
         android:layout_width="wrap_content"

@@ -22,10 +22,12 @@ public class EinkaufslisteDatabase {
 
     public static final String KEY_ID = "_id";
     public static final String KEY_ITEM = "task";
+    //neu
     public static final String KEY_AMOUNT = "amount";
     public static final String KEY_UNIT = "unit";
 
     public static final int COLUMN_ITEM_INDEX = 3;
+    //neu
     public static final int COLUMN_AMOUNT_INDEX = 1;
     public static final int COLUMN_UNIT_INDEX = 2;
 
@@ -52,6 +54,7 @@ public class EinkaufslisteDatabase {
 
     public long insertItem(ShopItem item) {
         ContentValues itemValues = new ContentValues();
+        //neu
         itemValues.put(KEY_AMOUNT, item.getAmount());
         itemValues.put(KEY_UNIT, item.getUnit());
         itemValues.put(KEY_ITEM, item.getName());
@@ -68,10 +71,12 @@ public class EinkaufslisteDatabase {
 
     public ArrayList<ShopItem> getAllToDoItems() {
         ArrayList<ShopItem> items = new ArrayList<ShopItem>();
+        //teil neu
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_AMOUNT, KEY_UNIT,
                 KEY_ITEM}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
+                //teil neu
                 String amount = cursor.getString(COLUMN_AMOUNT_INDEX);
                 String unit = cursor.getString(COLUMN_UNIT_INDEX);
                 String item = cursor.getString(COLUMN_ITEM_INDEX);
@@ -84,6 +89,7 @@ public class EinkaufslisteDatabase {
     }
 
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {
+        //teil neu
         private static final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID
                 + " integer primary key autoincrement, " + KEY_AMOUNT + " text " + KEY_UNIT + " text " + KEY_ITEM

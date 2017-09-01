@@ -40,6 +40,7 @@ public class EinkaufslisteAdapter extends ArrayAdapter<ShopItem> {
         ShopItem item = shopList.get(position);
 
         if (item != null) {
+            //neu
             TextView itemAmount = (TextView) v.findViewById(R.id.item_amount);
             TextView itemUnit = (TextView) v.findViewById(R.id.item_unit);
             TextView itemName = (TextView) v.findViewById(R.id.item_name);

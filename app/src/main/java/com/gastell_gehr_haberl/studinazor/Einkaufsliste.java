@@ -67,12 +67,14 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     private void addInputToList() {
+        //neu
         EditText num = (EditText) findViewById(R.id.item_edit_amount);
         String amount = num.getText().toString();
 
         EditText item = (EditText) findViewById(R.id.item_edit_input);
         String task = item.getText().toString();
 
+        //neu
         Spinner spinner = (Spinner) findViewById(R.id.item_spinner_unit);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -85,7 +87,7 @@ public class Einkaufsliste extends AppCompatActivity {
             }
         });
         String unit = spinner.getSelectedItem().toString();
-
+        //neu zum teil
         if (!task.equals("") && !amount.equals("")) {
             item.setText("");
             num.setText("");
