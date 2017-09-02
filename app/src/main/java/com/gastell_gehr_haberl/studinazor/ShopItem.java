@@ -19,6 +19,7 @@ public class ShopItem implements Comparable<ShopItem> {
     public String getAmount(){
         return amount;
     }
+
     public String getUnit(){
         return unit;
     }
@@ -34,6 +35,6 @@ public class ShopItem implements Comparable<ShopItem> {
 
     @Override
     public String toString() {
-        return "Menge: " + getAmount() + "Einheit: " + getUnit() + "Name: " + getName();
+        return "Menge: " + getAmount() + ", Einheit: " + getUnit() + ", Name: " + getName();
     }
 }

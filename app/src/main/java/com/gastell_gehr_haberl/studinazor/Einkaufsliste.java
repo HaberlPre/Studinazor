@@ -74,7 +74,7 @@ public class Einkaufsliste extends AppCompatActivity {
         String task = item.getText().toString();
 
         Spinner spinner = (Spinner) findViewById(R.id.item_spinner_unit);
-        /*spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(Einkaufsliste.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
@@ -83,7 +83,7 @@ public class Einkaufsliste extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
-        });*/
+        });
         String unit = spinner.getSelectedItem().toString();
 
         if (!task.equals("") && !amount.equals("")) {

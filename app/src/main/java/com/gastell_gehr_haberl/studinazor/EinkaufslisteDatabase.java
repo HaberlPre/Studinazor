@@ -21,13 +21,13 @@ public class EinkaufslisteDatabase {
     private static final String DATABASE_TABLE = "shoppingitems";
 
     public static final String KEY_ID = "_id";
-    public static final String KEY_ITEM = "task";
+    public static final String KEY_ITEM = "item";
     public static final String KEY_AMOUNT = "amount";
     public static final String KEY_UNIT = "unit";
 
-    public static final int COLUMN_ITEM_INDEX = 3;
     public static final int COLUMN_AMOUNT_INDEX = 1;
     public static final int COLUMN_UNIT_INDEX = 2;
+    public static final int COLUMN_ITEM_INDEX = 3;
 
     private ToDoDBOpenHelper dbHelper;
 
@@ -86,7 +86,7 @@ public class EinkaufslisteDatabase {
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {
         private static final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID
-                + " integer primary key autoincrement, " + KEY_AMOUNT + " text " + KEY_UNIT + " text " + KEY_ITEM
+                + " integer primary key autoincrement, " + KEY_AMOUNT + " text, " + KEY_UNIT + " text, " + KEY_ITEM
                 + " text not null);";
 
         public ToDoDBOpenHelper(Context c, String dbname,

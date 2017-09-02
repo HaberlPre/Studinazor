@@ -23,8 +23,9 @@
         android:id="@+id/item_edit_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/amount"
-        android:inputType="numberDecimal"/>
+        android:hint="@string/amount"
+        android:inputType="numberDecimal"
+        android:textColorHint="#aaaaaa"/>
 
     <Spinner
         android:id="@+id/item_spinner_unit"
@@ -36,7 +37,8 @@
         android:id="@+id/item_edit_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/item"/>
+        android:hint="@string/item"
+        android:textColorHint="#aaaaaa"/>
 
     <ListView
         android:id="@+id/shop_list"
