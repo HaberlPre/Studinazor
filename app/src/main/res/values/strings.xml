@@ -11,11 +11,11 @@
     <string name="todo_text_wip">ToDo</string>
 
     //Stundeplan
-    <string name="stundenplan_text_wip">stundenplan</string>
+    <string name="stundenplan_text_wip">Stundenplan</string>
 
     //Einkaufsliste
     <string name="einkauf_text_wip">Einkaufsliste</string>
-    <string name="add_button">Add</string>
+    <string name="add_button">Hinzufügen</string>
     <string name="amount">Menge</string>
     <string name="item">Ding</string>
 
@@ -25,6 +25,7 @@
         <item>Liter</item>
         <item>Milliliter</item>
         <item>Stück</item>
-        <item>Packungen</item>
+        <item>Packung[en]</item>
+        <item>Pfund</item>
     </string-array>
 </resources>
