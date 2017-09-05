@@ -8,7 +8,13 @@
     <string name="startbildschirm_string">Startbildschirm</string>
 
     //To-Do-Liste
-    <string name="todo_text_wip">ToDo</string>
+    <string name="todo_text_task">Neue Aufgabe</string>
+    <string name="todo_text_button">Add</string>
+    <string name="todo_text_date">Bis</string>
+    <string name="text_task">task</string>
+    <string name="text_date">date</string>
+    <string name="todo_sort">Sort by Date</string>
+
 
     //Stundeplan
     <string name="stundenplan_text_wip">Stundenplan</string>
