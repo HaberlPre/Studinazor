@@ -37,4 +37,6 @@
 
     <string name="menu_shoplist">Löschen</string>
     <string name="toolbar_name">Einkaufsliste</string>
+    <string name="item_delete">Löschen</string>
+    <string name="item_change">Bearbeiten</string>
 </resources>

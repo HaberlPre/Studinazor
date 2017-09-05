@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.Menu;
+import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
@@ -99,16 +100,45 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     private void initListView() {
-        ListView list = (ListView) findViewById(R.id.shop_list);
+        final ListView list = (ListView) findViewById(R.id.shop_list);
+        registerForContextMenu(list);
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long id) {
-                removeTaskAtPosition(position);
+                registerForContextMenu(list);
+                //removeTaskAtPosition(position);
                 return true;
             }
         });
     }
+
+    /*@Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo info){
+        super.onCreateContextMenu(menu, v, info);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_einkauf_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.item_delete:
+                removeTaskAtPosition(item.getItemId());
+                return true;
+            case R.id.item_change:
+                changeItem();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }*/
+
+    private void changeItem(){
+
+    }
+
 
     private void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_shoplist);
@@ -158,6 +188,9 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     private void deleteList(){
+        shopItems.clear();
+        shopItems_adapter.notifyDataSetChanged();
+
     }
 
     private void sortList() {

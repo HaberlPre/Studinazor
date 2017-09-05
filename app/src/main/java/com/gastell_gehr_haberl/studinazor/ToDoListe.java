@@ -62,13 +62,8 @@ public class ToDoListe extends AppCompatActivity {
         initTaskButton();
         initListView();
         initDateField();
-        initToolBar();
     }
 
-    private void initToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_toDolist);
-        setSupportActionBar(toolbar);
-    }
 
     private void initTaskButton() {
         addButton = (Button) findViewById(R.id.todo_text_button);
@@ -119,8 +114,6 @@ public class ToDoListe extends AppCompatActivity {
         ToDoItem newTask = new ToDoItem(task, cal.get(Calendar.DAY_OF_MONTH),
                 cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
 
-        //tasks.add(newTask);
-        //tasks_adapter.notifyDataSetChanged();
         todoDB.insertItem(newTask);
         updateList();
     }
@@ -139,8 +132,6 @@ public class ToDoListe extends AppCompatActivity {
     //int position wird übergeben
     private void removeTaskAtPosition(int position) {
         if (items.get(position) != null) {
-            //tasks.remove(position);
-            //tasks_adapter.notifyDataSetChanged();
             todoDB.removeToDoItem(items.get(position));
             updateList();
         }

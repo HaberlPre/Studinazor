@@ -6,4 +6,12 @@
         android:orderInCategory="100"
         android:title="@string/todo_sort"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/todo_delete"
+        android:orderInCategory="100"
+        android:title="Löschen"
+        app:showAsAction="never" />
+
+    
 </menu>
