@@ -22,7 +22,8 @@
         <activity android:name=".ToDoListe">
 
         </activity>
-        <activity android:name=".Einkaufsliste">
+        <activity android:name=".Einkaufsliste"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
     </application>

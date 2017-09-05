@@ -2,6 +2,7 @@ package com.gastell_gehr_haberl.studinazor;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -9,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,6 +58,7 @@ public class Einkaufsliste extends AppCompatActivity {
     private void initUI() {
         initTaskButton();
         initListView();
+        initToolBar();
     }
 
     private void initTaskButton() {
@@ -105,6 +110,11 @@ public class Einkaufsliste extends AppCompatActivity {
         });
     }
 
+    private void initToolBar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_shoplist);
+        setSupportActionBar(toolbar);
+    }
+
     private void initListAdapter() {
         ListView list = (ListView) findViewById(R.id.shop_list);
         shopItems_adapter = new EinkaufslisteAdapter(this, shopItems);
@@ -128,24 +138,24 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_einkaufsliste, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_sort:
-                sortList();
+            case R.id.action_delete_list:
+                //delete list methode noch zu machen
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
-    }*/
+    }
 
     private void sortList() {
         Collections.sort(shopItems);

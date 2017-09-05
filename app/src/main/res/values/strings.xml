@@ -28,4 +28,6 @@
         <item>Packung[en]</item>
         <item>Pfund</item>
     </string-array>
+
+    <string name="menu_shoplist">Löschen</string>
 </resources>
