@@ -15,11 +15,11 @@ import java.util.ArrayList;
  * Created by lucas on 05.09.2017.
  */
 
-public class StudenplanAdapter extends ArrayAdapter<StundenplanItem> {
+public class StundenplanAdapter extends ArrayAdapter<StundenplanItem> {
     private ArrayList<StundenplanItem> courseList;
     private Context context;
 
-    public StudenplanAdapter(Context context, ArrayList<StundenplanItem> listItems) {
+    public StundenplanAdapter(Context context, ArrayList<StundenplanItem> listItems) {
         super(context, R.layout.stundenplanlist_itemlist, listItems);
         this.context = context;
         this.courseList = listItems;
