@@ -9,7 +9,9 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_shoplist"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
+        android:layout_height="?attr/actionBarSize"
+        android:title="@string/toolbar_name"
+        android:titleTextColor="#CD3333"></android.support.v7.widget.Toolbar>
     
     <TextView
         android:id="@+id/einkauf_text_wip"

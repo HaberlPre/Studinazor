@@ -36,4 +36,5 @@
     </string-array>
 
     <string name="menu_shoplist">Löschen</string>
+    <string name="toolbar_name">Einkaufsliste</string>
 </resources>
