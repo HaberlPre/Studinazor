@@ -150,11 +150,14 @@ public class Einkaufsliste extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_delete_list:
                 //delete list methode noch zu machen
+                deleteList();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
 
+    private void deleteList(){
     }
 
     private void sortList() {

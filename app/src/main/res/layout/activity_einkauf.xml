@@ -6,13 +6,10 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <Toolbar
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_shoplist"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCombat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></Toolbar>
+        android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
     
     <TextView
         android:id="@+id/einkauf_text_wip"
