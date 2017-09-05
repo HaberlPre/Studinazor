@@ -74,7 +74,7 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void buttonClicked() {
-        EditText edit = (EditText) findViewById(R.id.todo_text_wip);
+        EditText edit = (EditText) findViewById(R.id.todo_text_task);
         EditText dateEdit = (EditText) findViewById(R.id.todo_text_date);
         String task = edit.getText().toString();
         String date = dateEdit.getText().toString();
@@ -114,7 +114,7 @@ public class ToDoListe extends AppCompatActivity {
 
         //tasks.add(newTask);
         //tasks_adapter.notifyDataSetChanged();
-        todoDB.insertToDoItem(newTask);
+        todoDB.insertItem(newTask);
         updateList();
     }
 
@@ -140,8 +140,8 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     public void showDatePickerDialog() {
-        DialogFragment dateFragment = new DatePickerFragment();
-        dateFragment.show(getFragmentManager(), "datePicker");
+        DialogFragment chosenDate = new ToDoListeChoosenDate();
+        chosenDate.show(getFragmentManager(), "datePicker");
     }
 
     private Date getDateFromString(String dateString) {
@@ -157,14 +157,14 @@ public class ToDoListe extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_todoliste, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.:
+            case R.id.todo_sort:
                 sortList();
                 return true;
             default:
