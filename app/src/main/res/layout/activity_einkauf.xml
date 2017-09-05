@@ -9,7 +9,6 @@
         android:id="@+id/einkauf_text_wip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:textColor="#3254a2"
         android:text="@string/einkauf_text_wip" />
 
