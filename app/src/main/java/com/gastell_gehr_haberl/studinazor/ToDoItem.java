@@ -16,7 +16,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
     public ToDoItem(String name, int day, int month, int year) {
         this.name = name;
-        date = new GregorianCalendar(year, month, day);
+        this.date = new GregorianCalendar(year, month, day);
     }
 
     public String getName() {

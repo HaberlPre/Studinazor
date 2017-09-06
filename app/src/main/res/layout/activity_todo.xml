@@ -4,11 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_toDolist"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/rot"></android.support.v7.widget.Toolbar>
+
 
     <EditText
         android:id="@+id/todo_text_task"
@@ -28,6 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
+            android:focusable="false"
             android:hint="@string/todo_text_date"
             android:inputType="date" />
 
