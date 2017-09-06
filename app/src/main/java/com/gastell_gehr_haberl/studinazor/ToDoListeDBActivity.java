@@ -1,8 +1,10 @@
 package com.gastell_gehr_haberl.studinazor;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -96,6 +98,15 @@ public class ToDoListeDBActivity extends AppCompatActivity
                 return true;
             }
         });
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(ToDoListeDBActivity.this, ToDoListe.class);
+                //i.putExtra(); //TODO <- context/bundle, dass todoliste mit richtiger liste lädt
+                startActivity(i);
+            }
+        });
+
     }
 
     private void initListAdapter() {

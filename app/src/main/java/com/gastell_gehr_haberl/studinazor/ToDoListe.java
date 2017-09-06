@@ -39,7 +39,8 @@ public class ToDoListe extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState); //TODO bundle von startendem intent
+        //TODO holen, prüfen und dann verarbeiten bzw wenn leer kp
         setContentView(R.layout.activity_todo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initTaskList();
