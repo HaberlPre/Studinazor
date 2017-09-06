@@ -2,6 +2,7 @@ package com.gastell_gehr_haberl.studinazor;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -36,6 +37,7 @@ public class ToDoListe extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initTaskList();
         initUI();
         initDataBase();
@@ -129,7 +131,6 @@ public class ToDoListe extends AppCompatActivity {
 
     }
 
-    //int position wird übergeben
     private void removeTaskAtPosition(int position) {
         if (items.get(position) != null) {
             todoDB.removeToDoItem(items.get(position));
@@ -138,7 +139,7 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     public void showDatePickerDialog() {
-        DialogFragment chosenDate = new ToDoListeChoosenDate();
+        DialogFragment chosenDate = new ToDoListeChosenDate();
         chosenDate.show(getFragmentManager(), "datePicker");
     }
 
@@ -164,6 +165,9 @@ public class ToDoListe extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.todo_sort:
                 sortList();
+                return true;
+            case android.R.id.home:
+                this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
