@@ -32,6 +32,9 @@ public class Einkaufsliste extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_einkauf);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initTaskList();
         initDatabase();
         initUI();
@@ -59,7 +62,6 @@ public class Einkaufsliste extends AppCompatActivity {
     private void initUI() {
         initTaskButton();
         initListView();
-        initToolBar();
     }
 
     private void initTaskButton() {
@@ -101,7 +103,7 @@ public class Einkaufsliste extends AppCompatActivity {
 
     private void initListView() {
         final ListView list = (ListView) findViewById(R.id.shop_list);
-        registerForContextMenu(list);
+        //registerForContextMenu(list);
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
@@ -113,7 +115,7 @@ public class Einkaufsliste extends AppCompatActivity {
         });
     }
 
-    /*@Override
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo info){
         super.onCreateContextMenu(menu, v, info);
         MenuInflater inflater = getMenuInflater();
@@ -133,16 +135,10 @@ public class Einkaufsliste extends AppCompatActivity {
             default:
                 return super.onContextItemSelected(item);
         }
-    }*/
+    }
 
     private void changeItem(){
 
-    }
-
-
-    private void initToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_shoplist);
-        setSupportActionBar(toolbar);
     }
 
     private void initListAdapter() {
@@ -181,6 +177,9 @@ public class Einkaufsliste extends AppCompatActivity {
             case R.id.action_delete_list:
                 //delete list methode noch zu machen
                 deleteList();
+                return true;
+            case R.id.home:
+                this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
