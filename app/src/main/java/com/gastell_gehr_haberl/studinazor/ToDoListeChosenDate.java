@@ -16,12 +16,12 @@ import java.util.Locale;
  * Created by Juliane on 05.09.2017.
  */
 
-public class ToDoListeChoosenDate extends DialogFragment implements
+public class ToDoListeChosenDate  extends DialogFragment implements
         DatePickerDialog.OnDateSetListener {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
+        // Use the current date as the default date in the picker
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);

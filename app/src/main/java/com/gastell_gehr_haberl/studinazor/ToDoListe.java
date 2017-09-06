@@ -2,6 +2,7 @@ package com.gastell_gehr_haberl.studinazor;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -27,7 +28,7 @@ import java.util.Locale;
 
 public class ToDoListe extends AppCompatActivity {
 
-    //private Button addButton;
+    private Button addButton;
     private ArrayList<ToDoItem> items;
     private ToDoListeAdapter todoItemsAdapter;
     private ToDoListeDatenbank todoDB;
@@ -36,10 +37,12 @@ public class ToDoListe extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initTaskList();
-        //initUI();
-        initDataBase();
         initUI();
+        initDataBase();
         updateList();
     }
 
@@ -49,9 +52,8 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void updateList() {
-        ArrayList tempList = todoDB.getAllToDoItems();
         items.clear();
-        items.addAll(tempList);
+        items.addAll(todoDB.getAllToDoItems());
         todoItemsAdapter.notifyDataSetChanged();
     }
 
@@ -64,10 +66,15 @@ public class ToDoListe extends AppCompatActivity {
         initTaskButton();
         initListView();
         initDateField();
+      //  initToolBar();
     }
 
+  // private void initToolBar() {
+  //    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_toDolist);setSupportActionBar(toolbar);
+  //  }
+
     private void initTaskButton() {
-        Button addButton = (Button) findViewById(R.id.todo_text_button);
+        addButton = (Button) findViewById(R.id.todo_text_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,9 +121,6 @@ public class ToDoListe extends AppCompatActivity {
 
         ToDoItem newTask = new ToDoItem(task, cal.get(Calendar.DAY_OF_MONTH),
                 cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
-
-        //tasks.add(newTask);
-        //tasks_adapter.notifyDataSetChanged();
         todoDB.insertItem(newTask);
         updateList();
     }
@@ -132,18 +136,15 @@ public class ToDoListe extends AppCompatActivity {
 
     }
 
-    //int position wird übergeben
     private void removeTaskAtPosition(int position) {
         if (items.get(position) != null) {
-            //tasks.remove(position);
-            //tasks_adapter.notifyDataSetChanged();
             todoDB.removeToDoItem(items.get(position));
             updateList();
         }
     }
 
     public void showDatePickerDialog() {
-        DialogFragment chosenDate = new ToDoListeChoosenDate();
+        DialogFragment chosenDate = new ToDoListeChosenDate();
         chosenDate.show(getFragmentManager(), "datePicker");
     }
 
@@ -170,6 +171,9 @@ public class ToDoListe extends AppCompatActivity {
             case R.id.todo_sort:
                 sortList();
                 return true;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -186,4 +190,6 @@ public class ToDoListe extends AppCompatActivity {
         todoDB.close();
 
     }
+
+
 }
