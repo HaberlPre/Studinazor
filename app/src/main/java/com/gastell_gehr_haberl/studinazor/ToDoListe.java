@@ -27,7 +27,7 @@ import java.util.Locale;
 
 public class ToDoListe extends AppCompatActivity {
 
-    private Button addButton;
+    //private Button addButton;
     private ArrayList<ToDoItem> items;
     private ToDoListeAdapter todoItemsAdapter;
     private ToDoListeDatenbank todoDB;
@@ -37,8 +37,9 @@ public class ToDoListe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
         initTaskList();
-        initUI();
+        //initUI();
         initDataBase();
+        initUI();
         updateList();
     }
 
@@ -48,8 +49,9 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void updateList() {
+        ArrayList tempList = todoDB.getAllToDoItems();
         items.clear();
-        items.addAll(todoDB.getAllToDoItems());
+        items.addAll(tempList);
         todoItemsAdapter.notifyDataSetChanged();
     }
 
@@ -62,16 +64,10 @@ public class ToDoListe extends AppCompatActivity {
         initTaskButton();
         initListView();
         initDateField();
-        initToolBar();
-    }
-
-    private void initToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_toDolist);
-        setSupportActionBar(toolbar);
     }
 
     private void initTaskButton() {
-        addButton = (Button) findViewById(R.id.todo_text_button);
+        Button addButton = (Button) findViewById(R.id.todo_text_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
