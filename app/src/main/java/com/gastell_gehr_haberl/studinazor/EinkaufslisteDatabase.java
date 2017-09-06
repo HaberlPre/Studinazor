@@ -66,6 +66,12 @@ public class EinkaufslisteDatabase {
 
     }
 
+    public void deleteList(){
+        String toDelete = KEY_ITEM + "=?";
+        String[] deleteArg = new String[]{getAllToDoItems().toString()};
+        db.delete(DATABASE_TABLE,toDelete,deleteArg);
+    }
+
     public ArrayList<ShopItem> getAllToDoItems() {
         ArrayList<ShopItem> items = new ArrayList<ShopItem>();
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_AMOUNT, KEY_UNIT,

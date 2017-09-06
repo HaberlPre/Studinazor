@@ -28,6 +28,10 @@ public class ShopItem implements Comparable<ShopItem> {
         return name;
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
+
     @Override
     public int compareTo(ShopItem another) {
         return 0; //getDueDate().compareTo(another.getDueDate());

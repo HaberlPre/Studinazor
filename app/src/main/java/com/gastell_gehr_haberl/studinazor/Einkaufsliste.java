@@ -1,14 +1,17 @@
 package com.gastell_gehr_haberl.studinazor;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Menu;
 import android.view.ContextMenu;
@@ -32,9 +35,7 @@ public class Einkaufsliste extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_einkauf);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         initTaskList();
         initDatabase();
         initUI();
@@ -103,38 +104,65 @@ public class Einkaufsliste extends AppCompatActivity {
 
     private void initListView() {
         final ListView list = (ListView) findViewById(R.id.shop_list);
-        //registerForContextMenu(list);
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        registerForContextMenu(list);
+        /*list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long id) {
-                registerForContextMenu(list);
+                //registerForContextMenu(list);
                 //removeTaskAtPosition(position);
                 return true;
             }
-        });
+        });*/
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo info){
         super.onCreateContextMenu(menu, v, info);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_einkauf_menu, menu);
+        inflater.inflate(R.menu.menu_einkaufsliste_context, menu);
+    }
+
+    public void createEdit(final ShopItem item) {
+        LayoutInflater inflater = LayoutInflater.from(Einkaufsliste.this);
+        View dialogView = inflater.inflate(R.layout.todoliste_context, null);
+        AlertDialog.Builder alertDialog =  new AlertDialog.Builder(Einkaufsliste.this);
+        alertDialog.setView(dialogView);
+        final EditText edit = (EditText) findViewById(R.id.edit_dialog_input);
+        edit.setText(item.getName());
+        final TextView message = (TextView) dialogView.findViewById(R.id.edit_task);
+
+        alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+                item.setName(edit.getText().toString());
+                shopItems_adapter.notifyDataSetChanged();
+            }
+        }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alert = alertDialog.create();
+        alert.show();
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = (int) info.id;
+
         switch (item.getItemId()) {
             case R.id.item_delete:
                 removeTaskAtPosition(item.getItemId());
-                return true;
+                break;
             case R.id.item_change:
                 changeItem();
-                return true;
-            default:
-                return super.onContextItemSelected(item);
+                createEdit(shopItems.get(position));
+                break;
         }
+                return super.onContextItemSelected(item);
     }
 
     private void changeItem(){
@@ -166,7 +194,6 @@ public class Einkaufsliste extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_einkaufsliste, menu);
         return true;
     }
@@ -175,10 +202,12 @@ public class Einkaufsliste extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete_list:
-                //delete list methode noch zu machen
                 deleteList();
                 return true;
-            case R.id.home:
+            case R.id.action_change_list:
+                changeItem();
+                return true;
+            case android.R.id.home:
                 this.finish();
                 return true;
             default:
@@ -189,7 +218,8 @@ public class Einkaufsliste extends AppCompatActivity {
     private void deleteList(){
         shopItems.clear();
         shopItems_adapter.notifyDataSetChanged();
-
+        shopDB.deleteList();
+        refreshArrayList();
     }
 
     private void sortList() {
