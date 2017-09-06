@@ -22,6 +22,9 @@ public class ToDoItem implements Comparable<ToDoItem> {
     public String getName() {
         return name;
     }
+     public void setName(String name){
+         this.name = name;
+     }
 
     public String getFormattedDate() {
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,

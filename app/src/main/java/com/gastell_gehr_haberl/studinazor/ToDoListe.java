@@ -1,17 +1,21 @@
 package com.gastell_gehr_haberl.studinazor;
 
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -92,14 +96,15 @@ public class ToDoListe extends AppCompatActivity {
 
     private void initListView() {
         ListView list = (ListView) findViewById(R.id.todo_list);
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        registerForContextMenu(list);
+        /*   list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long id) {
                 removeTaskAtPosition(position);
                 return true;
             }
-        });
+        }); */
     }
 
     private void initListAdapter() {
@@ -131,12 +136,12 @@ public class ToDoListe extends AppCompatActivity {
 
     }
 
-    private void removeTaskAtPosition(int position) {
-        if (items.get(position) != null) {
-            todoDB.removeToDoItem(items.get(position));
-            updateList();
-        }
-    }
+    //private void removeTaskAtPosition(int position) {
+    //    if (items.get(position) != null) {
+    //        todoDB.removeToDoItem(items.get(position));
+    //        updateList();
+    //    }
+    //}
 
     public void showDatePickerDialog() {
         DialogFragment chosenDate = new ToDoListeChosenDate();
@@ -163,7 +168,7 @@ public class ToDoListe extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.todo_sort:
+            case R.id.menu_todo_sort:
                 sortList();
                 return true;
             case android.R.id.home:
@@ -184,5 +189,55 @@ public class ToDoListe extends AppCompatActivity {
         super.onDestroy();
         todoDB.close();
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_todoliste_context, menu);
+    }
+
+    public void createEdit(final ToDoItem item) {
+        LayoutInflater inflater = LayoutInflater.from(ToDoListe.this);
+        View dialogView = inflater.inflate(R.layout.todoliste_context, null);
+        AlertDialog.Builder alertDialog =  new AlertDialog.Builder(ToDoListe.this);
+        alertDialog.setView(dialogView);
+        final EditText edit = (EditText) findViewById(R.id.edit_dialog_input);
+        edit.setText(item.getName());
+        final TextView message = (TextView) dialogView.findViewById(R.id.edit_task);
+
+        alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+            item.setName(edit.getText().toString());
+            todoItemsAdapter.notifyDataSetChanged();
+        }
+        }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo adapterInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = (int) adapterInfo.id;
+
+        switch(item.getItemId()) {
+            case R.id.menu_delete_task:
+                this.items.remove(position);
+                this.todoItemsAdapter.notifyDataSetChanged();
+                break;
+            case R.id.menu_edit_task:
+                createEdit(items.get(position));
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 }

@@ -13,8 +13,13 @@
     <string name="todo_text_date">Bis</string>
     <string name="text_task">task</string>
     <string name="text_date">date</string>
-    <string name="todo_sort">Sort by Date</string>
+    <string name="menu_todo_sort">Sort by Date</string>
+    <string name="menu_delete_all">Alles Löschen</string>
+    <string name="menu_delete_task">Löschen</string>
     <string name="delete_task">Löschen</string>
+    <string name="menu_edit_task">Bearbeiten</string>
+    <string name="edit_task">Bearbeiten</string>
+
 
 
     //Stundeplan
