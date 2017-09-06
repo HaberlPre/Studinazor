@@ -66,12 +66,9 @@ public class ToDoListe extends AppCompatActivity {
         initTaskButton();
         initListView();
         initDateField();
-      //  initToolBar();
     }
 
-  // private void initToolBar() {
-  //    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_toDolist);setSupportActionBar(toolbar);
-  //  }
+
 
     private void initTaskButton() {
         addButton = (Button) findViewById(R.id.todo_text_button);
@@ -172,13 +169,14 @@ public class ToDoListe extends AppCompatActivity {
                 sortList();
                 return true;
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
     }
+
 
     private void sortList() {
         Collections.sort(items);
