@@ -45,8 +45,8 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
                 DATABASE_VERSION);
     }
 
-    public void setName() { //TODO
-
+    public void setName(Context name) { //TODO statt string mgl?
+        this.name = name;
     }
 
     public static String getName() {
