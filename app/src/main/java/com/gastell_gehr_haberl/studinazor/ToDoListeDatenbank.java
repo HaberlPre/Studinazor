@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,10 @@ import java.util.Locale;
  * Created by Juliane on 05.09.2017.
  */
 
-public class ToDoListeDatenbank {
+public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
+
+    private static Context name;
+    //private String name;
 
     private static final String DATABASE_NAME = "toDoList.db";
     private static final int DATABASE_VERSION = 1;
@@ -39,6 +43,14 @@ public class ToDoListeDatenbank {
     public ToDoListeDatenbank(Context context) {
         dbHelper = new ToDoDBOpenHelper(context, DATABASE_NAME, null,
                 DATABASE_VERSION);
+    }
+
+    public void setName() { //TODO
+
+    }
+
+    public static String getName() {
+        return name.toString();
     }
 
     public void open() throws SQLException {
@@ -91,6 +103,11 @@ public class ToDoListeDatenbank {
         String[] deleteArguments = new String[]{item.getName()};
         db.delete(DATABASE_TABLE, toDelete, deleteArguments);
 
+    }
+
+    @Override
+    public int compareTo(@NonNull ToDoListeDatenbank o) {
+        return 0;
     }
 
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {

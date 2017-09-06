@@ -25,7 +25,7 @@ public class StartScreen extends AppCompatActivity {
         toDoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startToDo = new Intent(StartScreen.this, ToDoListe.class);
+                Intent startToDo = new Intent(StartScreen.this, ToDoListe.class); //ToDoListeDBActivity für mehr listen
                 startActivity(startToDo);
             }
         });

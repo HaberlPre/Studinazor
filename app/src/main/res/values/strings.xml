@@ -45,4 +45,7 @@
     <string name="toolbar_name">Einkaufsliste</string>
     <string name="item_delete">Löschen</string>
     <string name="item_change">Bearbeiten</string>
+    <string name="add_item_hint">Add List</string>
+    <string name="add_item_button_confirm">Add</string>
+    <string name="action_sort">Sort by Date</string>
 </resources>
