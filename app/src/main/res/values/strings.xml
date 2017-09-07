@@ -1,7 +1,7 @@
 <resources>
 
     // Startscreen
-    <string name="app_name">Studinazor</string>
+    <string name="newsfeed_string">Newsfeed</string>
     <string name="todo_liste_string">ToDo-Liste</string>
     <string name="einkaufsliste_string">Einkaufsliste</string>
     <string name="stundenplan_string">Stundenplan</string>

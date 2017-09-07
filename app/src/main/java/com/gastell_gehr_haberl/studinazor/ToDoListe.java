@@ -172,17 +172,27 @@ public class ToDoListe extends AppCompatActivity {
             case R.id.menu_todo_sort:
                 sortList();
                 return true;
+            case R.id.menu_delete_all:
+                deleteAll();
+                return true;
             case android.R.id.home:
                 this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+
         }
+
 
     }
 
     private void sortList() {
         Collections.sort(items);
+        todoItemsAdapter.notifyDataSetChanged();
+    }
+
+    private void deleteAll() {
+        items.clear();
         todoItemsAdapter.notifyDataSetChanged();
     }
 

@@ -5,7 +5,7 @@
   
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context="com.gastell_gehr_haberl.studinazor.StartScreen">
 
     <GridLayout
@@ -14,25 +14,26 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <TextView
-            android:id="@+id/start_text_wip"
-            android:layout_width="wrap_content"
+
+
+        <Button
+            android:id="@+id/StartToNewsfeedButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:layout_row="0"
-            android:text="@string/startbildschirm_string"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.076" />
+            android:layout_row="1"
+            android:text="@string/newsfeed_string"
+            tools:layout_editor_absoluteX="129dp"
+            tools:layout_editor_absoluteY="162dp"/>
+
+
 
         <Button
             android:id="@+id/StartToEinkaufButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:layout_row="1"
+            android:layout_row="3"
             android:text="@string/einkaufsliste_string"
             tools:layout_editor_absoluteX="129dp"
             tools:layout_editor_absoluteY="162dp" />
@@ -42,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:layout_row="2"
+            android:layout_row="4"
             android:text="@string/todo_liste_string"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="56dp" />
@@ -50,29 +51,15 @@
         <Button
             android:id="@+id/StartToStundenplanButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_column="0"
-            android:layout_row="3"
+            android:layout_row="5"
             android:text="@string/stundenplan_string"
             tools:layout_editor_absoluteX="9dp"
             tools:layout_editor_absoluteY="176dp" />
 
-        <TextView
-            android:id="@+id/newsticker_start_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="4"
-            android:text="@string/newsticker_start_string"/>
 
-        <TextView
-            android:id="@+id/poweredBy_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="5"
-            android:text="@string/poweredBy_string"
-            />
+
 
     </GridLayout>
 
