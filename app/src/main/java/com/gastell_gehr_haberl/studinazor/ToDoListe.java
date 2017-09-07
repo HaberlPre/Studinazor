@@ -98,14 +98,6 @@ public class ToDoListe extends AppCompatActivity {
     private void initListView() {
         ListView list = (ListView) findViewById(R.id.todo_list);
         registerForContextMenu(list);
-        /*   list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                removeTaskAtPosition(position);
-                return true;
-            }
-        }); */
     }
 
     private void initListAdapter() {
@@ -183,7 +175,6 @@ public class ToDoListe extends AppCompatActivity {
 
         }
 
-
     }
 
     private void sortList() {
@@ -212,21 +203,21 @@ public class ToDoListe extends AppCompatActivity {
         inflater.inflate(R.menu.menu_todoliste_context, menu);
     }
 
-    public void createEdit(final ToDoItem item) {
+   public void createEdit(final ToDoItem item) {
         LayoutInflater inflater = LayoutInflater.from(ToDoListe.this);
         View dialogView = inflater.inflate(R.layout.todoliste_context, null);
         AlertDialog.Builder alertDialog =  new AlertDialog.Builder(ToDoListe.this);
         alertDialog.setView(dialogView);
-        final EditText edit = (EditText) findViewById(R.id.edit_dialog_input);
+        final EditText edit = (EditText) dialogView.findViewById(R.id.edit_dialog_input);
         edit.setText(item.getName());
-        final TextView message = (TextView) dialogView.findViewById(R.id.edit_task);
+        final TextView message = (TextView) dialogView.findViewById(R.id.edit_old_task);
 
         alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int id) {
-            item.setName(edit.getText().toString());
-            todoItemsAdapter.notifyDataSetChanged();
-        }
+                item.setName(edit.getText().toString());
+                todoItemsAdapter.notifyDataSetChanged();
+            }
         }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int id) {
@@ -235,6 +226,7 @@ public class ToDoListe extends AppCompatActivity {
         });
         final AlertDialog alert = alertDialog.create();
         alert.show();
+
     }
 
     @Override
