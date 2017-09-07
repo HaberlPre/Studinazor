@@ -3,11 +3,8 @@ package com.gastell_gehr_haberl.studinazor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class StartScreen extends AppCompatActivity {
 
@@ -15,7 +12,6 @@ public class StartScreen extends AppCompatActivity {
     Button einkaufsButton;
     Button stundenplanButton;
     Button newsfeedButton;
-    TextView poweredBy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,20 +61,5 @@ public class StartScreen extends AppCompatActivity {
         einkaufsButton = (Button) findViewById(R.id.StartToEinkaufButton);
         stundenplanButton = (Button) findViewById(R.id.StartToStundenplanButton);
         newsfeedButton = (Button) findViewById(R.id.StartToNewsfeedButton);
-        setupNewsticker();
-     //   setupPoweredBy();
     }
-
-    private void setupNewsticker() {
-    }
-
-   /* private void setupPoweredBy() {
-        poweredBy = (TextView) findViewById(R.id.poweredBy_id);
-        poweredBy.setClickable(true);
-        poweredBy.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='https://newsapi.org/'> Powered by News API </a>";
-        poweredBy.setText(Html.fromHtml(text));
-    }
-*/
-
 }

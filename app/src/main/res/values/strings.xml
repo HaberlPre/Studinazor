@@ -53,4 +53,8 @@
     <string name="newsticker_string">Newsticker</string>
     <string name="poweredBy_string">Powered by News API</string>
     <string name="newsticker_start_string">Newsticker</string>
+    <string name="newsticker_description_string">Description</string>
+    <string name="newsticker_source">Source</string>
+    <string name="newsticker_poweredBy_string">Powered by News API</string>
+    <string name="newsticker_head_string">Newsticker</string>
 </resources>
