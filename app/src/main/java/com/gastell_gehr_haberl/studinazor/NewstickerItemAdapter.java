@@ -18,7 +18,6 @@ public class NewstickerItemAdapter extends ArrayAdapter<NewstickerItem> {
     private List <NewstickerItem> items;
     private Context context;
 
-    public String url;
 
     public NewstickerItemAdapter(Context context, List<NewstickerItem> items) {
         super(context, R.layout.newsticker_item, items);
@@ -26,7 +25,7 @@ public class NewstickerItemAdapter extends ArrayAdapter<NewstickerItem> {
         this.items = items;
     }
 
-  /* @Override
+    @Override
     public View getView (int position, View convertView, ViewGroup parent) {
         View v = convertView;
 
@@ -35,17 +34,21 @@ public class NewstickerItemAdapter extends ArrayAdapter<NewstickerItem> {
             v = inflater.inflate(R.layout.newsticker_item, null);
         }
 
-        TextView title = (TextView) v.findViewById(R.id.newsticker_start_id);
-
         NewstickerItem item = items.get(position);
 
-        title.setText(item.getTitle());
-        url = item.getUrl();
+        if (item != null) {
+
+            TextView title = (TextView) v.findViewById(R.id.newsticker_title);
+            TextView description = (TextView) v.findViewById(R.id.newsticker_description);
+            TextView url = (TextView) v.findViewById(R.id.newsticker_source);
+
+        //NewstickerItem item = items.get(position);
+            title.setText(String.valueOf(item.getTitle()));
+            description.setText(String.valueOf(item.getDescription()));
+            url.setText(String.valueOf(item.getUrl()));
+        }
 
         return v;
     }
-*/
-    public String getUrl() {
-        return url;
-    }
+
 }
