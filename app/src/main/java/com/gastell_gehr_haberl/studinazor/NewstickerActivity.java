@@ -22,11 +22,12 @@ public class NewstickerActivity extends StartScreen implements DownloadListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen); //TODO evtl falsch, in bundesliga eig datei
-        prepareTextView();
+      //  prepareTextView();
         new NewstickerDownloadTask(this, items).execute(ADDDRESS);
     }
 
-    private void prepareTextView() {
+ /*   private void prepareTextView() {
+
         items = new ArrayList<NewstickerItem>();
         adapter = new NewstickerItemAdapter(NewstickerActivity.this, items);
         TextView text = (TextView) findViewById(R.id.newsticker_start_id); //TODO evtl newsticker_id
@@ -35,9 +36,9 @@ public class NewstickerActivity extends StartScreen implements DownloadListener 
          * text.addHeader(header); //in bundesliga code weil ListView statt TextView
          * text.setAdapter(adapter);
          */
-        text.setText((CharSequence) adapter); //?
+  /*     text.setText((CharSequence) adapter); //?
     }
-
+*/
 
     @Override
     public void onDownloadFinished() {

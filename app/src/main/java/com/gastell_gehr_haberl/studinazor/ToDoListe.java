@@ -137,12 +137,12 @@ public class ToDoListe extends AppCompatActivity {
 
     }
 
-    //private void removeTaskAtPosition(int position) {
-    //    if (items.get(position) != null) {
-    //        todoDB.removeToDoItem(items.get(position));
-    //        updateList();
-    //    }
-    //}
+    private void removeTaskAtPosition(int position) {
+        if (items.get(position) != null) {
+            todoDB.removeToDoItem(items.get(position));
+            updateList();
+        }
+    }
 
     public void showDatePickerDialog() {
         DialogFragment chosenDate = new ToDoListeChosenDate();
@@ -192,8 +192,10 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void deleteAll() {
-        items.clear();
-        todoItemsAdapter.notifyDataSetChanged();
+        for(int i = items.size() - 1; i >= 0; i--) {
+            removeTaskAtPosition(i);
+        }
+
     }
 
     public void onDestroy() {
@@ -242,8 +244,7 @@ public class ToDoListe extends AppCompatActivity {
 
         switch(item.getItemId()) {
             case R.id.menu_delete_task:
-                this.items.remove(position);
-                this.todoItemsAdapter.notifyDataSetChanged();
+                removeTaskAtPosition(position);
                 break;
             case R.id.menu_edit_task:
                 createEdit(items.get(position));

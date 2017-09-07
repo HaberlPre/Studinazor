@@ -66,19 +66,19 @@ public class StartScreen extends AppCompatActivity {
         stundenplanButton = (Button) findViewById(R.id.StartToStundenplanButton);
         newsfeedButton = (Button) findViewById(R.id.StartToNewsfeedButton);
         setupNewsticker();
-        setupPoweredBy();
+     //   setupPoweredBy();
     }
 
     private void setupNewsticker() {
     }
 
-    private void setupPoweredBy() {
+   /* private void setupPoweredBy() {
         poweredBy = (TextView) findViewById(R.id.poweredBy_id);
         poweredBy.setClickable(true);
         poweredBy.setMovementMethod(LinkMovementMethod.getInstance());
         String text = "<a href='https://newsapi.org/'> Powered by News API </a>";
         poweredBy.setText(Html.fromHtml(text));
     }
-
+*/
 
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,7 +20,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/newsfeed_string"
-            />
+            android:background="#CAE1FF"
+            tools:ignore="ButtonStyle,NestedWeights" />
 
 
 
@@ -29,7 +31,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/einkaufsliste_string"
-            />
+            android:background="#00C5CD"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 
@@ -46,7 +49,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/todo_liste_string"
-             />
+            android:background="#FF4040"
+            tools:ignore="ButtonStyle,NestedWeights" />
 
         <Button
             android:id="@+id/StartToStundenplanButton"
@@ -54,7 +58,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/stundenplan_string"
-            />
+            android:background="#104E8B"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
 

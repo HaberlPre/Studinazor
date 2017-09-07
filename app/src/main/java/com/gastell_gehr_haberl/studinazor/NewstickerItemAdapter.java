@@ -26,7 +26,7 @@ public class NewstickerItemAdapter extends ArrayAdapter<NewstickerItem> {
         this.items = items;
     }
 
-    @Override
+  /* @Override
     public View getView (int position, View convertView, ViewGroup parent) {
         View v = convertView;
 
@@ -44,7 +44,7 @@ public class NewstickerItemAdapter extends ArrayAdapter<NewstickerItem> {
 
         return v;
     }
-
+*/
     public String getUrl() {
         return url;
     }
