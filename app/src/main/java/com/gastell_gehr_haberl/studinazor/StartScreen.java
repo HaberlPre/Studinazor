@@ -14,7 +14,7 @@ public class StartScreen extends AppCompatActivity {
     Button toDoButton;
     Button einkaufsButton;
     Button stundenplanButton;
-    TextView newsticker;
+    Button newsfeedButton;
     TextView poweredBy;
 
     @Override
@@ -50,12 +50,21 @@ public class StartScreen extends AppCompatActivity {
                 startActivity(startStundenplan);
             }
         });
+
+        newsfeedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startNewsfeed = new Intent (StartScreen.this, NewstickerActivity.class);
+                startActivity(startNewsfeed);
+            }
+        });
     }
 
     private void setupUI() {
         toDoButton = (Button) findViewById(R.id.StartToToDoButton);
         einkaufsButton = (Button) findViewById(R.id.StartToEinkaufButton);
         stundenplanButton = (Button) findViewById(R.id.StartToStundenplanButton);
+        newsfeedButton = (Button) findViewById(R.id.StartToNewsfeedButton);
         setupNewsticker();
         setupPoweredBy();
     }

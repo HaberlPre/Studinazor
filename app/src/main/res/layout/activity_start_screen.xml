@@ -1,67 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-  
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context="com.gastell_gehr_haberl.studinazor.StartScreen">
-
-    <GridLayout
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+    android:orientation="vertical">
 
 
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        <Button
+
+    <Button
             android:id="@+id/StartToNewsfeedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="@string/newsfeed_string"
-            tools:layout_editor_absoluteX="129dp"
-            tools:layout_editor_absoluteY="162dp"/>
+            />
 
 
 
         <Button
             android:id="@+id/StartToEinkaufButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="@string/einkaufsliste_string"
-            tools:layout_editor_absoluteX="129dp"
-            tools:layout_editor_absoluteY="162dp" />
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/StartToToDoButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="@string/todo_liste_string"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="56dp" />
+             />
 
         <Button
             android:id="@+id/StartToStundenplanButton"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_column="0"
-            android:layout_row="5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="@string/stundenplan_string"
-            tools:layout_editor_absoluteX="9dp"
-            tools:layout_editor_absoluteY="176dp" />
+            />
+    </LinearLayout>
 
 
 
-
-    </GridLayout>
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
