@@ -32,9 +32,11 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
     public static final String KEY_ID = "_id";
     public static final String KEY_TASK = "task";
     public static final String KEY_DATE = "date";
+    public static final String KEY_TIME = "time";
 
     public static final int COLUMN_TASK_INDEX = 1;
     public static final int COLUMN_DATE_INDEX = 2;
+    public static final int COLUMN_TIME_INDEX = 3;
 
     private ToDoDBOpenHelper dbHelper;
 
@@ -69,28 +71,34 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
         ContentValues newItems = new ContentValues();
         newItems.put(KEY_TASK, item.getName());
         newItems.put(KEY_DATE, item.getFormattedDate());
+        newItems.put(KEY_TIME, item.getFormattedTime());
         return db.insert(DATABASE_TABLE, null, newItems);
     }
 
     public ArrayList<ToDoItem> getAllToDoItems() {
         ArrayList<ToDoItem> items = new ArrayList<ToDoItem>();
         Cursor cursor = db.query(DATABASE_TABLE, new String[] {
-                KEY_ID, KEY_TASK, KEY_DATE }, null, null, null, null, null);
+                KEY_ID, KEY_TASK, KEY_DATE}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 String task = cursor.getString(COLUMN_TASK_INDEX);
                 String date = cursor.getString(COLUMN_DATE_INDEX);
+                String time = cursor.getString(COLUMN_TIME_INDEX);
                 Date formattedDate = null;
+                Date formattedTime = null;
                 try {
                     formattedDate = new SimpleDateFormat("dd.MM.yyyy",
                             Locale.GERMAN).parse(date);
+                    formattedTime = new SimpleDateFormat("HH:mm", Locale.GERMANY).parse(time);
                 } catch(ParseException e) {
                     e.printStackTrace();
                 }
-                Calendar cal = Calendar.getInstance(Locale.GERMAN);
-                cal.setTime(formattedDate);
+                Calendar chosenDate = Calendar.getInstance(Locale.GERMAN);
+                chosenDate.setTime(formattedDate);
+                Calendar chosenTime = Calendar.getInstance(Locale.GERMAN);
+                chosenTime.setTime(formattedTime);
 
-                items.add(new ToDoItem(task, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)));
+                items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH), chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR), chosenTime.get(Calendar.HOUR), chosenTime.get(Calendar.MINUTE)));
 
             } while (cursor.moveToNext());
         }
@@ -133,4 +141,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
 
     }
 }
+
+
+
 

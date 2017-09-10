@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
-    <EditText
-        android:id="@+id/todo_text_task"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/todo_text_task"></EditText>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,22 +11,80 @@
         android:padding="10dp">
 
 
+
+    <EditText
+        android:id="@+id/todo_text_task"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:hint="@string/todo_text_task"></EditText>
+
+    <Button
+        android:id="@+id/todo_text_button"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:text="@string/todo_text_button" />
+
+
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/todoReminderAndDateLayout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+    <TextView
+        android:id="@+id/notification_reminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/notification_reminder"
+        android:textSize="16sp" />
+
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/notification_switch"
+        android:paddingRight="25dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
         <EditText
-            android:id="@+id/todo_text_date"
+            android:id="@+id/notification_date"
+            android:gravity="center"
+            android:focusable="false"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
+            android:layout_weight="1"
+            android:hint="@string/notification_date"
+            android:inputType="date"/>
+
+        <EditText
+            android:id="@+id/notification_time"
+            android:gravity="center"
             android:focusable="false"
-            android:hint="@string/todo_text_date"
-            android:inputType="date" />
-
-        <Button
-            android:id="@+id/todo_text_button"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:text="@string/todo_text_button" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/notification_time"
+            android:inputType="time"/>
 
+        </LinearLayout>
     </LinearLayout>
 
     <ListView

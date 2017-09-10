@@ -16,13 +16,13 @@ import java.util.Locale;
  * Created by Juliane on 05.09.2017.
  */
 
-public class ToDoListeChosenDate  extends DialogFragment implements
+public class ToDoListeChosenDate   extends DialogFragment implements
         DatePickerDialog.OnDateSetListener {
 
+    final Calendar c = Calendar.getInstance();
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
-        final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
@@ -32,13 +32,14 @@ public class ToDoListeChosenDate  extends DialogFragment implements
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        TextView textView = (TextView) getActivity().findViewById(R.id.todo_text_date);
+        TextView textView = (TextView) getActivity().findViewById(R.id.notification_date);
 
-        GregorianCalendar date = new GregorianCalendar(year, month, day);
+        GregorianCalendar date = new GregorianCalendar();
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
                 Locale.GERMANY);
         String dateString = df.format(date.getTime());
 
         textView.setText(dateString);
     }
+
 }

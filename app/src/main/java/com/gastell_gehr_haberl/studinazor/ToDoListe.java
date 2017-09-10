@@ -2,23 +2,31 @@ package com.gastell_gehr_haberl.studinazor;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -69,6 +77,7 @@ public class ToDoListe extends AppCompatActivity {
         initTaskButton();
         initListView();
         initDateField();
+        initTimeField();
     }
 
 
@@ -84,14 +93,16 @@ public class ToDoListe extends AppCompatActivity {
 
     private void buttonClicked() {
         EditText edit = (EditText) findViewById(R.id.todo_text_task);
-        EditText dateEdit = (EditText) findViewById(R.id.todo_text_date);
+        EditText dateEdit = (EditText) findViewById(R.id.notification_date);
+        EditText timeEdit = (EditText) findViewById(R.id.notification_time);
         String task = edit.getText().toString();
         String date = dateEdit.getText().toString();
-
-        if (!task.equals("") && !date.equals("")) {
+        String time = timeEdit.getText().toString();
+        if (!task.equals("") && !date.equals("") && !time.equals("")) {
             edit.setText("");
             dateEdit.setText("");
-            addNewTask(task, date);
+            timeEdit.setText("");
+            addNewTask(task, date, time);
         }
     }
 
@@ -106,24 +117,38 @@ public class ToDoListe extends AppCompatActivity {
         list.setAdapter(todoItemsAdapter);
     }
 
-    private void addNewTask(String task, String date) {
+    private void addNewTask(String task, String date, String time) {
         Date dueDate = getDateFromString(date);
-        GregorianCalendar cal = new GregorianCalendar();
-        cal.setTime(dueDate);
+        Date dueTime = getTimeFromString(time);
+        GregorianCalendar chosenDate = new GregorianCalendar();
+        GregorianCalendar chosenTime = new GregorianCalendar();
+        chosenDate.setTime(dueDate);
+        chosenTime.setTime(dueTime);
 
-        ToDoItem newTask = new ToDoItem(task, cal.get(Calendar.DAY_OF_MONTH),
-                cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
+        ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
+                chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR), chosenTime.get(Calendar.HOUR), chosenTime.get(Calendar.MINUTE));
 
         todoDB.insertItem(newTask);
         updateList();
     }
 
     private void initDateField() {
-        EditText dateEdit = (EditText) findViewById(R.id.todo_text_date);
+        EditText dateEdit = (EditText) findViewById(R.id.notification_date);
         dateEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 showDatePickerDialog();
+            }
+        });
+
+    }
+
+    private void initTimeField() {
+        EditText timeEdit = (EditText) findViewById(R.id.notification_time);
+        timeEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                showTimePickerDialog();
             }
         });
 
@@ -141,12 +166,27 @@ public class ToDoListe extends AppCompatActivity {
         chosenDate.show(getFragmentManager(), "datePicker");
     }
 
+    public void showTimePickerDialog() {
+        DialogFragment chosenTime = new ToDoListeChosenTime();
+        chosenTime.show(getFragmentManager(), "timePicker");
+    }
+
     private Date getDateFromString(String dateString) {
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
                 Locale.GERMANY);
         try {
             return df.parse(dateString);
         } catch (ParseException e) {
+            return new Date();
+        }
+    }
+
+    private Date getTimeFromString(String timeString) {
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
+                Locale.GERMANY);
+        try {
+            return df.parse(timeString);
+        } catch(ParseException e) {
             return new Date();
         }
     }
@@ -203,7 +243,7 @@ public class ToDoListe extends AppCompatActivity {
         inflater.inflate(R.menu.menu_todoliste_context, menu);
     }
 
-   public void createEdit(final ToDoItem item) {
+    public void createEdit(final ToDoItem item) {
         LayoutInflater inflater = LayoutInflater.from(ToDoListe.this);
         View dialogView = inflater.inflate(R.layout.todoliste_context, null);
         AlertDialog.Builder alertDialog =  new AlertDialog.Builder(ToDoListe.this);

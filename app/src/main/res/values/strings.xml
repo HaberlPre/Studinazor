@@ -10,16 +10,22 @@
 
     //To-Do-Liste
     <string name="todo_text_task">Neue Aufgabe</string>
-    <string name="todo_text_button">Add</string>
-    <string name="todo_text_date">Bis</string>
-    <string name="text_task">task</string>
-    <string name="text_date">date</string>
+    <string name="todo_text_button"> + </string>
+    <string name="text_task">Aufgabe</string>
+    <string name="text_date">Datum</string>
     <string name="menu_todo_sort">Sort by Date</string>
     <string name="menu_delete_all">Alles Löschen</string>
     <string name="menu_delete_task">Löschen</string>
-    <string name="delete_task">Löschen</string>
     <string name="menu_edit_task">Bearbeiten</string>
+    <string name="delete_task">Löschen</string>
     <string name="edit_task">Bearbeiten</string>
+    <string name="notification_date">Datum</string>
+    <string name="notification_time">Zeit</string>
+    <string name="notification_reminder">Erinnerung</string>
+    <string name="notification_switch">Auswahl</string>
+    <string name="date_reminder_default">Heute</string>
+    <string name="date_error_check_again">Dieses Datum ist schon vorbei.</string>
+
 
 
 
