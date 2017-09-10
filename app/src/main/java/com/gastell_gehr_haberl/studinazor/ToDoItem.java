@@ -29,6 +29,10 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
     }
 
+    public ToDoItem(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

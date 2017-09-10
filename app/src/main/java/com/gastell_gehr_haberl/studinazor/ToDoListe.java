@@ -106,18 +106,18 @@ public class ToDoListe extends AppCompatActivity {
         String task = todoText.getText().toString();
         String date = dateEdit.getText().toString();
         String time = timeEdit.getText().toString();
-        if (!task.equals("") && !date.equals("") && !time.equals("")) {
+        if (!task.equals("")) {
             todoText.setText("");
-            dateEdit.setText("");
-            timeEdit.setText("");
-            addNewTask(task, date, time);
+            //dateEdit.setText("");
+            //timeEdit.setText("");
+            addNewTask(task);
         }
     }
 
     private void switchButton() {
         switchButton = (Switch) findViewById(R.id.notification_switch);
         dateAndTimeLayout = (LinearLayout) findViewById(R.id.todoDateAndTimeLayout);
-
+        dateAndTimeLayout.setVisibility(View.INVISIBLE);
         switchButton.setChecked(false);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -148,16 +148,15 @@ public class ToDoListe extends AppCompatActivity {
         list.setAdapter(todoItemsAdapter);
     }
 
-    private void addNewTask(String task, String date, String time) {
-        Date dueDate = getDateFromString(date);
+    private void addNewTask(String task) {
+        /*Date dueDate = getDateFromString(date);
         Date dueTime = getTimeFromString(time);
         GregorianCalendar chosenDate = new GregorianCalendar();
         GregorianCalendar chosenTime = new GregorianCalendar();
         chosenDate.setTime(dueDate);
         chosenTime.setTime(dueTime);
-
-        ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
-                chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR), chosenTime.get(Calendar.HOUR), chosenTime.get(Calendar.MINUTE));
+*/
+        ToDoItem newTask = new ToDoItem(task);
 
         todoDB.insertItem(newTask);
         updateList();
