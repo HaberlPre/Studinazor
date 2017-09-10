@@ -21,7 +21,7 @@
     <string name="edit_task">Bearbeiten</string>
     <string name="notification_date">Datum</string>
     <string name="notification_time">Zeit</string>
-    <string name="notification_reminder">Erinnerung</string>
+    <string name="notification_reminder">Erinnere mich</string>
     <string name="notification_switch">Auswahl</string>
     <string name="date_reminder_default">Heute</string>
     <string name="date_error_check_again">Dieses Datum ist schon vorbei.</string>

@@ -49,16 +49,18 @@
         android:text="@string/notification_reminder"
         android:textSize="16sp" />
 
-    <android.support.v7.widget.SwitchCompat
+    <Switch
         android:id="@+id/notification_switch"
         android:paddingRight="25dp"
-        android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:checked="false"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/todoDateAndTimeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

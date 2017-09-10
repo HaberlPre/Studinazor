@@ -89,7 +89,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
                 try {
                     formattedDate = new SimpleDateFormat("dd.MM.yyyy",
                             Locale.GERMAN).parse(date);
-                    formattedTime = new SimpleDateFormat("HH:mm", Locale.GERMANY).parse(time);
+                    formattedTime = new SimpleDateFormat("HH:mm", Locale.GERMAN).parse(time);
                 } catch(ParseException e) {
                     e.printStackTrace();
                 }

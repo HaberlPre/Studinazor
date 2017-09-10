@@ -18,6 +18,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
     private String name;
     private GregorianCalendar date;
     private GregorianCalendar time;
+    private boolean hasReminder;
 
 
 
@@ -57,7 +58,13 @@ public class ToDoItem implements Comparable<ToDoItem> {
         return date.getTime();
     }
 
+    public boolean hasReminder() {
+        return hasReminder;
+    }
 
+    public void setHasReminder(boolean hasReminder) {
+        this.hasReminder = hasReminder;
+    }
 
     @Override
     public int compareTo(ToDoItem newItem) {

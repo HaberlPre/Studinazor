@@ -21,6 +21,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,12 @@ import java.util.Locale;
 public class ToDoListe extends AppCompatActivity {
 
     private Button addButton;
+    private EditText todoText;
+    private Switch switchButton;
+    private LinearLayout dateAndTimeLayout;
+    private boolean userHasReminder;
+    private ToDoItem userToDoItem;
+    private Date userReminderDate;
     private ArrayList<ToDoItem> items;
     private ToDoListeAdapter todoItemsAdapter;
     private ToDoListeDatenbank todoDB;
@@ -75,6 +82,7 @@ public class ToDoListe extends AppCompatActivity {
 
     private void initUI() {
         initTaskButton();
+        switchButton();
         initListView();
         initDateField();
         initTimeField();
@@ -92,18 +100,41 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void buttonClicked() {
-        EditText edit = (EditText) findViewById(R.id.todo_text_task);
+        todoText = (EditText) findViewById(R.id.todo_text_task);
         EditText dateEdit = (EditText) findViewById(R.id.notification_date);
         EditText timeEdit = (EditText) findViewById(R.id.notification_time);
-        String task = edit.getText().toString();
+        String task = todoText.getText().toString();
         String date = dateEdit.getText().toString();
         String time = timeEdit.getText().toString();
         if (!task.equals("") && !date.equals("") && !time.equals("")) {
-            edit.setText("");
+            todoText.setText("");
             dateEdit.setText("");
             timeEdit.setText("");
             addNewTask(task, date, time);
         }
+    }
+
+    private void switchButton() {
+        switchButton = (Switch) findViewById(R.id.notification_switch);
+        dateAndTimeLayout = (LinearLayout) findViewById(R.id.todoDateAndTimeLayout);
+
+        switchButton.setChecked(false);
+        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    dateAndTimeLayout.setVisibility(View.VISIBLE);
+                } else {
+                    dateAndTimeLayout.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+    }
+
+
+    private void hideKeyBoard(EditText editText) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
     private void initListView() {
