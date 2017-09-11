@@ -30,6 +30,7 @@ public class NewstickerActivity extends StartScreen implements DownloadListener 
         new NewstickerDownloadTask(this, items).execute(ADDDRESS);
         //initNewsList();
         //initUI();
+        setupPoweredBy();
     }
 
     private void initNewsList() {
@@ -80,6 +81,14 @@ public class NewstickerActivity extends StartScreen implements DownloadListener 
         View header = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.newsticker_item, null);
         list.addHeaderView(header);
         list.setAdapter(adapter);
+    }
+
+    private void setupPoweredBy() {
+        poweredBy = (TextView) findViewById(R.id.poweredBy_id);
+        poweredBy.setClickable(true);
+        poweredBy.setMovementMethod(LinkMovementMethod.getInstance());
+        String text = "<a href='https://newsapi.org/'> Powered by News API </a>";
+        poweredBy.setText(Html.fromHtml(text));
     }
 
 

@@ -57,7 +57,7 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
 
     private void processJson(JSONObject jsonObject) {
         try {
-            JSONArray news = jsonObject.getJSONArray("articles");
+            JSONArray news = jsonObject.getJSONArray("articles:"); //"articles" ?
             for (int i=0; i<news.length(); i++) {
                 JSONObject article = news.getJSONObject(i);
                 String author = article.getString(AUTHOR);
@@ -83,7 +83,7 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
 
         StringBuilder stringBuilder = new StringBuilder();
         String line;
-        while ((line = bufferedReader.readLine()) != null) {
+        while ((line = bufferedReader.readLine()) != null) { //evtl falsch, weil jsondatei von newsapi keine null zeilen hat?
             stringBuilder.append(line + "\n");
         }
         bufferedReader.close();

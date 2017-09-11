@@ -13,9 +13,7 @@
     <ListView
         android:id="@+id/news_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:padding="10dp" />
+        android:layout_height="wrap_content"></ListView>
 
     <TextView
         android:id="@+id/poweredBy_id"
