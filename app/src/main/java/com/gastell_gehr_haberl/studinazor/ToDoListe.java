@@ -2,12 +2,9 @@ package com.gastell_gehr_haberl.studinazor;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,17 +14,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -43,8 +35,8 @@ public class ToDoListe extends AppCompatActivity {
 
     private Button addButton;
     private EditText todoText;
-    private Switch switchButton;
-    private LinearLayout dateAndTimeLayout;
+    //private Switch switchButton;
+    //private LinearLayout dateAndTimeLayout;
     private boolean userHasReminder;
     private ToDoItem userToDoItem;
     private Date userReminderDate;
@@ -57,7 +49,7 @@ public class ToDoListe extends AppCompatActivity {
         super.onCreate(savedInstanceState); //TODO bundle von startendem intent
         //TODO holen, prüfen und dann verarbeiten bzw wenn leer kp
         setContentView(R.layout.activity_todo);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initTaskList();
         initUI();
         initDataBase();
@@ -70,8 +62,9 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void updateList() {
+        ArrayList tempList = todoDB.getAllToDoItems();
         items.clear();
-        items.addAll(todoDB.getAllToDoItems());
+        items.addAll(tempList);
         todoItemsAdapter.notifyDataSetChanged();
     }
 
@@ -82,10 +75,10 @@ public class ToDoListe extends AppCompatActivity {
 
     private void initUI() {
         initTaskButton();
-        switchButton();
+        //switchButton();
         initListView();
         initDateField();
-        initTimeField();
+        //initTimeField();
     }
 
 
@@ -102,19 +95,19 @@ public class ToDoListe extends AppCompatActivity {
     private void buttonClicked() {
         todoText = (EditText) findViewById(R.id.todo_text_task);
         EditText dateEdit = (EditText) findViewById(R.id.notification_date);
-        EditText timeEdit = (EditText) findViewById(R.id.notification_time);
+        //EditText timeEdit = (EditText) findViewById(R.id.notification_time);
         String task = todoText.getText().toString();
         String date = dateEdit.getText().toString();
-        String time = timeEdit.getText().toString();
-        if (!task.equals("")) {
+        //String time = timeEdit.getText().toString();
+        if (!task.equals("") && !date.equals("")) {
             todoText.setText("");
-            //dateEdit.setText("");
+            dateEdit.setText("");
             //timeEdit.setText("");
-            addNewTask(task);
+            addNewTask(task, date);
         }
     }
 
-    private void switchButton() {
+    /*private void switchButton() {
         switchButton = (Switch) findViewById(R.id.notification_switch);
         dateAndTimeLayout = (LinearLayout) findViewById(R.id.todoDateAndTimeLayout);
         dateAndTimeLayout.setVisibility(View.INVISIBLE);
@@ -130,7 +123,7 @@ public class ToDoListe extends AppCompatActivity {
             }
         });
     }
-
+*/
 
     private void hideKeyBoard(EditText editText) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -139,7 +132,15 @@ public class ToDoListe extends AppCompatActivity {
 
     private void initListView() {
         ListView list = (ListView) findViewById(R.id.todo_list);
-        registerForContextMenu(list);
+        //registerForContextMenu(list);
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
+                removeTaskAtPosition(position);
+                return true;
+            }
+        });
     }
 
     private void initListAdapter() {
@@ -148,15 +149,16 @@ public class ToDoListe extends AppCompatActivity {
         list.setAdapter(todoItemsAdapter);
     }
 
-    private void addNewTask(String task) {
-        /*Date dueDate = getDateFromString(date);
-        Date dueTime = getTimeFromString(time);
+    private void addNewTask(String task, String date) {
+        Date dueDate = getDateFromString(date);
+        //Date dueTime = getTimeFromString(time);
         GregorianCalendar chosenDate = new GregorianCalendar();
-        GregorianCalendar chosenTime = new GregorianCalendar();
+        //GregorianCalendar chosenTime = new GregorianCalendar();
         chosenDate.setTime(dueDate);
-        chosenTime.setTime(dueTime);
-*/
-        ToDoItem newTask = new ToDoItem(task);
+        //chosenTime.setTime(dueTime);
+
+        ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
+                chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
 
         todoDB.insertItem(newTask);
         updateList();
@@ -259,7 +261,8 @@ public class ToDoListe extends AppCompatActivity {
 
     }
 
-    public void onDestroy() {
+    @Override
+    protected void onDestroy() {
         super.onDestroy();
         todoDB.close();
 

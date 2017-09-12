@@ -19,9 +19,10 @@ import java.util.Locale;
 public class ToDoListeChosenDate   extends DialogFragment implements
         DatePickerDialog.OnDateSetListener {
 
-    final Calendar c = Calendar.getInstance();
+    //final Calendar c = Calendar.getInstance();
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final Calendar c = Calendar.getInstance();
         // Use the current date as the default date in the picker
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
@@ -34,7 +35,7 @@ public class ToDoListeChosenDate   extends DialogFragment implements
     public void onDateSet(DatePicker view, int year, int month, int day) {
         TextView textView = (TextView) getActivity().findViewById(R.id.notification_date);
 
-        GregorianCalendar date = new GregorianCalendar();
+        GregorianCalendar date = new GregorianCalendar(year, month, day);
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
                 Locale.GERMANY);
         String dateString = df.format(date.getTime());

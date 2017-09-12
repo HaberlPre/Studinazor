@@ -32,11 +32,11 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
     public static final String KEY_ID = "_id";
     public static final String KEY_TASK = "task";
     public static final String KEY_DATE = "date";
-    public static final String KEY_TIME = "time";
+    //public static final String KEY_TIME = "time";
 
     public static final int COLUMN_TASK_INDEX = 1;
     public static final int COLUMN_DATE_INDEX = 2;
-    public static final int COLUMN_TIME_INDEX = 3;
+    //public static final int COLUMN_TIME_INDEX = 3;
 
     private ToDoDBOpenHelper dbHelper;
 
@@ -48,7 +48,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
     }
 
     public void setName(Context name) { //TODO statt string mgl?
-        this.name = name;
+        ToDoListeDatenbank.name = name;
     }
 
     public static String getName() {
@@ -71,7 +71,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
         ContentValues newItems = new ContentValues();
         newItems.put(KEY_TASK, item.getName());
         newItems.put(KEY_DATE, item.getFormattedDate());
-        newItems.put(KEY_TIME, item.getFormattedTime());
+        //newItems.put(KEY_TIME, item.getFormattedTime());
         return db.insert(DATABASE_TABLE, null, newItems);
     }
 
@@ -83,22 +83,24 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
             do {
                 String task = cursor.getString(COLUMN_TASK_INDEX);
                 String date = cursor.getString(COLUMN_DATE_INDEX);
-                String time = cursor.getString(COLUMN_TIME_INDEX);
+                //String time = cursor.getString(COLUMN_TIME_INDEX);
                 Date formattedDate = null;
-                Date formattedTime = null;
+                //Date formattedTime = null;
                 try {
                     formattedDate = new SimpleDateFormat("dd.MM.yyyy",
                             Locale.GERMAN).parse(date);
-                    formattedTime = new SimpleDateFormat("HH:mm", Locale.GERMAN).parse(time);
+                    //formattedTime = new SimpleDateFormat("HH:mm", Locale.GERMAN).parse(time);
                 } catch(ParseException e) {
                     e.printStackTrace();
                 }
                 Calendar chosenDate = Calendar.getInstance(Locale.GERMAN);
                 chosenDate.setTime(formattedDate);
-                Calendar chosenTime = Calendar.getInstance(Locale.GERMAN);
-                chosenTime.setTime(formattedTime);
+                //Calendar chosenTime = Calendar.getInstance(Locale.GERMAN);
+                //chosenTime.setTime(formattedTime);
 
-                items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH), chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR), chosenTime.get(Calendar.HOUR), chosenTime.get(Calendar.MINUTE)));
+                //items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH), chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR), chosenTime.get(Calendar.HOUR), chosenTime.get(Calendar.MINUTE)));
+                items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
+                        chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR)));
 
             } while (cursor.moveToNext());
         }

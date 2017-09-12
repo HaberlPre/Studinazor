@@ -1,14 +1,9 @@
 package com.gastell_gehr_haberl.studinazor;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.UUID;
 
 /**
  * Created by Juliane on 05.09.2017.
@@ -22,16 +17,22 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
 
 
-    public ToDoItem(String name, int day, int month, int year, int hour, int minute) {
+    /*public ToDoItem(String name, int day, int month, int year, int hour, int minute) {
         this.name = name;
         this.date = new GregorianCalendar(year, month, day);
-        this.time = new GregorianCalendar();
+        //this.time = new GregorianCalendar();
+    }*/
 
-    }
-
-    public ToDoItem(String name) {
+    public ToDoItem(String name, int day, int month, int year) {
         this.name = name;
+        this.date = new GregorianCalendar(year, month, day);
     }
+
+
+
+    /*public ToDoItem(String name, int i, int i1, int i2) {
+        this.name = name;
+    }*/
 
     public String getName() {
         return name;
@@ -48,11 +49,11 @@ public class ToDoItem implements Comparable<ToDoItem> {
         return df.format(date.getTime());
     }
 
-    public String getFormattedTime() {
+    /*public String getFormattedTime() {
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
                 Locale.GERMANY);
         return df.format(time.getTime());
-    }
+    }*/
 
     public Date getDueDate() {
         return date.getTime();
@@ -75,9 +76,14 @@ public class ToDoItem implements Comparable<ToDoItem> {
         return getDueDate().compareTo(newItem.getDueDate());
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Name: " + getName() + ", Date: " + getFormattedDate() + "Time: " + getFormattedTime();
+    }*/
+
+    @Override
+    public String toString() {
+        return "Name: " + getName() + ", Date: " + getFormattedDate();
     }
 }
 
