@@ -58,21 +58,33 @@ public class EinkaufslisteDatabase {
         return db.insert(DATABASE_TABLE, null, itemValues);
     }
 
-    public void removeToDoItem(ShopItem item) {
-
+    public void removeShopItem(ShopItem item) {
         String toDelete = KEY_ITEM + "=?";
         String[] deleteArguments = new String[]{item.getName()};
         db.delete(DATABASE_TABLE, toDelete, deleteArguments);
 
     }
 
-    public void deleteList(){
-        String toDelete = KEY_ITEM + "=?";
-        String[] deleteArg = new String[]{getAllToDoItems().toString()};
-        db.delete(DATABASE_TABLE,toDelete,deleteArg);
+    public void removeAllItems(){
+        db =  dbHelper.getWritableDatabase();
+        db.delete(DATABASE_TABLE, null, null);
     }
 
-    public ArrayList<ShopItem> getAllToDoItems() {
+    public void updateShopItem(String amount, String unit, String name, ShopItem item){
+        db = dbHelper.getWritableDatabase();
+        //the new values
+        ContentValues newValues = new ContentValues();
+        newValues.put(KEY_AMOUNT, amount);
+        newValues.put(KEY_UNIT,unit);
+        newValues.put(KEY_ITEM,name);
+        //which row should be updated (the ? will be the item.getName()-Argument)
+        String toUpdate = KEY_ITEM + "=?";
+        String[] updateArgument = new String[]{item.getName()};
+
+        db.update(DATABASE_TABLE, newValues, toUpdate, updateArgument);
+    }
+
+    public ArrayList<ShopItem> getAllShopItems() {
         ArrayList<ShopItem> items = new ArrayList<ShopItem>();
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_AMOUNT, KEY_UNIT,
                 KEY_ITEM}, null, null, null, null, null);

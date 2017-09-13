@@ -10,21 +10,40 @@
     android:paddingBottom="20dp" >
 
     <TextView
-        android:id="@+id/change_item"
+        android:id="@+id/edit_item_head"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_marginBottom="20dp"
-        android:text="@string/change_item"/> 
+        android:text="@string/edit_item_head"/> 
 
-    <EditText
-        android:id="@+id/edit_dialog_input"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-         <requestFocus />
-         
-                
-            </EditText>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_dialog_input_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/amount"
+            android:inputType="numberDecimal"
+            android:textColorHint="#aaaaaa"/>
+
+        <Spinner
+            android:id="@+id/edit_dialog_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/units"></Spinner>
+
+        <EditText
+            android:id="@+id/edit_dialog_input_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/item"
+            android:textColorHint="#aaaaaa"
+            android:inputType="textCapSentences"/>
+
+    </LinearLayout>
 
 </LinearLayout>

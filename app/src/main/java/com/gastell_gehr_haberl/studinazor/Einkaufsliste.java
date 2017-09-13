@@ -49,7 +49,7 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     private void refreshArrayList(){
-        ArrayList tempList = shopDB.getAllToDoItems();
+        ArrayList tempList = shopDB.getAllShopItems();
         shopItems.clear();
         shopItems.addAll(tempList);
         shopItems_adapter.notifyDataSetChanged();
@@ -125,28 +125,54 @@ public class Einkaufsliste extends AppCompatActivity {
 
     public void createEdit(final ShopItem item) {
         LayoutInflater inflater = LayoutInflater.from(Einkaufsliste.this);
-        View dialogView = inflater.inflate(R.layout.todoliste_context, null);
+        View dialogView = inflater.inflate(R.layout.einkaufsliste_context, null);
         AlertDialog.Builder alertDialog =  new AlertDialog.Builder(Einkaufsliste.this);
         alertDialog.setView(dialogView);
-        final EditText edit = (EditText) dialogView.findViewById(R.id.edit_dialog_input);
-        edit.setText(item.getName());
-        final TextView message = (TextView) dialogView.findViewById(R.id.edit_old_task);
+        final EditText amountEdit = (EditText) dialogView.findViewById(R.id.edit_dialog_input_amount);
+        amountEdit.setText(item.getAmount());
+        final Spinner unitNew = (Spinner) dialogView.findViewById(R.id.edit_dialog_spinner);
+        //unitNew.setSelection(item.getUnit()); //<- soll int position von unit im array liefern
+        unitNew.setPrompt(item.getUnit());
+        final EditText itemEdit = (EditText) dialogView.findViewById(R.id.edit_dialog_input_item);
+        itemEdit.setText(item.getName());
+        final TextView message = (TextView) dialogView.findViewById(R.id.edit_item_head);
 
         alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int id) {
-                item.setName(edit.getText().toString());
+
+                String newAmount = amountEdit.getText().toString();
+                String newUnit = unitNew.getSelectedItem().toString();
+                String newName = itemEdit.getText().toString();
+
+                shopDB.updateShopItem(newAmount,newUnit,newName,item);
                 shopItems_adapter.notifyDataSetChanged();
-            }
+                refreshArrayList();
+
+                /*ShopItem temp = new ShopItem(item.getAmount(),item.getUnit(),item.getName());
+                shopDB.removeShopItem(item);
+
+                temp.setAmount(amountEdit.getText().toString());
+                temp.setUnit(unitNew.getSelectedItem().toString());
+                temp.setName(itemEdit.getText().toString());
+
+                shopItems_adapter.notifyDataSetChanged();
+
+                //löscht es alte und macht ein neues
+                shopDB.removeShopItem(item);
+                addNewTask(amountEdit.getText().toString(),unitNew.getSelectedItem().toString(),itemEdit.getText().toString());*/
+
+             }
         }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
-            public void onClick(DialogInterface dialog, int id) {
+               public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
-            }
-        });
-        final AlertDialog alert = alertDialog.create();
-        alert.show();
+               }
+            });
+            final AlertDialog alert = alertDialog.create();
+            alert.show();
     }
+
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -158,7 +184,7 @@ public class Einkaufsliste extends AppCompatActivity {
                 removeTaskAtPosition(item.getItemId());
                 break;
             case R.id.item_change:
-                changeItem();
+                //changeItem();
                 createEdit(shopItems.get(position));
                 break;
         }
@@ -176,9 +202,7 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     private void addNewTask(String amount, String unit, String task) {
-
         ShopItem newTask = new ShopItem(amount, unit, task);
-
         shopDB.insertItem(newTask);
         refreshArrayList();
     }
@@ -186,7 +210,7 @@ public class Einkaufsliste extends AppCompatActivity {
 
     private void removeTaskAtPosition(int position) {
         if (shopItems.get(position) != null) {
-            shopDB.removeToDoItem(shopItems.get(position));
+            shopDB.removeShopItem(shopItems.get(position));
             refreshArrayList();
         }
     }
@@ -204,9 +228,6 @@ public class Einkaufsliste extends AppCompatActivity {
             case R.id.action_delete_list:
                 deleteList();
                 return true;
-            case R.id.action_change_list:
-                changeItem();
-                return true;
             case android.R.id.home:
                 this.finish();
                 return true;
@@ -216,10 +237,12 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     private void deleteList(){
-        shopItems.clear();
+        shopDB.removeAllItems();
         shopItems_adapter.notifyDataSetChanged();
-        shopDB.deleteList();
         refreshArrayList();
+        /*for(int i = shopItems.size() - 1; i >= 0; i--) {
+            removeTaskAtPosition(i);
+        }*/
     }
 
     private void sortList() {

@@ -43,7 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/item"
-        android:textColorHint="#aaaaaa"/>
+        android:textColorHint="#aaaaaa"
+        android:inputType="textCapSentences"/>
 
 </LinearLayout>
 

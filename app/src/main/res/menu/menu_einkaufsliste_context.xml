@@ -7,6 +7,6 @@
 
     <item
         android:id="@+id/item_change"
-        android:title="@string/item_change" />
+        android:title="@string/item_edit" />
 
 </menu>
