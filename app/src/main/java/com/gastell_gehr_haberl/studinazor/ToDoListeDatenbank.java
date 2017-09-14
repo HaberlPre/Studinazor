@@ -71,7 +71,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
         ContentValues newItems = new ContentValues();
         newItems.put(KEY_TASK, item.getName());
         newItems.put(KEY_DATE, item.getFormattedDate());
-        //newItems.put(KEY_TIME, item.getFormattedTime());
+        newItems.put(KEY_TIME, item.getFormattedTime());
         return db.insert(DATABASE_TABLE, null, newItems);
     }
 
@@ -89,7 +89,8 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
                 try {
                     formattedDate = new SimpleDateFormat("dd.MM.yyyy",
                             Locale.GERMAN).parse(date);
-                    formattedTime = new SimpleDateFormat("HH:mm", Locale.GERMAN).parse(time);
+                    formattedTime = new SimpleDateFormat("HH:mm:ss",
+                            Locale.GERMAN).parse(time);
                 } catch(ParseException e) {
                     e.printStackTrace();
                 }
@@ -100,7 +101,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
 
                 items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                         chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR),
-                        chosenTime.get(Calendar.HOUR), chosenTime.get(Calendar.MINUTE),00));
+                        chosenTime.get(Calendar.HOUR), chosenTime.get(Calendar.MINUTE),chosenTime.get(Calendar.SECOND)));
                 //items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                 //        chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR)));
 
@@ -123,15 +124,15 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
     }
 
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {
-        /*private static final String DATABASE_CREATE = "create table "
-                + DATABASE_TABLE + " (" + KEY_ID
-                + " integer primary key autoincrement, " + KEY_TASK
-                + " text, " + KEY_DATE + " text, " + KEY_TIME + " text not null);";*/
-
         private static final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID
                 + " integer primary key autoincrement, " + KEY_TASK
-                + " text not null, " + KEY_DATE + " text);";
+                + " text, " + KEY_DATE + " text, " + KEY_TIME + " text not null);";
+
+        /*private static final String DATABASE_CREATE = "create table "
+                + DATABASE_TABLE + " (" + KEY_ID
+                + " integer primary key autoincrement, " + KEY_TASK
+                + " text not null, " + KEY_DATE + " text);";*/
 
         public ToDoDBOpenHelper(Context c, String dbname,
                                 SQLiteDatabase.CursorFactory factory, int version) {
@@ -150,7 +151,3 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
 
     }
 }
-
-
-
-
