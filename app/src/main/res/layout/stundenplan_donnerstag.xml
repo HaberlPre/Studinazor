@@ -57,14 +57,16 @@
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
-            android:hint="@string/input_class" />
+            android:hint="@string/input_class"
+            android:inputType="textCapSentences"/>
 
         <EditText
             android:id="@+id/input_first_room_thursday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="@string/input_room"/>
+            android:hint="@string/input_room"
+            android:inputType="textCapSentences"/>
 
     </LinearLayout>
 
@@ -85,14 +87,16 @@
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
-            android:hint="@string/input_class"/>
+            android:hint="@string/input_class"
+            android:inputType="textCapSentences"/>
 
         <EditText
             android:id="@+id/input_second_room_thursday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="@string/input_room"/>
+            android:hint="@string/input_room"
+            android:inputType="textCapSentences"/>
 
     </LinearLayout>
 
@@ -112,14 +116,16 @@
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
-            android:hint="@string/input_class"/>
+            android:hint="@string/input_class"
+            android:inputType="textCapSentences"/>
 
         <EditText
             android:id="@+id/input_third_room_thursday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="@string/input_room"/>
+            android:hint="@string/input_room"
+            android:inputType="textCapSentences"/>
 
     </LinearLayout>
 
@@ -139,14 +145,16 @@
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
-            android:hint="@string/input_class"/>
+            android:hint="@string/input_class"
+            android:inputType="textCapSentences"/>
 
         <EditText
             android:id="@+id/input_fourth_room_thursday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="@string/input_room"/>
+            android:hint="@string/input_room"
+            android:inputType="textCapSentences"/>
 
     </LinearLayout>
 
@@ -167,14 +175,16 @@
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
-            android:hint="@string/input_class"/>
+            android:hint="@string/input_class"
+            android:inputType="textCapSentences"/>
 
         <EditText
             android:id="@+id/input_fifth_room_thursday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="@string/input_room"/>
+            android:hint="@string/input_room"
+            android:inputType="textCapSentences"/>
 
     </LinearLayout>
 
@@ -195,14 +205,16 @@
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
-            android:hint="@string/input_class"/>
+            android:hint="@string/input_class"
+            android:inputType="textCapSentences"/>
 
         <EditText
             android:id="@+id/input_sixth_room_thursday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="@string/input_room"/>
+            android:hint="@string/input_room"
+            android:inputType="textCapSentences"/>
 
     </LinearLayout>
 
