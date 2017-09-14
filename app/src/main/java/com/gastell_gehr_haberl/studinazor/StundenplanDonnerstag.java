@@ -32,21 +32,21 @@ public class StundenplanDonnerstag extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stundenplan_daily_layout);
+        setContentView(R.layout.stundenplan_donnerstag);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        inputFirstClass = (EditText) findViewById(R.id.input_first_class);
-        inputSecondClass = (EditText) findViewById(R.id.input_second_class);
-        inputThirdClass = (EditText) findViewById(R.id.input_third_class);
-        inputFourthClass = (EditText) findViewById(R.id.input_fourth_class);
-        inputFifthClass = (EditText) findViewById(R.id.input_fifth_class);
-        inputSixthClass = (EditText) findViewById(R.id.input_sixth_class);
-        inputFirstRoom = (EditText) findViewById(R.id.input_first_room);
-        inputSecondRoom = (EditText) findViewById(R.id.input_second_room);
-        inputThirdRoom = (EditText) findViewById(R.id.input_third_room);
-        inputFourthRoom = (EditText) findViewById(R.id.input_fourth_room);
-        inputFifthRoom = (EditText) findViewById(R.id.input_fifth_room);
-        inputSixthRoom = (EditText) findViewById(R.id.input_sixth_room);
-        saveInput = (Button) findViewById(R.id.input_button);
+        inputFirstClass = (EditText) findViewById(R.id.input_first_class_thursday);
+        inputSecondClass = (EditText) findViewById(R.id.input_second_class_thursday);
+        inputThirdClass = (EditText) findViewById(R.id.input_third_class_thursday);
+        inputFourthClass = (EditText) findViewById(R.id.input_fourth_class_thursday);
+        inputFifthClass = (EditText) findViewById(R.id.input_fifth_class_thursday);
+        inputSixthClass = (EditText) findViewById(R.id.input_sixth_class_thursday);
+        inputFirstRoom = (EditText) findViewById(R.id.input_first_room_thursday);
+        inputSecondRoom = (EditText) findViewById(R.id.input_second_room_thursday);
+        inputThirdRoom = (EditText) findViewById(R.id.input_third_room_thursday);
+        inputFourthRoom = (EditText) findViewById(R.id.input_fourth_room_thursday);
+        inputFifthRoom = (EditText) findViewById(R.id.input_fifth_room_thursday);
+        inputSixthRoom = (EditText) findViewById(R.id.input_sixth_room_thursday);
+        saveInput = (Button) findViewById(R.id.input_button_thursday);
         saveInput.setOnClickListener(this);
         savedPreferences();
     }

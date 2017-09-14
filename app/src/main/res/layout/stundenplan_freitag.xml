@@ -12,7 +12,7 @@
 
 
         <TextView
-            android:id="@+id/time_text"
+            android:id="@+id/time_text_friday"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.80"
@@ -21,7 +21,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/class_text"
+            android:id="@+id/class_text_friday"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.14"
@@ -30,7 +30,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/room_text"
+            android:id="@+id/room_text_friday"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/first_class"
+            android:id="@+id/first_class_friday"
             android:layout_width="0dp"
             android:layout_weight="0.80"
             android:layout_height="wrap_content"
@@ -53,14 +53,14 @@
             />
 
         <EditText
-            android:id="@+id/input_first_class"
+            android:id="@+id/input_first_class_friday"
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
             android:hint="@string/input_class" />
 
         <EditText
-            android:id="@+id/input_first_room"
+            android:id="@+id/input_first_room_friday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/second_class"
+            android:id="@+id/second_class_friday"
             android:layout_width="0dp"
             android:layout_weight="0.80"
             android:layout_height="wrap_content"
@@ -81,14 +81,14 @@
 
 
         <EditText
-            android:id="@+id/input_second_class"
+            android:id="@+id/input_second_class_friday"
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
             android:hint="@string/input_class"/>
 
         <EditText
-            android:id="@+id/input_second_room"
+            android:id="@+id/input_second_room_friday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -101,21 +101,21 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/third_class"
+            android:id="@+id/third_class_friday"
             android:layout_width="0dp"
             android:layout_weight="0.80"
             android:layout_height="wrap_content"
             android:text="@string/third_class" />
 
         <EditText
-            android:id="@+id/input_third_class"
+            android:id="@+id/input_third_class_friday"
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
             android:hint="@string/input_class"/>
 
         <EditText
-            android:id="@+id/input_third_room"
+            android:id="@+id/input_third_room_friday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -128,21 +128,21 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/fourth_class"
+            android:id="@+id/fourth_class_friday"
             android:layout_width="0dp"
             android:layout_weight="0.80"
             android:layout_height="wrap_content"
             android:text="@string/fourth_class" />
 
         <EditText
-            android:id="@+id/input_fourth_class"
+            android:id="@+id/input_fourth_class_friday"
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
             android:hint="@string/input_class"/>
 
         <EditText
-            android:id="@+id/input_fourth_room"
+            android:id="@+id/input_fourth_room_friday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/fifth_class"
+            android:id="@+id/fifth_class_friday"
             android:layout_width="0dp"
             android:layout_weight="0.80"
             android:layout_height="wrap_content"
@@ -163,14 +163,14 @@
             />
 
         <EditText
-            android:id="@+id/input_fifth_class"
+            android:id="@+id/input_fifth_class_friday"
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
             android:hint="@string/input_class"/>
 
         <EditText
-            android:id="@+id/input_fifth_room"
+            android:id="@+id/input_fifth_room_friday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/sixth_class"
+            android:id="@+id/sixth_class_friday"
             android:layout_width="0dp"
             android:layout_weight="0.80"
             android:layout_height="wrap_content"
@@ -191,14 +191,14 @@
             />
 
         <EditText
-            android:id="@+id/input_sixth_class"
+            android:id="@+id/input_sixth_class_friday"
             android:layout_width="0dp"
             android:layout_weight="1.14"
             android:layout_height="wrap_content"
             android:hint="@string/input_class"/>
 
         <EditText
-            android:id="@+id/input_sixth_room"
+            android:id="@+id/input_sixth_room_friday"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/input_button"
+        android:id="@+id/input_button_friday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/input_button"
