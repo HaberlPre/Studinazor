@@ -53,18 +53,18 @@ public class StundenplanFreitag extends AppCompatActivity implements View.OnClic
 
     private void savedPreferences() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String firstClassInput = pref.getString("firstClass", "");
-        String secondClassInput = pref.getString("secondClass", "");
-        String thirdClassInput = pref.getString("thirdClass", "");
-        String fourthClassInput = pref.getString("fourthClass", "");
-        String fifthClassInput = pref.getString("fifthClass", "");
-        String sixthClassInput = pref.getString("sixthClass", "");
-        String firstRoomInput = pref.getString("firstRoom", "");
-        String secondRoomInput = pref.getString("secondRoom", "");
-        String thirdRoomInput = pref.getString("thirdRoom", "");
-        String fourthRoomInput = pref.getString("fourthRoom", "");
-        String fifthRoomInput = pref.getString("fifthRoom", "");
-        String sixthRoomInput = pref.getString("sixthRoom", "");
+        String firstClassInput = pref.getString("firstClassFriday", "");
+        String secondClassInput = pref.getString("secondClassFriday", "");
+        String thirdClassInput = pref.getString("thirdClassFriday", "");
+        String fourthClassInput = pref.getString("fourthClassFriday", "");
+        String fifthClassInput = pref.getString("fifthClassFriday", "");
+        String sixthClassInput = pref.getString("sixthClassFriday", "");
+        String firstRoomInput = pref.getString("firstRoomFriday", "");
+        String secondRoomInput = pref.getString("secondRoomFriday", "");
+        String thirdRoomInput = pref.getString("thirdRoomFriday", "");
+        String fourthRoomInput = pref.getString("fourthRoomFriday", "");
+        String fifthRoomInput = pref.getString("fifthRoomFriday", "");
+        String sixthRoomInput = pref.getString("sixthRoomFriday", "");
         inputFirstClass.setText(firstClassInput);
         inputSecondClass.setText(secondClassInput);
         inputThirdClass.setText(thirdClassInput);
@@ -88,18 +88,18 @@ public class StundenplanFreitag extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        savePreferences("firstClass", inputFirstClass.getText().toString());
-        savePreferences("secondClass", inputSecondClass.getText().toString());
-        savePreferences("thirdClass", inputThirdClass.getText().toString());
-        savePreferences("fourthClass", inputFourthClass.getText().toString());
-        savePreferences("fifthClass", inputFifthClass.getText().toString());
-        savePreferences("sixthClass", inputSixthClass.getText().toString());
-        savePreferences("firstRoom", inputFirstRoom.getText().toString());
-        savePreferences("secondRoom", inputSecondRoom.getText().toString());
-        savePreferences("thirdRoom", inputThirdRoom.getText().toString());
-        savePreferences("fourthRoom", inputFourthRoom.getText().toString());
-        savePreferences("fifthRoom", inputFifthRoom.getText().toString());
-        savePreferences("sixthRoom", inputSecondRoom.getText().toString());
+        savePreferences("firstClassFriday", inputFirstClass.getText().toString());
+        savePreferences("secondClassFriday", inputSecondClass.getText().toString());
+        savePreferences("thirdClassFriday", inputThirdClass.getText().toString());
+        savePreferences("fourthClassFriday", inputFourthClass.getText().toString());
+        savePreferences("fifthClassFriday", inputFifthClass.getText().toString());
+        savePreferences("sixthClassFriday", inputSixthClass.getText().toString());
+        savePreferences("firstRoomFriday", inputFirstRoom.getText().toString());
+        savePreferences("secondRoomFriday", inputSecondRoom.getText().toString());
+        savePreferences("thirdRoomFriday", inputThirdRoom.getText().toString());
+        savePreferences("fourthRoomFriday", inputFourthRoom.getText().toString());
+        savePreferences("fifthRoomFriday", inputFifthRoom.getText().toString());
+        savePreferences("sixthRoomFriday", inputSecondRoom.getText().toString());
 
     }
 
