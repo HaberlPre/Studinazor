@@ -15,19 +15,19 @@ import android.widget.EditText;
 
 public class StundenplanFreitag extends AppCompatActivity implements View.OnClickListener{
 
-    EditText inputFirstClass;
-    EditText inputSecondClass;
-    EditText inputThirdClass;
-    EditText inputFourthClass;
-    EditText inputFifthClass;
-    EditText inputSixthClass;
-    EditText inputFirstRoom;
-    EditText inputSecondRoom;
-    EditText inputThirdRoom;
-    EditText inputFourthRoom;
-    EditText inputFifthRoom;
-    EditText inputSixthRoom;
-    Button saveInput;
+    private EditText inputFirstClass;
+    private EditText inputSecondClass;
+    private EditText inputThirdClass;
+    private EditText inputFourthClass;
+    private EditText inputFifthClass;
+    private EditText inputSixthClass;
+    private EditText inputFirstRoom;
+    private EditText inputSecondRoom;
+    private EditText inputThirdRoom;
+    private EditText inputFourthRoom;
+    private EditText inputFifthRoom;
+    private EditText inputSixthRoom;
+    private Button saveInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
