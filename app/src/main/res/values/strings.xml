@@ -29,8 +29,23 @@
 
 
     //Stundeplan
-    <string name="stundenplan_text_wip">Stundenplan</string>
-    <string name="menu_shoplist">Löschen</string> //wegen menu noch drin
+    <string name="class_text">Vorlesungen</string>
+    <string name="time_text">Uhrzeit</string>
+    <string name="room_text">Raum</string>
+    <string name="button_monday">Montag</string>
+    <string name="button_tuesday">Dienstag</string>
+    <string name="button_wednesday">Mittwoch</string>
+    <string name="button_thursday">Donnerstag</string>
+    <string name="button_friday">Freitag</string>
+    <string name="first_class">8.00 - 10.00</string>
+    <string name="second_class">10.00 - 12.00</string>
+    <string name="third_class">12.00 - 14.00</string>
+    <string name="fourth_class">14.00 - 16.00</string>
+    <string name="fifth_class">16.00 - 18.00</string>
+    <string name="sixth_class">18.00 - 20.00</string>
+    <string name="input_class">Kurs</string>
+    <string name="input_room">Raum</string>
+    <string name="input_button">Eingaben speichern</string>
 
     //Einkaufsliste
     <string name="einkauf_text_wip">Einkaufsliste</string>

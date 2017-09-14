@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:paddingBottom="15dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/time_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.80"
+            android:text="@string/time_text"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/class_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.14"
+            android:text="@string/class_text"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/room_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/room_text"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/first_class"
+            android:layout_width="0dp"
+            android:layout_weight="0.80"
+            android:layout_height="wrap_content"
+            android:text="@string/first_class"
+            />
+
+        <EditText
+            android:id="@+id/input_first_class"
+            android:layout_width="0dp"
+            android:layout_weight="1.14"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_class" />
+
+        <EditText
+            android:id="@+id/input_first_room"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_room"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/second_class"
+            android:layout_width="0dp"
+            android:layout_weight="0.80"
+            android:layout_height="wrap_content"
+            android:text="@string/second_class" />
+
+
+        <EditText
+            android:id="@+id/input_second_class"
+            android:layout_width="0dp"
+            android:layout_weight="1.14"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_class"/>
+
+        <EditText
+            android:id="@+id/input_second_room"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_room"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/third_class"
+            android:layout_width="0dp"
+            android:layout_weight="0.80"
+            android:layout_height="wrap_content"
+            android:text="@string/third_class" />
+
+        <EditText
+            android:id="@+id/input_third_class"
+            android:layout_width="0dp"
+            android:layout_weight="1.14"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_class"/>
+
+        <EditText
+            android:id="@+id/input_third_room"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_room"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/fourth_class"
+            android:layout_width="0dp"
+            android:layout_weight="0.80"
+            android:layout_height="wrap_content"
+            android:text="@string/fourth_class" />
+
+        <EditText
+            android:id="@+id/input_fourth_class"
+            android:layout_width="0dp"
+            android:layout_weight="1.14"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_class"/>
+
+        <EditText
+            android:id="@+id/input_fourth_room"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_room"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/fifth_class"
+            android:layout_width="0dp"
+            android:layout_weight="0.80"
+            android:layout_height="wrap_content"
+            android:text="@string/fifth_class"
+            />
+
+        <EditText
+            android:id="@+id/input_fifth_class"
+            android:layout_width="0dp"
+            android:layout_weight="1.14"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_class"/>
+
+        <EditText
+            android:id="@+id/input_fifth_room"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_room"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/sixth_class"
+            android:layout_width="0dp"
+            android:layout_weight="0.80"
+            android:layout_height="wrap_content"
+            android:text="@string/sixth_class"
+            />
+
+        <EditText
+            android:id="@+id/input_sixth_class"
+            android:layout_width="0dp"
+            android:layout_weight="1.14"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_class"/>
+
+        <EditText
+            android:id="@+id/input_sixth_room"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_room"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/input_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/input_button"
+        android:padding="20dp"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>
