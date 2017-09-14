@@ -3,6 +3,7 @@ package com.gastell_gehr_haberl.studinazor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,6 +24,7 @@ public class Stundenplan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stundenplan);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initUI();
         initCourseButtons();
     }
@@ -80,5 +82,16 @@ public class Stundenplan extends AppCompatActivity {
         });
 
         }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
   }
