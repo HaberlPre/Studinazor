@@ -46,43 +46,43 @@ public class Stundenplan extends AppCompatActivity {
         mondayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startMonday = new Intent(Stundenplan.this, StundenplanMonday.class);
+                Intent startMonday = new Intent(Stundenplan.this, StundenplanMontag.class);
                 startActivity(startMonday);
             }
         });
 
-      /*  tuesdayButton.setOnClickListener(new View.OnClickListener() {
+        tuesdayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startEinkauf = new Intent(Stundenplan.this, Einkaufsliste.class);
-                startActivity(startEinkauf);
+                Intent startTuesday = new Intent(Stundenplan.this, StundenplanDienstag.class);
+                startActivity(startTuesday);
             }
         });
 
         wednesdayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startStundenplan = new Intent (Stundenplan.this, Stundenplan.class);
-                startActivity(startStundenplan);
+                Intent startWednesday = new Intent (Stundenplan.this, StundenplanMittwoch.class);
+                startActivity(startWednesday);
                 }
             });
 
         thursdayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent startNewsfeed = new Intent (Stundenplan.this, NewstickerActivity.class);
-                    startActivity(startNewsfeed);
+                    Intent startThursday = new Intent (Stundenplan.this, StundenplanDonnerstag.class);
+                    startActivity(startThursday);
                 }
             });
 
         fridayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startNewsfeed = new Intent (Stundenplan.this, NewstickerActivity.class);
-                startActivity(startNewsfeed);
+                Intent startFriday = new Intent (Stundenplan.this, StundenplanFreitag.class);
+                startActivity(startFriday);
             }
         });
-        */
+
         }
 
   }

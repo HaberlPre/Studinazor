@@ -10,10 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * Created by Juliane on 13.09.2017.
+ * Created by Juliane on 14.09.2017.
  */
 
-public class StundenplanMonday extends AppCompatActivity implements View.OnClickListener{
+public class StundenplanMittwoch extends AppCompatActivity implements View.OnClickListener{
 
     EditText inputFirstClass;
     EditText inputSecondClass;
@@ -51,7 +51,7 @@ public class StundenplanMonday extends AppCompatActivity implements View.OnClick
         savedPreferences();
     }
 
-   private void savedPreferences() {
+    private void savedPreferences() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String firstClassInput = pref.getString("firstClass", "");
         String secondClassInput = pref.getString("secondClass", "");
@@ -114,5 +114,4 @@ public class StundenplanMonday extends AppCompatActivity implements View.OnClick
         }
     }
 }
-
 

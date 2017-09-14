@@ -28,7 +28,19 @@
         <activity android:name=".Einkaufsliste">
 
         </activity>
-        <activity android:name=".StundenplanMonday">
+        <activity android:name=".StundenplanMontag">
+
+        </activity>
+        <activity android:name=".StundenplanDienstag">
+
+        </activity>
+        <activity android:name=".StundenplanMittwoch">
+
+        </activity>
+        <activity android:name=".StundenplanDonnerstag">
+
+        </activity>
+        <activity android:name=".StundenplanFreitag">
 
         </activity>
     </application>
