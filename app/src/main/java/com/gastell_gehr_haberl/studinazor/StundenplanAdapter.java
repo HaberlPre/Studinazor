@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -39,15 +40,15 @@ public class StundenplanAdapter extends ArrayAdapter<StundenplanItem> {
         StundenplanItem course = courseList.get(position);
 
         if (course!=null) {
-            TextView courseName = (TextView) v.findViewById(R.id.course_name);
-            TextView courseDay = (TextView) v.findViewById(R.id.course_day);
-            TextView courseStart = (TextView) v.findViewById(R.id.course_start);
-            TextView courseEnd = (TextView) v.findViewById(R.id.course_end);
+            //TextView courseName = (TextView) v.findViewById(R.id.course_name);
+            //TextView courseDay = (TextView) v.findViewById(R.id.course_day);
+            //TextView courseStart = (TextView) v.findViewById(R.id.course_start);
+            //TextView courseEnd = (TextView) v.findViewById(R.id.course_end);
 
-            courseName.setText(course.getCourse());
-            courseDay.setText(course.getDay());
-            courseStart.setText(course.getStart());
-            courseEnd.setText(course.getEnd());
+            //courseName.setText(course.getCourse());
+            //courseDay.setText(course.getDay());
+            //courseStart.setText(course.getStart());
+            //courseEnd.setText(course.getEnd());
         }
         return v;
     }

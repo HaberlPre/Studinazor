@@ -1,5 +1,6 @@
 package com.gastell_gehr_haberl.studinazor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.CollapsibleActionView;
@@ -8,11 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by lucas on 09.08.2017.
@@ -20,113 +17,72 @@ import java.util.Collections;
 
 public class Stundenplan extends AppCompatActivity {
 
-    private TextView textView; //Stundenplan "namenstag"
-    private ArrayList<StundenplanItem> courses;
-    private StundenplanAdapter courses_adapter;
-    private StundenplanDatabase coursesDB;
+    Button mondayButton;
+    Button tuesdayButton;
+    Button wednesdayButton;
+    Button thursdayButton;
+    Button fridayButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stundenplan);
-        initCourseList();
-        initDatabase();
         initUI();
+        initCourseButtons();
     }
 
-    private void initDatabase() {
-        coursesDB = new StundenplanDatabase(this);
-        coursesDB.open();
+
+
+    private void initUI() {
+        mondayButton = (Button) findViewById(R.id.button_monday);
+        tuesdayButton = (Button) findViewById(R.id.button_tuesday);
+        wednesdayButton = (Button) findViewById(R.id.button_wednesday);
+        thursdayButton = (Button) findViewById(R.id.button_thursday);
+        fridayButton = (Button) findViewById(R.id.button_friday);
     }
 
-    private void refreshArrayList() {
-        ArrayList tempList = coursesDB.getAllStundenplanItems();
-        courses.clear();
-        courses.addAll(tempList);
-        courses_adapter.notifyDataSetChanged();
-    }
 
-    private void initCourseList() {
-        courses = new ArrayList<StundenplanItem>();
-        initListAdapter();
-    }
-
-    private void initUI() { //TODO in verbing mit layout - buttons nur wip
-        initCourseButton();
-        initListView();
-        initDataField();
-    }
-
-    private void initDataField() {
-    }
-
-    private void initCourseButton() {
-    }
-
-    private void addInputToList() {
-    }
-
-    private void initListView() {
-        ListView list = (ListView) findViewById(R.id.course_list); //TODO eig kein listview
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+    private void initCourseButtons() {
+        mondayButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                removeTaskAtPosition(position);
-                return true;
+            public void onClick(View v) {
+                Intent startMonday = new Intent(Stundenplan.this, StundenplanMonday.class);
+                startActivity(startMonday);
             }
         });
-    }
 
-    private void initListAdapter() {
-        ListView list = (ListView) findViewById(R.id.course_list);
-        courses_adapter = new StundenplanAdapter(this, courses);
-        list.setAdapter(courses_adapter);
-    }
+      /*  tuesdayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startEinkauf = new Intent(Stundenplan.this, Einkaufsliste.class);
+                startActivity(startEinkauf);
+            }
+        });
 
-    private void addNewCourse (String course, String day, String start, String end) {
-        StundenplanItem newIem = new StundenplanItem(course, day, start, end);
+        wednesdayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startStundenplan = new Intent (Stundenplan.this, Stundenplan.class);
+                startActivity(startStundenplan);
+                }
+            });
 
-        coursesDB.insertStundenplanItem(newIem);
-        refreshArrayList();
-    }
+        thursdayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent startNewsfeed = new Intent (Stundenplan.this, NewstickerActivity.class);
+                    startActivity(startNewsfeed);
+                }
+            });
 
-    private void removeTaskAtPosition(int position) { //TODO listview?!?
-        if (courses.get(position) != null) {
-            coursesDB.removeStundenplanItem(courses.get(position));
-            refreshArrayList();
+        fridayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startNewsfeed = new Intent (Stundenplan.this, NewstickerActivity.class);
+                startActivity(startNewsfeed);
+            }
+        });
+        */
         }
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu (Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_stundenplan, menu);
-        //TODO stundenplan menu xml wip
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected (MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_delete_list:
-                deleteList();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void deleteList() { //TODO
-    }
-
-    private void sortList() {
-        Collections.sort(courses);
-        courses_adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        coursesDB.close();
-    }
-
-}
+  }

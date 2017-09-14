@@ -28,6 +28,9 @@
         <activity android:name=".Einkaufsliste">
 
         </activity>
+        <activity android:name=".StundenplanMonday">
+
+        </activity>
     </application>
 
 </manifest>
