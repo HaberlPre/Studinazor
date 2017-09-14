@@ -10,34 +10,40 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/button_monday"/>
+        android:text="@string/button_monday"
+        android:background="#C1FFC1"
+        />
 
     <Button
         android:id="@+id/button_tuesday"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/button_tuesday"/>
+        android:text="@string/button_tuesday"
+        android:background="#B4EEB4"/>
 
     <Button
         android:id="@+id/button_wednesday"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/button_wednesday"/>
+        android:text="@string/button_wednesday"
+        android:background="#9BCD9B"/>
 
     <Button
         android:id="@+id/button_thursday"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/button_thursday"/>
+        android:text="@string/button_thursday"
+        android:background="#8FBC8F"/>
 
     <Button
         android:id="@+id/button_friday"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/button_friday"/>
+        android:text="@string/button_friday"
+        android:background="#698B69"/>
 
 </LinearLayout>

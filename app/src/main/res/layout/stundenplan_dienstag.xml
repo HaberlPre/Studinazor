@@ -6,7 +6,7 @@
     android:fillViewport="true" >
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="15dp"
     android:paddingBottom="15dp"
     android:orientation="vertical">
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.80"
             android:text="@string/time_text"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.14"
             android:text="@string/class_text"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/room_text"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </LinearLayout>
