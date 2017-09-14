@@ -181,7 +181,7 @@ public class Einkaufsliste extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.item_delete:
-                removeTaskAtPosition(item.getItemId());
+                removeTaskAtPosition(position);
                 break;
             case R.id.item_change:
                 //changeItem();
