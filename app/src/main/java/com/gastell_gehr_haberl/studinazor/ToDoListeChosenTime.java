@@ -1,6 +1,5 @@
 package com.gastell_gehr_haberl.studinazor;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -18,13 +16,15 @@ import java.util.Locale;
  * Created by Juliane on 10.09.2017.
  */
 
-public class ToDoListeChosenTime extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+public class ToDoListeChosenTime extends DialogFragment implements
+        TimePickerDialog.OnTimeSetListener {
 
-    final Calendar c = Calendar.getInstance();
+    //final Calendar c = Calendar.getInstance();
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        int hour = c.get(Calendar.HOUR);
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
         boolean is24Hour = true;
 
@@ -33,12 +33,16 @@ public class ToDoListeChosenTime extends DialogFragment implements TimePickerDia
 
     public void onTimeSet(TimePicker view, int hour, int minute) {
         TextView textView = (TextView) getActivity().findViewById(R.id.notification_time);
-
-        GregorianCalendar time = new GregorianCalendar();
+        ///*
+        GregorianCalendar time = new GregorianCalendar(1970, 0, 1, hour, minute); //(hour, minute);
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
                 Locale.GERMANY);
         String timeString = df.format(time.getTime());
-
         textView.setText(timeString);
+        //*/
+        /*
+        String time_manual = ""+hour+":"+minute; //TODO?
+        textView.setText(time_manual);
+        */
     }
 }

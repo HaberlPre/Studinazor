@@ -1,6 +1,7 @@
 package com.gastell_gehr_haberl.studinazor;
 
 import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -26,6 +28,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+
 
 /**
  * Created by lucas on 09.08.2017.
@@ -43,6 +46,9 @@ public class ToDoListe extends AppCompatActivity {
     private ArrayList<ToDoItem> items;
     private ToDoListeAdapter todoItemsAdapter;
     private ToDoListeDatenbank todoDB;
+    private EditText mTimeEditText;
+
+    Calendar selecteddate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +85,28 @@ public class ToDoListe extends AppCompatActivity {
         initListView();
         initDateField();
         //initTimeField();
+        initTimeEditText();
+    }
+
+    private void initTimeEditText() {
+        mTimeEditText = (EditText) findViewById(R.id.notification_time);
+        mTimeEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(ToDoListe.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        mTimeEditText.setText(hourOfDay+" : "+minute);
+                    }
+                }, hour, minute, true);
+                mTimePicker.setTitle("Select Time"); // //?
+                mTimePicker.show();
+            }
+        });
     }
 
 
@@ -95,15 +123,16 @@ public class ToDoListe extends AppCompatActivity {
     private void buttonClicked() {
         todoText = (EditText) findViewById(R.id.todo_text_task);
         EditText dateEdit = (EditText) findViewById(R.id.notification_date);
-        //EditText timeEdit = (EditText) findViewById(R.id.notification_time);
+        EditText timeEdit = (EditText) findViewById(R.id.notification_time);
         String task = todoText.getText().toString();
         String date = dateEdit.getText().toString();
-        //String time = timeEdit.getText().toString();
+        String time = timeEdit.getText().toString();
         if (!task.equals("") && !date.equals("")) {
             todoText.setText("");
             dateEdit.setText("");
-            //timeEdit.setText("");
-            addNewTask(task, date);
+            timeEdit.setText("");
+            addNewTask(task, date, time);
+            //addNewTask(task, date);
         }
     }
 
@@ -149,16 +178,21 @@ public class ToDoListe extends AppCompatActivity {
         list.setAdapter(todoItemsAdapter);
     }
 
-    private void addNewTask(String task, String date) {
+    private void addNewTask(String task, String date, String time) {
+    //private void addNewTask(String task, String date) {
         Date dueDate = getDateFromString(date);
-        //Date dueTime = getTimeFromString(time);
+        Date dueTime = getTimeFromString(time);
         GregorianCalendar chosenDate = new GregorianCalendar();
-        //GregorianCalendar chosenTime = new GregorianCalendar();
+        GregorianCalendar chosenTime = new GregorianCalendar();
         chosenDate.setTime(dueDate);
-        //chosenTime.setTime(dueTime);
+        chosenTime.setTime(dueTime);
 
         ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
-                chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
+                chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
+                chosenTime.get(Calendar.HOUR_OF_DAY), chosenTime.get(Calendar.MINUTE));
+
+        //ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
+        //chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
 
         todoDB.insertItem(newTask);
         updateList();
@@ -186,6 +220,7 @@ public class ToDoListe extends AppCompatActivity {
 
     }
 
+
     private void removeTaskAtPosition(int position) {
         if (items.get(position) != null) {
             todoDB.removeToDoItem(items.get(position));
@@ -194,13 +229,48 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     public void showDatePickerDialog() {
+        ///*
         DialogFragment chosenDate = new ToDoListeChosenDate();
         chosenDate.show(getFragmentManager(), "datePicker");
+        //*/
+        /*
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog startdatepicker = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        final Calendar c = Calendar.getInstance();
+                        c.set(year, monthOfYear, dayOfMonth);
+                        selecteddate = c;
+                    }
+                }, mYear, mMonth, mDay);
+        startdatepicker.show();*/
     }
 
     public void showTimePickerDialog() {
+        ///*
         DialogFragment chosenTime = new ToDoListeChosenTime();
         chosenTime.show(getFragmentManager(), "timePicker");
+        //*/
+        /*
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        selecteddate.set(selecteddate.get(Calendar.YEAR), selecteddate.get(Calendar.MONTH), selecteddate.get(Calendar.DAY_OF_MONTH), hourOfDay, minute);
+                    }
+                }
+                , 10, 10, false
+
+        );
+        timePickerDialog.show();*/
     }
 
     private Date getDateFromString(String dateString) {

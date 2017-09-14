@@ -13,21 +13,24 @@ public class ToDoItem implements Comparable<ToDoItem> {
     private String name;
     private GregorianCalendar date;
     private GregorianCalendar time;
+    //private String time;
     private boolean hasReminder;
 
 
-
-    /*public ToDoItem(String name, int day, int month, int year, int hour, int minute) {
+    ///*
+    public ToDoItem(String name, int day, int month, int year, int hourOfDay, int minute) {
         this.name = name;
-        this.date = new GregorianCalendar(year, month, day);
-        //this.time = new GregorianCalendar();
-    }*/
-
+        this.date = new GregorianCalendar(year, month, day, hourOfDay, minute);
+        //this.time = new GregorianCalendar(hourOfDay, minute);
+        //this.time = ""+hour+":"+minute;
+    }
+    //*/
+    /*
     public ToDoItem(String name, int day, int month, int year) {
         this.name = name;
         this.date = new GregorianCalendar(year, month, day);
     }
-
+    */
 
 
     /*public ToDoItem(String name, int i, int i1, int i2) {
@@ -50,9 +53,11 @@ public class ToDoItem implements Comparable<ToDoItem> {
     }
 
     /*public String getFormattedTime() {
+
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
                 Locale.GERMANY);
         return df.format(time.getTime());
+        //return time;
     }*/
 
     public Date getDueDate() {
@@ -60,6 +65,14 @@ public class ToDoItem implements Comparable<ToDoItem> {
     }
 
     public Date getDueTime() {
+        //return time.getTime();
+
+        /*SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        try {
+            Date date = format.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
         return date.getTime();
     }
 
@@ -75,15 +88,17 @@ public class ToDoItem implements Comparable<ToDoItem> {
     public int compareTo(ToDoItem newItem) {
         return getDueDate().compareTo(newItem.getDueDate());
     }
-
-    /*@Override
+    /*
+    @Override
     public String toString() {
         return "Name: " + getName() + ", Date: " + getFormattedDate() + "Time: " + getFormattedTime();
-    }*/
-
+    }
+    */
+    ///*
     @Override
     public String toString() {
         return "Name: " + getName() + ", Date: " + getFormattedDate();
     }
+    //*/
 }
 
