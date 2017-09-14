@@ -15,9 +15,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Switch;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
@@ -38,8 +40,8 @@ public class ToDoListe extends AppCompatActivity {
 
     private Button addButton;
     private EditText todoText;
-    //private Switch switchButton;
-    //private LinearLayout dateAndTimeLayout;
+    private Switch switchButton;
+    private LinearLayout dateAndTimeLayout;
     private boolean userHasReminder;
     private ToDoItem userToDoItem;
     private Date userReminderDate;
@@ -137,7 +139,7 @@ public class ToDoListe extends AppCompatActivity {
         }
     }
 
-    /*private void switchButton() {
+    private void switchButton() {
         switchButton = (Switch) findViewById(R.id.notification_switch);
         dateAndTimeLayout = (LinearLayout) findViewById(R.id.todoDateAndTimeLayout);
         dateAndTimeLayout.setVisibility(View.INVISIBLE);
@@ -153,7 +155,7 @@ public class ToDoListe extends AppCompatActivity {
             }
         });
     }
-*/
+
 
     private void hideKeyBoard(EditText editText) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
