@@ -100,7 +100,7 @@ public class ToDoListe extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(ToDoListe.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        mTimeEditText.setText(hourOfDay+" : "+minute);
+                        mTimeEditText.setText(hourOfDay+" : "+minute+" : "+00);
                     }
                 }, hour, minute, true);
                 mTimePicker.setTitle("Select Time"); // //?
@@ -189,7 +189,7 @@ public class ToDoListe extends AppCompatActivity {
 
         ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                 chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
-                chosenTime.get(Calendar.HOUR_OF_DAY), chosenTime.get(Calendar.MINUTE));
+                chosenTime.get(Calendar.HOUR_OF_DAY), chosenTime.get(Calendar.MINUTE), 00);
 
         //ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
         //chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));

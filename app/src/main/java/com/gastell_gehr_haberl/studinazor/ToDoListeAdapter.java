@@ -44,7 +44,7 @@ public class ToDoListeAdapter extends ArrayAdapter<ToDoItem> {
             TextView textDate = (TextView) v.findViewById(R.id.text_date);
 
             textTask.setText(task.getName());
-            textDate.setText(task.getFormattedDate());
+            textDate.setText(task.getFormattedDate()+task.getFormattedTime());
         }
 
         return v;

@@ -100,7 +100,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
 
                 items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                         chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR),
-                        chosenTime.get(Calendar.HOUR), chosenTime.get(Calendar.MINUTE)));
+                        chosenTime.get(Calendar.HOUR), chosenTime.get(Calendar.MINUTE),00));
                 //items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                 //        chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR)));
 

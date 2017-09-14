@@ -18,11 +18,11 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
 
     ///*
-    public ToDoItem(String name, int day, int month, int year, int hourOfDay, int minute) {
+    public ToDoItem(String name, int day, int month, int year, int hourOfDay, int minute, int seconds) {
         this.name = name;
-        this.date = new GregorianCalendar(year, month, day, hourOfDay, minute);
-        //this.time = new GregorianCalendar(hourOfDay, minute);
-        //this.time = ""+hour+":"+minute;
+        this.date = new GregorianCalendar(year, month, day);
+        this.time = new GregorianCalendar(hourOfDay, minute, seconds);
+        //this.time = ""+hourOfDay+":"+minute;
     }
     //*/
     /*
@@ -52,28 +52,19 @@ public class ToDoItem implements Comparable<ToDoItem> {
         return df.format(date.getTime());
     }
 
-    /*public String getFormattedTime() {
+    public String getFormattedTime() {
 
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
                 Locale.GERMANY);
         return df.format(time.getTime());
-        //return time;
-    }*/
+    }
 
     public Date getDueDate() {
         return date.getTime();
     }
 
     public Date getDueTime() {
-        //return time.getTime();
-
-        /*SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        try {
-            Date date = format.parse(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-        return date.getTime();
+        return time.getTime();
     }
 
     public boolean hasReminder() {
@@ -88,17 +79,17 @@ public class ToDoItem implements Comparable<ToDoItem> {
     public int compareTo(ToDoItem newItem) {
         return getDueDate().compareTo(newItem.getDueDate());
     }
-    /*
+    ///*
     @Override
     public String toString() {
         return "Name: " + getName() + ", Date: " + getFormattedDate() + "Time: " + getFormattedTime();
     }
-    */
-    ///*
+    //*/
+    /*
     @Override
     public String toString() {
         return "Name: " + getName() + ", Date: " + getFormattedDate();
     }
-    //*/
+    */
 }
 
