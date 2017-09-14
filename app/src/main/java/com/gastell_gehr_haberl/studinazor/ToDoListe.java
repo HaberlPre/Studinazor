@@ -354,7 +354,7 @@ public class ToDoListe extends AppCompatActivity {
         alertDialog.setView(dialogView);
         final EditText edit = (EditText) dialogView.findViewById(R.id.edit_dialog_input);
         edit.setText(item.getName());
-        final TextView message = (TextView) dialogView.findViewById(R.id.edit_old_task);
+        //final TextView message = (TextView) dialogView.findViewById(R.id.edit_old_task);
 
         alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
 

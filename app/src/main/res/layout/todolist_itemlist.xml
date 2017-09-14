@@ -42,4 +42,15 @@
             android:textSize="14sp" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="85dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true" />
+
 </RelativeLayout>
