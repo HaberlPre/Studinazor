@@ -54,7 +54,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
     public String getFormattedTime() {
 
-        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
+        DateFormat df = DateFormat.getDateInstance(DateFormat.LONG,
                 Locale.GERMANY);
         return df.format(time.getTime());
     }
@@ -82,7 +82,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
     ///*
     @Override
     public String toString() {
-        return "Name: " + getName() + ", Date: " + getFormattedDate() + "Time: " + getFormattedTime();
+        return "Name: " + getName() + ", Date: " + getFormattedDate() + ", Time: " + getFormattedTime();
     }
     //*/
     /*
