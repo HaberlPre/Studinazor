@@ -35,10 +35,6 @@ public class NewstickerItemAdapter extends ArrayAdapter<NewstickerItem> {
             v = inflater.inflate(R.layout.newsticker_item, null);
         }
 
-        //NewstickerItem item = items.get(position);
-
-        //if (item != null) {
-
             TextView title = (TextView) v.findViewById(R.id.newsticker_title);
             TextView description = (TextView) v.findViewById(R.id.newsticker_description);
             TextView url = (TextView) v.findViewById(R.id.newsticker_source);
@@ -47,7 +43,6 @@ public class NewstickerItemAdapter extends ArrayAdapter<NewstickerItem> {
             title.setText(String.valueOf(item.getTitle()));
             description.setText(String.valueOf(item.getDescription()));
             url.setText(String.valueOf(item.getUrl()));
-        //}
 
         return v;
     }
