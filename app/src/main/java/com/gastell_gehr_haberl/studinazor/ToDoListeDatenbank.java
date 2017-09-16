@@ -118,6 +118,23 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
 
     }
 
+    public void removeAllItems(){
+        db =  dbHelper.getWritableDatabase();
+        db.delete(DATABASE_TABLE, null, null);
+    }
+
+    public void updateShopItem(String name, ToDoItem item){
+        db = dbHelper.getWritableDatabase();
+        //the new values
+        ContentValues newValues = new ContentValues();
+        newValues.put(KEY_TASK,name);
+        //which row should be updated (the ? will be the item.getName()-Argument)
+        String toUpdate = KEY_TASK + "=?";
+        String[] updateArgument = new String[]{item.getName()};
+
+        db.update(DATABASE_TABLE, newValues, toUpdate, updateArgument);
+    }
+
     @Override
     public int compareTo(@NonNull ToDoListeDatenbank o) {
         return 0;

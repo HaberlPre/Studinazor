@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
@@ -134,7 +135,7 @@ public class ToDoListe extends AppCompatActivity {
             todoText.setText("");
             dateEdit.setText("");
             timeEdit.setText("");
-            addNewTask(task, date, time);
+             addNewTask(task, date, time);
             //addNewTask(task, date);
         }
     }
@@ -328,11 +329,12 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void deleteAll() {
-        for(int i = items.size() - 1; i >= 0; i--) {
-            removeTaskAtPosition(i);
+        todoDB.removeAllItems();
+        todoItemsAdapter.notifyDataSetChanged();
+        updateList();
+        /*for(int i = items.size() - 1; i >= 0; i--) {
+            removeTaskAtPosition(i);*/
         }
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -356,13 +358,20 @@ public class ToDoListe extends AppCompatActivity {
         alertDialog.setView(dialogView);
         final EditText edit = (EditText) dialogView.findViewById(R.id.edit_dialog_input);
         edit.setText(item.getName());
-        //final TextView message = (TextView) dialogView.findViewById(R.id.edit_old_task);
+        final TextView message = (TextView) dialogView.findViewById(R.id.edit_old_task);
 
         alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int id) {
-                item.setName(edit.getText().toString());
+
+                String newName = edit.getText().toString();
+
+                todoDB.updateShopItem(newName,item);
                 todoItemsAdapter.notifyDataSetChanged();
+                updateList();
+
+                /*item.setName(edit.getText().toString());
+                todoItemsAdapter.notifyDataSetChanged();*/
             }
         }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
