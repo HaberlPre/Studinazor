@@ -93,6 +93,7 @@ public class ToDoListe extends AppCompatActivity {
 
     private void initTimeEditText() {
         mTimeEditText = (EditText) findViewById(R.id.notification_time);
+        //TextView textView = (TextView) getActivity().findViewById(R.id.notification_date); //TODO ?!? vom chosendate
         mTimeEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,10 +107,11 @@ public class ToDoListe extends AppCompatActivity {
                         mTimeEditText.setText(hourOfDay+" : "+minute+" : "+ seconds);
                     }
                 }, hour, minute, true);
-                mTimePicker.setTitle("Select Time"); // //?
+                //mTimePicker.setTitle("Select Time"); // //?
                 mTimePicker.show();
             }
         });
+        //idee: textview machen wie chosendate fragment, meine implementieren (=hier) crashed to do bei aufruf
     }
 
 

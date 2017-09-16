@@ -1,5 +1,6 @@
 package com.gastell_gehr_haberl.studinazor;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
@@ -15,11 +16,11 @@ import java.util.ArrayList;
  * Created by lucas on 07.09.2017.
  */
 
-public class NewstickerActivity extends StartScreen implements DownloadListener {
+public class NewstickerActivity extends Activity implements DownloadListener {
 
     private ArrayList<NewstickerItem> items;
     private NewstickerItemAdapter adapter;
-    private final static String ADDDRESS = "https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=6b20d2bac2034606b24756716c03b72e";
+    private final static String ADDRESS = "https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=6b20d2bac2034606b24756716c03b72e";
     TextView poweredBy;
 
     @Override
@@ -27,51 +28,9 @@ public class NewstickerActivity extends StartScreen implements DownloadListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newsticker);
         prepareListView();
-        new NewstickerDownloadTask(this, items).execute(ADDDRESS);
-        //initNewsList();
-        //initUI();
         setupPoweredBy();
-    }
+        new NewstickerDownloadTask(this, items).execute(ADDRESS);
 
-    private void initNewsList() {
-        items = new ArrayList<NewstickerItem>();
-        initListAdapter();
-    }
-
-    private void initListAdapter() {
-        ListView list = (ListView) findViewById(R.id.news_list);
-        adapter = new NewstickerItemAdapter(this, items);
-        list.setAdapter(adapter);
-    }
-
-    private void initUI() {
-        initListView();
-        initPoweredByLink();
-    }
-
-    private void initPoweredByLink() {
-        poweredBy = (TextView) findViewById(R.id.poweredBy_id);
-        poweredBy.setClickable(true);
-        poweredBy.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='https://newsapi.org/'> Powered by News API </a>";
-        poweredBy.setText(Html.fromHtml(text));
-    }
-
-    private void initListView() {
-        /*final ListView list = (ListView) findViewById(R.id.news_list); //FINAL!!!!!!!!!!!!!
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView item = (TextView) list.getItemAtPosition(position); //evtl falsch, würde source hyperlink ersetzen
-                NewstickerItem news = (NewstickerItem) list.getItemAtPosition(position);
-                item.setClickable(true);
-                item.setMovementMethod(LinkMovementMethod.getInstance());
-                String url = news.getUrl();
-                String text = "<a href='url'"
-                return false;
-            }
-        });*/
-        ListView list = (ListView) findViewById(R.id.news_list);
     }
 
     private void prepareListView() {
