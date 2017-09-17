@@ -1,25 +1,37 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".NewstickerActivity">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <TextView
-        android:id="@+id/newsticker_head"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true" >>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/newsticker_head_string"/>
+        android:layout_height="match_parent"
+        tools:context=".NewstickerActivity"
+        android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/news_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+            <TextView
+                android:id="@+id/newsticker_head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/newsticker_head_string"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/poweredBy_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/newsticker_poweredBy_string"/>
+            <TextView
+                android:id="@+id/poweredBy_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/newsticker_poweredBy_string" />
 
-</RelativeLayout>
+            <ListView
+                android:id="@+id/news_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ListView>
+    </LinearLayout>
+</ScrollView>
+
+

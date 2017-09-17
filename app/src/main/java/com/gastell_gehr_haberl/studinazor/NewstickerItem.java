@@ -9,7 +9,7 @@ public class NewstickerItem {
     private String author;
     private String title;
     private String description;
-    private String  url;
+    private String url;
     private String urlToImage;
     private String publishedAt;
 

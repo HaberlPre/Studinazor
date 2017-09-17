@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+
 /**
  * Created by lucas on 07.09.2017.
  */
@@ -57,7 +58,8 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
 
     private void processJson(JSONObject jsonObject) {
         try {
-            JSONArray news = jsonObject.getJSONArray("articles:"); //"articles" ?
+
+            JSONArray news = jsonObject.getJSONArray("articles");
             for (int i=0; i<news.length(); i++) {
                 JSONObject article = news.getJSONObject(i);
                 String author = article.getString(AUTHOR);
@@ -67,7 +69,9 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
                 String urlToImage = article.getString(URLTOIMAGE);
                 String publishedAt = article.getString(PUBLISHEDAT);
                 NewstickerItem item = new NewstickerItem(author, title, description, url, urlToImage, publishedAt);
+
                 items.add(item);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,11 +83,11 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.connect();
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream(), "ISO-8859-15")); //TODO iso typ checken
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream(), "ISO-8859-1")); //TODO iso typ checken
 
         StringBuilder stringBuilder = new StringBuilder();
         String line;
-        while ((line = bufferedReader.readLine()) != null) { //evtl falsch, weil jsondatei von newsapi keine null zeilen hat?
+        while ((line = bufferedReader.readLine()) != null) { //TODO evtl falsch, weil jsondatei von newsapi nicht einen wert pro zeile hat?
             stringBuilder.append(line + "\n");
         }
         bufferedReader.close();
