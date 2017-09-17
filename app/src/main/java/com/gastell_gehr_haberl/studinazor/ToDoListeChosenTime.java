@@ -21,6 +21,10 @@ public class ToDoListeChosenTime extends DialogFragment implements
 
     //final Calendar c = Calendar.getInstance();
 
+    public ToDoListeChosenTime() {
+
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Calendar c = Calendar.getInstance();
@@ -31,17 +35,17 @@ public class ToDoListeChosenTime extends DialogFragment implements
         return new TimePickerDialog(getActivity(), this, hour, minute, is24Hour);
     }
 
-    public void onTimeSet(TimePicker view, int hour, int minute) {
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         TextView textView = (TextView) getActivity().findViewById(R.id.notification_time);
         ///*
-        GregorianCalendar time = new GregorianCalendar(1970, 0, 1, hour, minute); //(hour, minute);
-        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
+        GregorianCalendar time = new GregorianCalendar(hourOfDay, minute, 0); //(hour, minute);
+        DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG,
                 Locale.GERMANY);
         String timeString = df.format(time.getTime());
         textView.setText(timeString);
         //*/
         /*
-        String time_manual = ""+hour+":"+minute; //TODO?
+        String time_manual = hourOfDay+" : "+minute+" : "+0; //TODO?
         textView.setText(time_manual);
         */
     }

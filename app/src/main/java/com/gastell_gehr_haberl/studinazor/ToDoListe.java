@@ -48,20 +48,19 @@ public class ToDoListe extends AppCompatActivity {
     private ArrayList<ToDoItem> items;
     private ToDoListeAdapter todoItemsAdapter;
     private ToDoListeDatenbank todoDB;
-    private EditText mTimeEditText;
+    private EditText mTimeEditText; //oder textview?
     private int seconds = 0;
 
     Calendar selecteddate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState); //TODO bundle von startendem intent
-        //TODO holen, prüfen und dann verarbeiten bzw wenn leer kp
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //was macht die fkt? antworten bitte an lucas
         initTaskList();
-        initUI();
         initDataBase();
+        initUI();
         updateList();
     }
 
@@ -84,11 +83,11 @@ public class ToDoListe extends AppCompatActivity {
 
     private void initUI() {
         initTaskButton();
-        //switchButton();
+        //switchButton(); //TODO wenn aus, geht add button nicht (passiert nix); an: crashed weil timepicker
         initListView();
         initDateField();
-        //initTimeField();
-        initTimeEditText();
+        initTimeField();
+        //initTimeEditText();
     }
 
     private void initTimeEditText() {
@@ -128,16 +127,17 @@ public class ToDoListe extends AppCompatActivity {
     private void buttonClicked() {
         todoText = (EditText) findViewById(R.id.todo_text_task);
         EditText dateEdit = (EditText) findViewById(R.id.notification_date);
-        EditText timeEdit = (EditText) findViewById(R.id.notification_time);
+        //EditText timeEdit = (EditText) findViewById(R.id.notification_time);
         String task = todoText.getText().toString();
         String date = dateEdit.getText().toString();
-        String time = timeEdit.getText().toString();
+        //String time = timeEdit.getText().toString();
+        //if (!task.equals("") && !date.equals("") && !time.equals("")) {
         if (!task.equals("") && !date.equals("")) {
             todoText.setText("");
             dateEdit.setText("");
-            timeEdit.setText("");
-            addNewTask(task, date, time);
-            //addNewTask(task, date);
+            //timeEdit.setText("");
+            //addNewTask(task, date, time);
+            addNewTask(task, date);
         }
     }
 
@@ -183,21 +183,22 @@ public class ToDoListe extends AppCompatActivity {
         list.setAdapter(todoItemsAdapter);
     }
 
-    private void addNewTask(String task, String date, String time) {
-    //private void addNewTask(String task, String date) {
+    //private void addNewTask(String task, String date, String time) {
+    private void addNewTask(String task, String date) {
         Date dueDate = getDateFromString(date);
-        Date dueTime = getTimeFromString(time);
+        //Date dueTime = getTimeFromString(time);
         GregorianCalendar chosenDate = new GregorianCalendar();
-        GregorianCalendar chosenTime = new GregorianCalendar();
+        //GregorianCalendar chosenTime = new GregorianCalendar();
         chosenDate.setTime(dueDate);
-        chosenTime.setTime(dueTime);
+        //chosenTime.setTime(dueTime);
 
-        ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
-                chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
-                chosenTime.get(Calendar.HOUR_OF_DAY), chosenTime.get(Calendar.MINUTE), chosenTime.get(Calendar.SECOND));
 
         //ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
-        //chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
+        //       chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
+        //       chosenTime.get(Calendar.SECOND), chosenTime.get(Calendar.MINUTE), chosenTime.get(Calendar.HOUR_OF_DAY));
+
+        ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
+        chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
 
         todoDB.insertItem(newTask);
         updateList();
@@ -236,7 +237,7 @@ public class ToDoListe extends AppCompatActivity {
     public void showDatePickerDialog() {
         ///*
         DialogFragment chosenDate = new ToDoListeChosenDate();
-        chosenDate.show(getFragmentManager(), "datePicker");
+        chosenDate.show(getFragmentManager(), "eat a dick"); //string macht nichts
         //*/
         /*
         final Calendar c = Calendar.getInstance();
@@ -261,7 +262,7 @@ public class ToDoListe extends AppCompatActivity {
     public void showTimePickerDialog() {
         ///*
         DialogFragment chosenTime = new ToDoListeChosenTime();
-        chosenTime.show(getFragmentManager(), "timePicker");
+        chosenTime.show(getFragmentManager(), "timePicker"); //was macht der string? ^ siehe oben
         //*/
         /*
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
@@ -289,7 +290,7 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private Date getTimeFromString(String timeString) {
-        DateFormat df = DateFormat.getDateInstance(DateFormat.LONG,
+        DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG,
                 Locale.GERMANY);
         try {
             return df.parse(timeString);

@@ -32,7 +32,7 @@ public class ToDoListeChosenDate   extends DialogFragment implements
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
-    public void onDateSet(DatePicker view, int year, int month, int day) {
+    public void onDateSet(DatePicker view,  int year, int month, int day) {
         TextView textView = (TextView) getActivity().findViewById(R.id.notification_date);
 
         GregorianCalendar date = new GregorianCalendar(year, month, day);
