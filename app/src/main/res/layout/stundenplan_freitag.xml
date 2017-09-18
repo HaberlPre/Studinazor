@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fillViewport="true" >
+
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:fillViewport="true">
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#F0FFF0"
+    android:orientation="vertical"
     android:padding="15dp"
     android:paddingBottom="15dp"
-    android:orientation="vertical"
-    android:background="#F0FFF0">
+    >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -22,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.80"
             android:text="@string/time_text"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -31,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.14"
             android:text="@string/class_text"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -40,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/room_text"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -52,26 +55,25 @@
         <TextView
             android:id="@+id/first_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="0.80"
             android:layout_height="wrap_content"
-            android:text="@string/first_class"
-            />
+            android:layout_weight="0.80"
+            android:text="@string/first_class" />
 
         <EditText
             android:id="@+id/input_first_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="1.14"
             android:layout_height="wrap_content"
+            android:layout_weight="1.14"
             android:hint="@string/input_class"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
         <EditText
             android:id="@+id/input_first_room_friday"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/input_room"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
     </LinearLayout>
 
@@ -82,26 +84,25 @@
         <TextView
             android:id="@+id/second_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="0.80"
             android:layout_height="wrap_content"
-            android:text="@string/second_class" />
-
+            android:layout_weight="0.80"
+            android:text="@string/third_class" />
 
         <EditText
             android:id="@+id/input_second_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="1.14"
             android:layout_height="wrap_content"
+            android:layout_weight="1.14"
             android:hint="@string/input_class"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
         <EditText
             android:id="@+id/input_second_room_friday"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/input_room"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
     </LinearLayout>
 
@@ -112,25 +113,25 @@
         <TextView
             android:id="@+id/third_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="0.80"
             android:layout_height="wrap_content"
+            android:layout_weight="0.80"
             android:text="@string/third_class" />
 
         <EditText
             android:id="@+id/input_third_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="1.14"
             android:layout_height="wrap_content"
+            android:layout_weight="1.14"
             android:hint="@string/input_class"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
         <EditText
             android:id="@+id/input_third_room_friday"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/input_room"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
     </LinearLayout>
 
@@ -141,25 +142,25 @@
         <TextView
             android:id="@+id/fourth_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="0.80"
             android:layout_height="wrap_content"
+            android:layout_weight="0.80"
             android:text="@string/fourth_class" />
 
         <EditText
             android:id="@+id/input_fourth_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="1.14"
             android:layout_height="wrap_content"
+            android:layout_weight="1.14"
             android:hint="@string/input_class"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
         <EditText
             android:id="@+id/input_fourth_room_friday"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/input_room"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
     </LinearLayout>
 
@@ -170,26 +171,25 @@
         <TextView
             android:id="@+id/fifth_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="0.80"
             android:layout_height="wrap_content"
-            android:text="@string/fifth_class"
-            />
+            android:layout_weight="0.80"
+            android:text="@string/fifth_class" />
 
         <EditText
             android:id="@+id/input_fifth_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="1.14"
             android:layout_height="wrap_content"
+            android:layout_weight="1.14"
             android:hint="@string/input_class"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
         <EditText
             android:id="@+id/input_fifth_room_friday"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/input_room"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
     </LinearLayout>
 
@@ -200,26 +200,24 @@
         <TextView
             android:id="@+id/sixth_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="0.80"
             android:layout_height="wrap_content"
-            android:text="@string/sixth_class"
-            />
+            android:layout_weight="0.80"
+            android:text="@string/sixth_class" />
 
         <EditText
             android:id="@+id/input_sixth_class_friday"
             android:layout_width="0dp"
-            android:layout_weight="1.14"
             android:layout_height="wrap_content"
+            android:layout_weight="1.14"
             android:hint="@string/input_class"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
         <EditText
             android:id="@+id/input_sixth_room_friday"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="@string/input_room"
-            android:inputType="textCapSentences"/>
+            android:layout_weight="1"
+            android:hint="@string/input_room" />
 
     </LinearLayout>
 
@@ -227,10 +225,10 @@
         android:id="@+id/input_button_friday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/input_button"
-        android:padding="20dp"
         android:layout_marginTop="20dp"
-        android:background="#698B69"/>
+        android:background="#698B69"
+        android:padding="20dp"
+        android:text="@string/input_button" />
 
 </LinearLayout>
-    </ScrollView>
+</ScrollView>
