@@ -3,6 +3,8 @@ package com.gastell_gehr_haberl.studinazor;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -299,6 +301,36 @@ public class ToDoListe extends AppCompatActivity {
         }
     }
 
+    private void enableStartScreenButton() {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Button startNewsfeed = (Button) findViewById(R.id.StartToNewsfeedButton);
+            Button startEinkauf = (Button) findViewById(R.id.StartToEinkaufButton);
+            Button startStundenplan = (Button) findViewById(R.id.StartToStundenplanButton);
+            startNewsfeed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent newsfeedStart = new Intent(ToDoListe.this, NewstickerActivity.class);
+                    startActivity(newsfeedStart);
+                }
+            });
+            startEinkauf.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent einkaufStart = new Intent(ToDoListe.this, Einkaufsliste.class);
+                    startActivity(einkaufStart);
+                }
+            });
+            startStundenplan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent stundenplanStart = new Intent(ToDoListe.this, Stundenplan.class);
+                    startActivity(stundenplanStart);
+                }
+            });
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -334,9 +366,7 @@ public class ToDoListe extends AppCompatActivity {
         todoDB.removeAllItems();
         todoItemsAdapter.notifyDataSetChanged();
         updateList();
-        /*for(int i = items.size() - 1; i >= 0; i--) {
-            removeTaskAtPosition(i);*/
-        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -371,9 +401,6 @@ public class ToDoListe extends AppCompatActivity {
                 todoDB.updateShopItem(newName,item);
                 todoItemsAdapter.notifyDataSetChanged();
                 updateList();
-
-                /*item.setName(edit.getText().toString());
-                todoItemsAdapter.notifyDataSetChanged();*/
             }
         }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 

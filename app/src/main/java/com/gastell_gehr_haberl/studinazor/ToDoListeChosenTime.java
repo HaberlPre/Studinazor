@@ -19,6 +19,7 @@ import java.util.Locale;
 public class ToDoListeChosenTime extends DialogFragment implements
         TimePickerDialog.OnTimeSetListener {
 
+
     //final Calendar c = Calendar.getInstance();
 
     public ToDoListeChosenTime() {

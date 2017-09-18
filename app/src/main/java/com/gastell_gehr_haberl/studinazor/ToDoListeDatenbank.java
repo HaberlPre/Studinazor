@@ -110,6 +110,8 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
 
     }
 
+
+    //Neue Version, alles löschen und bearbeiten
     public void removeAllItems(){
         db =  dbHelper.getWritableDatabase();
         db.delete(DATABASE_TABLE, null, null);
