@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:weightSum="2">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="5">
+
+        <Button
+            android:id="@+id/button_monday"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#C1FFC1"
+            android:text="@string/button_monday" />
+
+        <Button
+            android:id="@+id/button_tuesday"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#B4EEB4"
+            android:text="@string/button_tuesday" />
+
+        <Button
+            android:id="@+id/button_wednesday"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#9BCD9B"
+            android:text="@string/button_wednesday" />
+
+        <Button
+            android:id="@+id/button_thursday"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#8FBC8F"
+            android:text="@string/button_thursday" />
+
+        <Button
+            android:id="@+id/button_friday"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#698B69"
+            android:text="@string/button_friday" />
+
+    </LinearLayout>
+
+<ScrollView
+    android:layout_width="0dp"
+    android:layout_weight="1"
     android:layout_height="fill_parent"
     android:fillViewport="true" >
     <LinearLayout
@@ -8,7 +66,8 @@
         android:layout_height="match_parent"
         android:padding="15dp"
         android:paddingBottom="15dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#F0FFF0">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -21,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.80"
                 android:text="@string/time_text"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -30,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.14"
                 android:text="@string/class_text"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -39,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/room_text"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -228,7 +287,9 @@
             android:layout_height="wrap_content"
             android:text="@string/input_button"
             android:padding="20dp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:background="#9BCD9B"/>
 
     </LinearLayout>
 </ScrollView>
+</LinearLayout>
