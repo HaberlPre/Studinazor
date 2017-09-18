@@ -9,18 +9,18 @@ import android.widget.TextView;
 
 import java.util.List;
 
-
 /**
- * Created by lucas on 07.09.2017.
+ * Created by lucas on 18.09.2017.
  */
 
-public class NewstickerItemAdapter extends ArrayAdapter<NewstickerItem> {
 
-    private List <NewstickerItem> items;
+public class NewstickerItemAdapterWithLinks extends ArrayAdapter<NewstickerItem> {
+
+    private List<NewstickerItem> items;
     private Context context;
 
 
-    public NewstickerItemAdapter(Context context, List<NewstickerItem> list) {
+    public NewstickerItemAdapterWithLinks(Context context, List<NewstickerItem> list) {
         super(context, R.layout.newsticker_item, list);
         this.context = context;
         items = list;
@@ -35,14 +35,14 @@ public class NewstickerItemAdapter extends ArrayAdapter<NewstickerItem> {
             v = inflater.inflate(R.layout.newsticker_item, null);
         }
 
-            TextView title = (TextView) v.findViewById(R.id.newsticker_title);
-            TextView description = (TextView) v.findViewById(R.id.newsticker_description);
-            //TextView url = (TextView) v.findViewById(R.id.newsticker_source);
+        TextView title = (TextView) v.findViewById(R.id.newsticker_title);
+        TextView description = (TextView) v.findViewById(R.id.newsticker_description);
+        TextView url = (TextView) v.findViewById(R.id.newsticker_source);
 
-            NewstickerItem item = items.get(position);
-            title.setText(String.valueOf(item.getTitle()));
-            description.setText(String.valueOf(item.getDescription()));
-            //url.setText(String.valueOf(item.getUrl()));
+        NewstickerItem item = items.get(position);
+        title.setText(String.valueOf(item.getTitle()));
+        description.setText(String.valueOf(item.getDescription()));
+        url.setText(String.valueOf(item.getUrl()));
 
         return v;
     }

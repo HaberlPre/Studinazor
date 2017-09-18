@@ -26,7 +26,6 @@
     <string name="date_reminder_default">Heute</string>
     <string name="date_error_check_again">Dieses Datum ist schon vorbei.</string>
 
-
     //Stundeplan
     <string name="class_text">Vorlesungen</string>
     <string name="time_text">Uhrzeit</string>
@@ -45,6 +44,11 @@
     <string name="input_class">Kurs</string>
     <string name="input_room">Raum</string>
     <string name="input_button">Eingaben speichern</string>
+    <string name="time_freitag">Freitag</string>
+    <string name="time_dienstag">Dienstag</string>
+    <string name="time_donnerstag">Donnerstag</string>
+    <string name="time_mittwoch">Mittwoch</string>
+    <string name="time_montag">Montag</string>
 
     //Einkaufsliste
     <string name="einkauf_text_wip">Einkaufsliste</string>
@@ -75,7 +79,7 @@
     <string name="newsticker_source">Source</string>
     <string name="newsticker_poweredBy_string">Powered by News API</string>
     <string name="newsticker_head_string">Newsticker</string>
-
+    <string name="newsticker_toggle_links_string">Links ein-/ausblenden</string>
 
     //keine Ahnung wo die hingehören
     <string name="add_item_hint">Add List</string>

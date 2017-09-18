@@ -1,15 +1,15 @@
 package com.gastell_gehr_haberl.studinazor;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,10 +19,12 @@ import java.util.ArrayList;
  * Created by lucas on 07.09.2017.
  */
 
-public class NewstickerActivity extends Activity implements DownloadListener {
+public class NewstickerActivity extends AppCompatActivity implements DownloadListener {
 
     private ArrayList<NewstickerItem> items;
-    private NewstickerItemAdapter adapter;
+    private boolean showLinks = false;
+    private NewstickerItemAdapterNoLinks adapterNoLinks;
+    private NewstickerItemAdapterWithLinks adapterWithLinks;
     private final static String ADDRESS = "https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=6b20d2bac2034606b24756716c03b72e";
     TextView poweredBy;
 
@@ -30,7 +32,7 @@ public class NewstickerActivity extends Activity implements DownloadListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newsticker);
-        enableStartScreenButton();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         prepareListView();
         setupPoweredBy();
         new NewstickerDownloadTask(this, items).execute(ADDRESS);
@@ -38,10 +40,36 @@ public class NewstickerActivity extends Activity implements DownloadListener {
 
     private void prepareListView() {
         items = new ArrayList<NewstickerItem>();
-        adapter = new NewstickerItemAdapter(NewstickerActivity.this, items);
-        ListView list = (ListView) findViewById(R.id.news_list);
-        list.setAdapter(adapter);
+        if (showLinks) {
+            adapterWithLinks = new NewstickerItemAdapterWithLinks(NewstickerActivity.this, items);
+            ListView list = (ListView) findViewById(R.id.news_list);
+            list.setAdapter(adapterWithLinks);
 
+            list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    openUrl(position);
+                    return true;
+                }
+            });
+
+            registerForContextMenu(list); //wofür gut?
+        } else {
+            adapterNoLinks = new NewstickerItemAdapterNoLinks(NewstickerActivity.this, items);
+            ListView list = (ListView) findViewById(R.id.news_list);
+            list.setAdapter(adapterNoLinks);
+
+            list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    openUrl(position);
+                    return true;
+                }
+            });
+
+            registerForContextMenu(list); //wofür gut?
+        }
+/*
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -49,6 +77,9 @@ public class NewstickerActivity extends Activity implements DownloadListener {
                 return true;
             }
         });
+
+        registerForContextMenu(list); //wofür gut?
+*/
     }
 
     private void openUrl(int position) {
@@ -66,40 +97,39 @@ public class NewstickerActivity extends Activity implements DownloadListener {
         poweredBy.setText(Html.fromHtml(text));
     }
 
-    private void enableStartScreenButton() {
-        int orientation = getResources().getConfiguration().orientation;
-        if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Button startEinkauf = (Button) findViewById(R.id.StartToEinkaufButton);
-            Button startTodo = (Button) findViewById(R.id.StartToToDoButton);
-            Button startStundenplan = (Button) findViewById(R.id.StartToStundenplanButton);
-            startEinkauf.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent startEinkauf = new Intent(NewstickerActivity.this, Einkaufsliste.class);
-                    startActivity(startEinkauf);
-                }
-            });
-            startTodo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent startTodo = new Intent(NewstickerActivity.this, ToDoListe.class);
-                    startActivity(startTodo);
-                }
-            });
-            startStundenplan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent startStundenplan = new Intent(NewstickerActivity.this, Stundenplan.class);
-                    startActivity(startStundenplan);
-                }
-            });
+    @Override
+    public void onDownloadFinished() {
+        if (showLinks) {
+            adapterWithLinks.notifyDataSetChanged();
+        } else {
+            adapterNoLinks.notifyDataSetChanged();
         }
-
     }
 
     @Override
-    public void onDownloadFinished() {
-        adapter.notifyDataSetChanged();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_newsticker, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.newsticker_toggle_links:
+                toggleURLs();
+                prepareListView();
+                new NewstickerDownloadTask(this, items).execute(ADDRESS);
+                return true;
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void toggleURLs() {
+        showLinks = ! showLinks;
     }
 
 }

@@ -76,17 +76,17 @@ public class ToDoItem implements Comparable<ToDoItem> {
     public int compareTo(ToDoItem newItem) {
         return getDueDate().compareTo(newItem.getDueDate());
     }
-    /*
+
     @Override //crashed die app überraschenderweise nicht
     public String toString() {
         return "Name: " + getName() + ", Date: " + getFormattedDate() + ", Time: " + getFormattedTime();
     }
-    */
 
+    /*
     @Override
     public String toString() {
         return "Name: " + getName() + ", Date: " + getFormattedDate();
     }
-
+    */
 }
 

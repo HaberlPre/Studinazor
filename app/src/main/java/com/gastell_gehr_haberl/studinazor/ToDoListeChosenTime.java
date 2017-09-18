@@ -46,7 +46,7 @@ public class ToDoListeChosenTime extends DialogFragment implements
         textView.setText(timeString);
         //*/
         /*
-        String time_manual = hourOfDay+" : "+minute+" : "+0; //TODO?
+        String time_manual = hourOfDay+" : "+minute+" : "+0;
         textView.setText(time_manual);
         */
     }
