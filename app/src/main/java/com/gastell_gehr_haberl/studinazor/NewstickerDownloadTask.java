@@ -23,7 +23,7 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
     private static final String AUTHOR = "author";
     private static final String TITLE = "title";
     private static final String DESCRIPTION = "description";
-    private static final String URL = "url"; //TODO final URL URL? "URL" keine URL
+    private static final String URL = "url";
     private static final String URLTOIMAGE = "urlToImage"; //DITO
     private static final String PUBLISHEDAT = "publishedAt";
     
@@ -83,11 +83,11 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.connect();
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream(), "ISO-8859-1")); //TODO iso typ checken
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 
         StringBuilder stringBuilder = new StringBuilder();
         String line;
-        while ((line = bufferedReader.readLine()) != null) { //TODO evtl falsch, weil jsondatei von newsapi nicht einen wert pro zeile hat?
+        while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line + "\n");
         }
         bufferedReader.close();

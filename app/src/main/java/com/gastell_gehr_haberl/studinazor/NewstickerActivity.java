@@ -1,12 +1,13 @@
 package com.gastell_gehr_haberl.studinazor;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,16 +31,28 @@ public class NewstickerActivity extends Activity implements DownloadListener {
         prepareListView();
         setupPoweredBy();
         new NewstickerDownloadTask(this, items).execute(ADDRESS);
-
     }
 
     private void prepareListView() {
         items = new ArrayList<NewstickerItem>();
         adapter = new NewstickerItemAdapter(NewstickerActivity.this, items);
         ListView list = (ListView) findViewById(R.id.news_list);
-        View header = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.newsticker_item, null);
-        list.addHeaderView(header);
         list.setAdapter(adapter);
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                openUrl(position);
+                return true;
+            }
+        });
+    }
+
+    private void openUrl(int position) {
+        NewstickerItem item = items.get(position);
+        String s = item.getUrl();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
+        startActivity(browserIntent);
     }
 
     private void setupPoweredBy() {
@@ -50,10 +63,10 @@ public class NewstickerActivity extends Activity implements DownloadListener {
         poweredBy.setText(Html.fromHtml(text));
     }
 
-
     @Override
     public void onDownloadFinished() {
         adapter.notifyDataSetChanged();
     }
+
 }
 

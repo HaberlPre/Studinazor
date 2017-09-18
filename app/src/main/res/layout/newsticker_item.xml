@@ -20,10 +20,10 @@
         android:layout_height="wrap_content"
         android:text="@string/newsticker_description_string"/>
 
-    <TextView
+    <!--TextView
         android:id="@+id/newsticker_source"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/newsticker_source"/>
+        android:text="@string/newsticker_source"/-->
 
 </LinearLayout>
