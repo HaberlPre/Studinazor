@@ -1,6 +1,7 @@
 package com.gastell_gehr_haberl.studinazor;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,7 @@ public class StundenplanDienstag extends AppCompatActivity implements View.OnCli
         inputSixthRoom = (EditText) findViewById(R.id.input_sixth_room_tuesday);
         saveInput = (Button) findViewById(R.id.input_button_tuesday);
         saveInput.setOnClickListener(this);
+        enableDaysButton();
         savedPreferences();
     }
 
@@ -101,6 +103,20 @@ public class StundenplanDienstag extends AppCompatActivity implements View.OnCli
         savePreferences("fifthRoomTuesday", inputFifthRoom.getText().toString());
         savePreferences("sixthRoomTuesday", inputSecondRoom.getText().toString());
 
+    }
+
+    private void enableDaysButton() {
+        int orientation = getResources().getConfiguration().orientation;
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Button startMonday = (Button) findViewById(R.id.button_monday);
+            Button startWednesday = (Button) findViewById(R.id.button_wednesday);
+            Button startThursday = (Button) findViewById(R.id.button_thursday);
+            Button startFriday = (Button) findViewById(R.id.button_friday);
+            startMonday.setOnClickListener(this);
+            startWednesday.setOnClickListener(this);
+            startThursday.setOnClickListener(this);
+            startFriday.setOnClickListener(this);
+        }
     }
 
     @Override

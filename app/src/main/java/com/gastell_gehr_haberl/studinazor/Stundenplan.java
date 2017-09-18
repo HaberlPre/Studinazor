@@ -1,6 +1,7 @@
 package com.gastell_gehr_haberl.studinazor;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -26,6 +27,7 @@ public class Stundenplan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stundenplan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        enableStartScreenButton();
         initUI();
         initCourseButtons();
     }
@@ -84,6 +86,37 @@ public class Stundenplan extends AppCompatActivity {
 
         }
 
+        private void enableStartScreenButton() {
+            int orientation = getResources().getConfiguration().orientation;
+            if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                Button startEinkauf = (Button) findViewById(R.id.StartToEinkaufButton);
+                Button startTodo = (Button) findViewById(R.id.StartToToDoButton);
+                Button startNewsfeed = (Button) findViewById(R.id.StartToNewsfeedButton);
+                startEinkauf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent startEinkauf = new Intent(Stundenplan.this, Einkaufsliste.class);
+                        startActivity(startEinkauf);
+                    }
+                });
+                startTodo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent startTodo = new Intent(Stundenplan.this, ToDoListe.class);
+                        startActivity(startTodo);
+                    }
+                });
+                startNewsfeed.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent startNewsfeed = new Intent(Stundenplan.this, NewstickerActivity.class);
+                        startActivity(startNewsfeed);
+                    }
+                });
+            }
+
+        }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -95,5 +128,6 @@ public class Stundenplan extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
   }
