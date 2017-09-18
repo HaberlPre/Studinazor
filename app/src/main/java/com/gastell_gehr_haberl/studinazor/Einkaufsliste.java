@@ -1,6 +1,8 @@
 package com.gastell_gehr_haberl.studinazor;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +38,7 @@ public class Einkaufsliste extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_einkauf);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        enableStartScreenButton();
         initTaskList();
         initDatabase();
         initUI();
@@ -149,19 +152,6 @@ public class Einkaufsliste extends AppCompatActivity {
                 shopItems_adapter.notifyDataSetChanged();
                 refreshArrayList();
 
-                /*ShopItem temp = new ShopItem(item.getAmount(),item.getUnit(),item.getName());
-                shopDB.removeShopItem(item);
-
-                temp.setAmount(amountEdit.getText().toString());
-                temp.setUnit(unitNew.getSelectedItem().toString());
-                temp.setName(itemEdit.getText().toString());
-
-                shopItems_adapter.notifyDataSetChanged();
-
-                //löscht es alte und macht ein neues
-                shopDB.removeShopItem(item);
-                addNewTask(amountEdit.getText().toString(),unitNew.getSelectedItem().toString(),itemEdit.getText().toString());*/
-
              }
         }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
@@ -215,6 +205,35 @@ public class Einkaufsliste extends AppCompatActivity {
         }
     }
 
+    private void enableStartScreenButton() {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Button startNewsfeed = (Button) findViewById(R.id.StartToNewsfeedButton);
+            Button startToDo = (Button) findViewById(R.id.StartToToDoButton);
+            Button startStundenplan = (Button) findViewById(R.id.StartToStundenplanButton);
+            startNewsfeed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent newsfeedStart = new Intent(Einkaufsliste.this, NewstickerActivity.class);
+                    startActivity(newsfeedStart);
+                }
+            });
+            startToDo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent toDoStart = new Intent(Einkaufsliste.this, ToDoListe.class);
+                    startActivity(toDoStart);
+                }
+            });
+            startStundenplan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent stundenplanStart = new Intent(Einkaufsliste.this, Stundenplan.class);
+                    startActivity(stundenplanStart);
+                }
+            });
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -240,9 +259,6 @@ public class Einkaufsliste extends AppCompatActivity {
         shopDB.removeAllItems();
         shopItems_adapter.notifyDataSetChanged();
         refreshArrayList();
-        /*for(int i = shopItems.size() - 1; i >= 0; i--) {
-            removeTaskAtPosition(i);
-        }*/
     }
 
     private void sortList() {

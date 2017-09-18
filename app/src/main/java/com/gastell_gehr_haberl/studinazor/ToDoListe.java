@@ -3,6 +3,8 @@ package com.gastell_gehr_haberl.studinazor;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
@@ -48,19 +51,20 @@ public class ToDoListe extends AppCompatActivity {
     private ArrayList<ToDoItem> items;
     private ToDoListeAdapter todoItemsAdapter;
     private ToDoListeDatenbank todoDB;
-    private EditText mTimeEditText; //oder textview?
+    private EditText mTimeEditText;
     private int seconds = 0;
 
     Calendar selecteddate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState); //TODO bundle von startendem intent
+        //TODO holen, prüfen und dann verarbeiten bzw wenn leer kp
         setContentView(R.layout.activity_todo);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //was macht die fkt? antworten bitte an lucas
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initTaskList();
-        initDataBase();
         initUI();
+        initDataBase();
         updateList();
     }
 
@@ -83,11 +87,11 @@ public class ToDoListe extends AppCompatActivity {
 
     private void initUI() {
         initTaskButton();
-        //switchButton(); //TODO wenn aus, geht add button nicht (passiert nix); an: crashed weil timepicker
+        //switchButton();
         initListView();
         initDateField();
-        initTimeField();
-        //initTimeEditText();
+        //initTimeField();
+        initTimeEditText();
     }
 
     private void initTimeEditText() {
@@ -127,17 +131,16 @@ public class ToDoListe extends AppCompatActivity {
     private void buttonClicked() {
         todoText = (EditText) findViewById(R.id.todo_text_task);
         EditText dateEdit = (EditText) findViewById(R.id.notification_date);
-        //EditText timeEdit = (EditText) findViewById(R.id.notification_time);
+        EditText timeEdit = (EditText) findViewById(R.id.notification_time);
         String task = todoText.getText().toString();
         String date = dateEdit.getText().toString();
-        //String time = timeEdit.getText().toString();
-        //if (!task.equals("") && !date.equals("") && !time.equals("")) {
+        String time = timeEdit.getText().toString();
         if (!task.equals("") && !date.equals("")) {
             todoText.setText("");
             dateEdit.setText("");
-            //timeEdit.setText("");
-            //addNewTask(task, date, time);
-            addNewTask(task, date);
+            timeEdit.setText("");
+             addNewTask(task, date, time);
+            //addNewTask(task, date);
         }
     }
 
@@ -183,22 +186,21 @@ public class ToDoListe extends AppCompatActivity {
         list.setAdapter(todoItemsAdapter);
     }
 
-    //private void addNewTask(String task, String date, String time) {
-    private void addNewTask(String task, String date) {
+    private void addNewTask(String task, String date, String time) {
+    //private void addNewTask(String task, String date) {
         Date dueDate = getDateFromString(date);
-        //Date dueTime = getTimeFromString(time);
+        Date dueTime = getTimeFromString(time);
         GregorianCalendar chosenDate = new GregorianCalendar();
-        //GregorianCalendar chosenTime = new GregorianCalendar();
+        GregorianCalendar chosenTime = new GregorianCalendar();
         chosenDate.setTime(dueDate);
-        //chosenTime.setTime(dueTime);
-
-
-        //ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
-        //       chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
-        //       chosenTime.get(Calendar.SECOND), chosenTime.get(Calendar.MINUTE), chosenTime.get(Calendar.HOUR_OF_DAY));
+        chosenTime.setTime(dueTime);
 
         ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
-        chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
+                chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
+                chosenTime.get(Calendar.HOUR_OF_DAY), chosenTime.get(Calendar.MINUTE), chosenTime.get(Calendar.SECOND));
+
+        //ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
+        //chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
 
         todoDB.insertItem(newTask);
         updateList();
@@ -237,7 +239,7 @@ public class ToDoListe extends AppCompatActivity {
     public void showDatePickerDialog() {
         ///*
         DialogFragment chosenDate = new ToDoListeChosenDate();
-        chosenDate.show(getFragmentManager(), "eat a dick"); //string macht nichts
+        chosenDate.show(getFragmentManager(), "datePicker");
         //*/
         /*
         final Calendar c = Calendar.getInstance();
@@ -262,7 +264,7 @@ public class ToDoListe extends AppCompatActivity {
     public void showTimePickerDialog() {
         ///*
         DialogFragment chosenTime = new ToDoListeChosenTime();
-        chosenTime.show(getFragmentManager(), "timePicker"); //was macht der string? ^ siehe oben
+        chosenTime.show(getFragmentManager(), "timePicker");
         //*/
         /*
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
@@ -290,12 +292,42 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private Date getTimeFromString(String timeString) {
-        DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG,
+        DateFormat df = DateFormat.getDateInstance(DateFormat.LONG,
                 Locale.GERMANY);
         try {
             return df.parse(timeString);
         } catch(ParseException e) {
             return new Date();
+        }
+    }
+
+    private void enableStartScreenButton() {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Button startNewsfeed = (Button) findViewById(R.id.StartToNewsfeedButton);
+            Button startEinkauf = (Button) findViewById(R.id.StartToEinkaufButton);
+            Button startStundenplan = (Button) findViewById(R.id.StartToStundenplanButton);
+            startNewsfeed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent newsfeedStart = new Intent(ToDoListe.this, NewstickerActivity.class);
+                    startActivity(newsfeedStart);
+                }
+            });
+            startEinkauf.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent einkaufStart = new Intent(ToDoListe.this, Einkaufsliste.class);
+                    startActivity(einkaufStart);
+                }
+            });
+            startStundenplan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent stundenplanStart = new Intent(ToDoListe.this, Stundenplan.class);
+                    startActivity(stundenplanStart);
+                }
+            });
         }
     }
 
@@ -331,10 +363,9 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void deleteAll() {
-        for(int i = items.size() - 1; i >= 0; i--) {
-            removeTaskAtPosition(i);
-        }
-
+        todoDB.removeAllItems();
+        todoItemsAdapter.notifyDataSetChanged();
+        updateList();
     }
 
     @Override
@@ -359,13 +390,17 @@ public class ToDoListe extends AppCompatActivity {
         alertDialog.setView(dialogView);
         final EditText edit = (EditText) dialogView.findViewById(R.id.edit_dialog_input);
         edit.setText(item.getName());
-        //final TextView message = (TextView) dialogView.findViewById(R.id.edit_old_task);
+        final TextView message = (TextView) dialogView.findViewById(R.id.edit_old_task);
 
         alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int id) {
-                item.setName(edit.getText().toString());
+
+                String newName = edit.getText().toString();
+
+                todoDB.updateShopItem(newName,item);
                 todoItemsAdapter.notifyDataSetChanged();
+                updateList();
             }
         }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
