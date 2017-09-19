@@ -63,6 +63,7 @@ public class ToDoListe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //was macht die fkt? antworten bitte an lucas
+        enableStartScreenButton();
         initTaskList();
         initDataBase();
         initUI();
@@ -454,4 +455,5 @@ public class ToDoListe extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
+
 }

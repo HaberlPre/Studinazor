@@ -1,6 +1,7 @@
 package com.gastell_gehr_haberl.studinazor;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,6 +35,7 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newsticker);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        enableStartScreenButton();
         prepareListView();
         setupPoweredBy();
         new NewstickerDownloadTask(this, items).execute(ADDRESS);
@@ -130,6 +133,36 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
 
     private void toggleURLs() {
         showLinks = ! showLinks;
+    }
+
+    private void enableStartScreenButton() {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Button startEinkauf = (Button) findViewById(R.id.StartToEinkaufButton);
+            Button startToDo = (Button) findViewById(R.id.StartToToDoButton);
+            Button startStundenplan = (Button) findViewById(R.id.StartToStundenplanButton);
+            startEinkauf.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent einkaufStart = new Intent(NewstickerActivity.this, Einkaufsliste.class);
+                    startActivity(einkaufStart);
+                }
+            });
+            startToDo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent toDoStart = new Intent(NewstickerActivity.this, ToDoListe.class);
+                    startActivity(toDoStart);
+                }
+            });
+            startStundenplan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent stundenplanStart = new Intent(NewstickerActivity.this, Stundenplan.class);
+                    startActivity(stundenplanStart);
+                }
+            });
+        }
     }
 
 }
