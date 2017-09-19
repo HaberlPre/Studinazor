@@ -128,7 +128,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.14"
-                    android:hint="@string/input_class"
                     android:inputType="textCapSentences" />
 
                 <EditText
@@ -136,7 +135,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/input_room"
                     android:inputType="textCapSentences" />
 
             </LinearLayout>
@@ -157,7 +155,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.14"
-                    android:hint="@string/input_class"
                     android:inputType="textCapSentences" />
 
                 <EditText
@@ -165,7 +162,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/input_room"
                     android:inputType="textCapSentences" />
 
             </LinearLayout>
@@ -186,7 +182,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.14"
-                    android:hint="@string/input_class"
                     android:inputType="textCapSentences" />
 
                 <EditText
@@ -194,7 +189,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/input_room"
                     android:inputType="textCapSentences" />
 
             </LinearLayout>
@@ -215,7 +209,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.14"
-                    android:hint="@string/input_class"
                     android:inputType="textCapSentences" />
 
                 <EditText
@@ -223,7 +216,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/input_room"
                     android:inputType="textCapSentences" />
 
             </LinearLayout>
@@ -244,7 +236,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.14"
-                    android:hint="@string/input_class"
                     android:inputType="textCapSentences" />
 
                 <EditText
@@ -252,7 +243,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/input_room"
                     android:inputType="textCapSentences" />
 
             </LinearLayout>
@@ -273,16 +263,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.14"
-                    android:hint="@string/input_class"
                     android:inputType="textCapSentences" />
 
                 <EditText
                     android:id="@+id/input_sixth_room_friday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/input_room" />
-
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <Button

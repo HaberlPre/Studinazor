@@ -1,5 +1,6 @@
 package com.gastell_gehr_haberl.studinazor;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -112,10 +113,34 @@ public class StundenplanDienstag extends AppCompatActivity implements View.OnCli
             Button startWednesday = (Button) findViewById(R.id.button_wednesday);
             Button startThursday = (Button) findViewById(R.id.button_thursday);
             Button startFriday = (Button) findViewById(R.id.button_friday);
-            startMonday.setOnClickListener(this);
-            startWednesday.setOnClickListener(this);
-            startThursday.setOnClickListener(this);
-            startFriday.setOnClickListener(this);
+            startMonday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startMondayIntent = new Intent(StundenplanDienstag.this, StundenplanMontag.class);
+                    startActivity(startMondayIntent);
+                }
+            });
+            startWednesday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startWednesdayIntent = new Intent(StundenplanDienstag.this, StundenplanMittwoch.class);
+                    startActivity(startWednesdayIntent);
+                }
+            });
+            startThursday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startThursdayIntent = new Intent(StundenplanDienstag.this, StundenplanDonnerstag.class);
+                    startActivity(startThursdayIntent);
+                }
+            });
+            startFriday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startFridayIntent = new Intent(StundenplanDienstag.this, StundenplanFreitag.class);
+                    startActivity(startFridayIntent);
+                }
+            });
         }
     }
 
@@ -123,7 +148,10 @@ public class StundenplanDienstag extends AppCompatActivity implements View.OnCli
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                Intent intent = new Intent(getApplicationContext(), Stundenplan.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

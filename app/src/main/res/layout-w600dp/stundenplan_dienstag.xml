@@ -133,7 +133,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1.14"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_class"
                 android:inputType="textCapSentences"/>
 
             <EditText
@@ -141,7 +140,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_room"
                 android:inputType="textCapSentences"/>
 
         </LinearLayout>
@@ -163,7 +161,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1.14"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_class"
                 android:inputType="textCapSentences"/>
 
             <EditText
@@ -171,7 +168,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_room"
                 android:inputType="textCapSentences"/>
 
         </LinearLayout>
@@ -192,7 +188,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1.14"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_class"
                 android:inputType="textCapSentences"/>
 
             <EditText
@@ -200,7 +195,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_room"
                 android:inputType="textCapSentences"/>
 
         </LinearLayout>
@@ -221,7 +215,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1.14"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_class"
                 android:inputType="textCapSentences"/>
 
             <EditText
@@ -229,7 +222,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_room"
                 android:inputType="textCapSentences"/>
 
         </LinearLayout>
@@ -251,7 +243,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1.14"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_class"
                 android:inputType="textCapSentences"/>
 
             <EditText
@@ -259,7 +250,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_room"
                 android:inputType="textCapSentences"/>
 
         </LinearLayout>
@@ -281,7 +271,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1.14"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_class"
                 android:inputType="textCapSentences"/>
 
             <EditText
@@ -289,7 +278,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_room"
                 android:inputType="textCapSentences"/>
 
         </LinearLayout>

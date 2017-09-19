@@ -1,6 +1,8 @@
 package com.gastell_gehr_haberl.studinazor;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +50,7 @@ public class StundenplanMontag extends AppCompatActivity implements View.OnClick
         inputSixthRoom = (EditText) findViewById(R.id.input_sixth_room_monday);
         saveInput = (Button) findViewById(R.id.input_button_monday);
         saveInput.setOnClickListener(this);
+        enableDaysButton();
         savedPreferences();
     }
 
@@ -107,11 +110,53 @@ public class StundenplanMontag extends AppCompatActivity implements View.OnClick
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                Intent intent = new Intent(getApplicationContext(), Stundenplan.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void enableDaysButton() {
+        int orientation = getResources().getConfiguration().orientation;
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Button startTuesday = (Button) findViewById(R.id.button_tuesday);
+            Button startWednesday = (Button) findViewById(R.id.button_wednesday);
+            Button startThursday = (Button) findViewById(R.id.button_thursday);
+            final Button startFriday = (Button) findViewById(R.id.button_friday);
+            startTuesday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startTuesdayIntent = new Intent(StundenplanMontag.this, StundenplanDienstag.class);
+                    startActivity(startTuesdayIntent);
+                }
+            });
+            startWednesday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startWednesdayIntent = new Intent(StundenplanMontag.this, StundenplanMittwoch.class);
+                    startActivity(startWednesdayIntent);
+                }
+            });
+            startThursday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startThursdayIntent = new Intent(StundenplanMontag.this, StundenplanDonnerstag.class);
+                    startActivity(startThursdayIntent);
+                }
+            });
+            startFriday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startFridayIntent = new Intent(StundenplanMontag.this, StundenplanFreitag.class);
+                    startActivity(startFridayIntent);
+                }
+            });
+        }
+    }
+
 }
 
