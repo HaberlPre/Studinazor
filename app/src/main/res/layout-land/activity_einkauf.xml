@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
     android:weightSum="2"
-    android:baselineAligned="false"
-    android:id="@+id/stunden">
+    android:baselineAligned="false">
 
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -81,52 +81,59 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:weightSum="5">
+        android:background="#fafad2">
+
+
+        <TextView
+            android:id="@+id/einkauf_text_wip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/einkauf_text_wip" />
 
         <Button
-            android:id="@+id/button_monday"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_monday"
-            android:background="#C1FFC1"
-            />
+            android:id="@+id/add_button"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_button"
+            android:background="#ffc125"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"/>
 
-        <Button
-            android:id="@+id/button_tuesday"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_tuesday"
-            android:background="#B4EEB4"/>
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/button_wednesday"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_wednesday"
-            android:background="#9BCD9B"/>
+            <EditText
+                android:id="@+id/item_edit_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/amount"
+                android:inputType="numberDecimal"
+                android:textColorHint="#aaaaaa"/>
 
-        <Button
-            android:id="@+id/button_thursday"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_thursday"
-            android:background="#8FBC8F"/>
+            <Spinner
+                android:id="@+id/item_spinner_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/units"></Spinner>
 
-        <Button
-            android:id="@+id/button_friday"
+            <EditText
+                android:id="@+id/item_edit_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/item"
+                android:textColorHint="#aaaaaa"
+                android:inputType="textCapSentences"/>
+
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/shop_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_friday"
-            android:background="#698B69"/>
+            android:layout_height="match_parent">
+        </ListView>
 
     </LinearLayout>
-
-
-
-
 </LinearLayout>

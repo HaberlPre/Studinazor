@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    android:baselineAligned="false">
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/StartToNewsfeedButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/newsfeed_string"
+                android:background="#CAE1FF"
+                tools:ignore="ButtonStyle,NestedWeights" />
+
+
+
+            <Button
+                android:id="@+id/StartToEinkaufButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/einkaufsliste_string"
+                android:background="#00C5CD"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/StartToToDoButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/todo_liste_string"
+                android:background="#FF4040"
+                tools:ignore="ButtonStyle,NestedWeights" />
+
+            <Button
+                android:id="@+id/StartToStundenplanButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/stundenplan_string"
+                android:background="#104E8B"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+
+
+            <EditText
+                android:id="@+id/todo_text_task"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:hint="@string/todo_text_task"></EditText>
+
+            <Button
+                android:id="@+id/todo_text_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:text="@string/todo_text_button"
+                android:background="#FF1493"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/todoReminderAndDateLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/notification_reminder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/notification_reminder"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/notification_switch"
+                    android:paddingRight="25dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/todoDateAndTimeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/notification_date"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/notification_date"
+                    android:inputType="date"/>
+
+                <EditText
+                    android:id="@+id/notification_time"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/notification_time"
+                    android:inputType="time"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/todo_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

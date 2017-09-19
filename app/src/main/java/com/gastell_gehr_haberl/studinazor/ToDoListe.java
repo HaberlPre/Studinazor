@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.Time;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,6 +28,7 @@ import android.widget.TimePicker;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -218,8 +220,17 @@ public class ToDoListe extends AppCompatActivity {
         GregorianCalendar chosenDate = new GregorianCalendar();
         GregorianCalendar chosenTime = new GregorianCalendar();
         //Calendar chosenTime = Calendar.getInstance();
+        int y = dueDate.getYear();
+        int mo = dueDate.getMonth();
+        int d = dueDate.getDay();
+        int h = dueTime.getHours();
+        int mi = dueTime.getMinutes();
+        int s = dueTime.getSeconds();
+        //chosenDate.set(y, mo, d);
+        Date datetest = new Date(y, mo, d, h, mi, s);
         chosenDate.setTime(dueDate);
-        chosenTime.setTime(dueTime);
+        //chosenTime.set(y, mo, d, h, mi);
+        chosenTime.setTime(datetest);
 
 
         ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
@@ -319,14 +330,16 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private Date getTimeFromString(String timeString) {
-        DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG, //Long/Short
-                Locale.GERMANY);
+        //DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG, //Long/Short
+        //        Locale.GERMANY);
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
         try {
             return df.parse(timeString);
         } catch(ParseException e) {
             return new Date();
         }
     }
+
 
     private void enableStartScreenButton() {
         int orientation = getResources().getConfiguration().orientation;

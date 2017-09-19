@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
     android:weightSum="2"
-    android:baselineAligned="false"
-    android:id="@+id/stunden">
+    android:baselineAligned="false">
 
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -71,62 +71,39 @@
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
 
-
-
     </LinearLayout>
 
-
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:weightSum="5">
+        android:layout_height="fill_parent"
+        android:fillViewport="true" >>
 
-        <Button
-            android:id="@+id/button_monday"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_monday"
-            android:background="#C1FFC1"
-            />
+            android:layout_height="match_parent"
+            tools:context=".NewstickerActivity"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_tuesday"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_tuesday"
-            android:background="#B4EEB4"/>
+            <TextView
+                android:id="@+id/newsticker_head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/newsticker_head_string"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <Button
-            android:id="@+id/button_wednesday"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_wednesday"
-            android:background="#9BCD9B"/>
+            <TextView
+                android:id="@+id/poweredBy_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/newsticker_poweredBy_string" />
 
-        <Button
-            android:id="@+id/button_thursday"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_thursday"
-            android:background="#8FBC8F"/>
-
-        <Button
-            android:id="@+id/button_friday"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/button_friday"
-            android:background="#698B69"/>
-
-    </LinearLayout>
-
-
-
+            <ListView
+                android:id="@+id/news_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ListView>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
