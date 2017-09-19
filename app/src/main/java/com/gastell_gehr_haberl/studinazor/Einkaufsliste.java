@@ -248,7 +248,10 @@ public class Einkaufsliste extends AppCompatActivity {
                 deleteList();
                 return true;
             case android.R.id.home:
-                this.finish();
+                Intent intent = new Intent(getApplicationContext(), StartScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
