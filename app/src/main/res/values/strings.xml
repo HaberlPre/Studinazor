@@ -58,10 +58,11 @@
         <item>Gramm</item>
         <item>Kilogramm</item>
         <item>Liter</item>
-        <item>Milliliter</item>
         <item>Stück</item>
         <item>Packung[en]</item>
         <item>Pfund</item>
+        <item>Flasche[n]</item>
+        <item>Kasten</item>
     </string-array>
 
     <string name="item_delete_all">Alles Löschen</string>
