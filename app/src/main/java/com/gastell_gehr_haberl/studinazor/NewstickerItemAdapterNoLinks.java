@@ -16,6 +16,10 @@ import java.util.List;
 
 public class NewstickerItemAdapterNoLinks extends ArrayAdapter<NewstickerItem> {
 
+    /**
+     * Adapter für Ansicht ohne Links
+     */
+
     private List <NewstickerItem> items;
     private Context context;
 

@@ -24,7 +24,7 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
     private static final String TITLE = "title";
     private static final String DESCRIPTION = "description";
     private static final String URL = "url";
-    private static final String URLTOIMAGE = "urlToImage"; //DITO
+    private static final String URLTOIMAGE = "urlToImage";
     private static final String PUBLISHEDAT = "publishedAt";
     
     private ArrayList<NewstickerItem> items;
@@ -56,6 +56,10 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
         listener.onDownloadFinished();
     }
 
+    /**
+     * arbeitet das JSON-Objekt ab
+     * @param jsonObject
+     */
     private void processJson(JSONObject jsonObject) {
         try {
 
@@ -78,6 +82,13 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
         }
     }
 
+    /**
+     * Holt das JSON-Objekt aus der URL
+     * @param urlString
+     * @return gibt das JSON-Objekt zurück
+     * @throws IOException
+     * @throws JSONException
+     */
     private JSONObject getJSONObjectFromURL(String urlString) throws  IOException, JSONException {
         URL url = new URL(urlString);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

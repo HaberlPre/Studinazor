@@ -54,6 +54,9 @@ public class StundenplanDienstag extends AppCompatActivity implements View.OnCli
         savedPreferences();
     }
 
+    /**
+     * Alle gespeicherten Einträge
+     */
     private void savedPreferences() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String firstClassInput = pref.getString("firstClassTuesday", "");
@@ -82,6 +85,11 @@ public class StundenplanDienstag extends AppCompatActivity implements View.OnCli
         inputSixthRoom.setText(sixthRoomInput);
     }
 
+    /**
+     * Speichert die Einträge
+     * @param key
+     * @param value
+     */
     private void savePreferences(String key, String value) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor edit = pref.edit();
@@ -106,6 +114,29 @@ public class StundenplanDienstag extends AppCompatActivity implements View.OnCli
 
     }
 
+    /**
+     * Menü in der Actionbar
+     * @param item
+     * @return Welche Aktion ausgelöst werden soll: Zurück-Pfeil
+     *
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(), Stundenplan.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
+     */
     private void enableDaysButton() {
         int orientation = getResources().getConfiguration().orientation;
         if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -141,20 +172,6 @@ public class StundenplanDienstag extends AppCompatActivity implements View.OnCli
                     startActivity(startFridayIntent);
                 }
             });
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(), Stundenplan.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("EXIT", true);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 }

@@ -16,6 +16,10 @@ import java.util.List;
 
 public class NewstickerItemAdapterWithLinks extends ArrayAdapter<NewstickerItem> {
 
+    /**
+     * Adapter für Ansicht mit Links
+     */
+
     private List<NewstickerItem> items;
     private Context context;
 

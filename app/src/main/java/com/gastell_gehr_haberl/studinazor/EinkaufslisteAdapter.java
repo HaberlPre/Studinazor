@@ -34,7 +34,6 @@ public class EinkaufslisteAdapter extends ArrayAdapter<ShopItem> {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.shoplist_itemlist, null);
-
         }
 
         ShopItem task = shopList.get(position);

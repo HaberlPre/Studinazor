@@ -54,6 +54,9 @@ public class StundenplanMittwoch extends AppCompatActivity implements View.OnCli
         savedPreferences();
     }
 
+    /**
+     * Alle gespeicherten Einträge
+     */
     private void savedPreferences() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String firstClassInput = pref.getString("firstClassWednesday", "");
@@ -82,6 +85,11 @@ public class StundenplanMittwoch extends AppCompatActivity implements View.OnCli
         inputSixthRoom.setText(sixthRoomInput);
     }
 
+    /**
+     * Speichert die Einträge
+     * @param key
+     * @param value
+     */
     private void savePreferences(String key, String value) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor edit = pref.edit();
@@ -106,6 +114,12 @@ public class StundenplanMittwoch extends AppCompatActivity implements View.OnCli
 
     }
 
+    /**
+     * Menü in der Actionbar
+     * @param item
+     * @return Welche Aktion ausgelöst werden soll: Zurück-Pfeil
+     *
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -120,6 +134,9 @@ public class StundenplanMittwoch extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /**
+     * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
+     */
     private void enableDaysButton() {
         int orientation = getResources().getConfiguration().orientation;
         if(orientation == Configuration.ORIENTATION_LANDSCAPE) {

@@ -62,7 +62,6 @@ public class EinkaufslisteDatabase {
         String toDelete = KEY_ITEM + "=?";
         String[] deleteArguments = new String[]{item.getName()};
         db.delete(DATABASE_TABLE, toDelete, deleteArguments);
-
     }
 
     public void removeAllItems(){
@@ -119,7 +118,6 @@ public class EinkaufslisteDatabase {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
         }
     }
 }

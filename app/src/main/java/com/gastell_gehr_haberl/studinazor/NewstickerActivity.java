@@ -23,6 +23,10 @@ import java.util.ArrayList;
 
 public class NewstickerActivity extends AppCompatActivity implements DownloadListener {
 
+    /**
+     * Orientiert an Übung 7 des Android-Kurses
+     */
+
     private ArrayList<NewstickerItem> items;
     private boolean showLinks = false;
     private NewstickerItemAdapterNoLinks adapterNoLinks;
@@ -55,8 +59,6 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
                     return true;
                 }
             });
-
-            registerForContextMenu(list); //wofür gut?
         } else {
             adapterNoLinks = new NewstickerItemAdapterNoLinks(NewstickerActivity.this, items);
             ListView list = (ListView) findViewById(R.id.news_list);
@@ -69,20 +71,7 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
                     return true;
                 }
             });
-
-            registerForContextMenu(list); //wofür gut?
         }
-/*
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                openUrl(position);
-                return true;
-            }
-        });
-
-        registerForContextMenu(list); //wofür gut?
-*/
     }
 
     private void openUrl(int position) {
@@ -115,6 +104,12 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
         return true;
     }
 
+    /**
+     * Menü in der Actionbar
+     * @param item
+     * @return Welche Aktion ausgelöst werden soll: Entweder Zurück-Pfeil oder Ändern von Link sichtbar/nicht sichtbar
+     *
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -134,10 +129,16 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
         }
     }
 
+    /**
+     * Entscheidet ob Links gezeigt werden oder nicht
+     */
     private void toggleURLs() {
         showLinks = ! showLinks;
     }
 
+    /**
+     * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
+     */
     private void enableStartScreenButton() {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE){

@@ -42,7 +42,7 @@ public class ShopItem implements Comparable<ShopItem> {
 
     @Override
     public int compareTo(ShopItem another) {
-        return 0; //getDueDate().compareTo(another.getDueDate());
+        return 0;
     }
 
     @Override

@@ -29,6 +29,11 @@ import java.util.Collections;
 
 public class Einkaufsliste extends AppCompatActivity {
 
+    /**
+     * Orientiert an Übung 5 des Android-Kurses
+     */
+
+
     private ArrayList<ShopItem> shopItems;
     private EinkaufslisteAdapter shopItems_adapter;
     private EinkaufslisteDatabase shopDB;
@@ -108,82 +113,8 @@ public class Einkaufsliste extends AppCompatActivity {
     private void initListView() {
         final ListView list = (ListView) findViewById(R.id.shop_list);
         registerForContextMenu(list);
-        /*list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                //registerForContextMenu(list);
-                //removeTaskAtPosition(position);
-                return true;
-            }
-        });*/
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo info){
-        super.onCreateContextMenu(menu, v, info);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_einkaufsliste_context, menu);
-    }
-
-    public void createEdit(final ShopItem item) {
-        LayoutInflater inflater = LayoutInflater.from(Einkaufsliste.this);
-        View dialogView = inflater.inflate(R.layout.einkaufsliste_context, null);
-        AlertDialog.Builder alertDialog =  new AlertDialog.Builder(Einkaufsliste.this);
-        alertDialog.setView(dialogView);
-        final EditText amountEdit = (EditText) dialogView.findViewById(R.id.edit_dialog_input_amount);
-        amountEdit.setText(item.getAmount());
-        final Spinner unitNew = (Spinner) dialogView.findViewById(R.id.edit_dialog_spinner);
-        //unitNew.setSelection(item.getUnit()); //<- soll int position von unit im array liefern
-        unitNew.setPrompt(item.getUnit());
-        final EditText itemEdit = (EditText) dialogView.findViewById(R.id.edit_dialog_input_item);
-        itemEdit.setText(item.getName());
-        final TextView message = (TextView) dialogView.findViewById(R.id.edit_item_head);
-
-        alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int id) {
-
-                String newAmount = amountEdit.getText().toString();
-                String newUnit = unitNew.getSelectedItem().toString();
-                String newName = itemEdit.getText().toString();
-
-                shopDB.updateShopItem(newAmount,newUnit,newName,item);
-                shopItems_adapter.notifyDataSetChanged();
-                refreshArrayList();
-
-             }
-        }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-               public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-               }
-            });
-            final AlertDialog alert = alertDialog.create();
-            alert.show();
-    }
-
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int position = (int) info.id;
-
-        switch (item.getItemId()) {
-            case R.id.item_delete:
-                removeTaskAtPosition(position);
-                break;
-            case R.id.item_change:
-                //changeItem();
-                createEdit(shopItems.get(position));
-                break;
-        }
-                return super.onContextItemSelected(item);
-    }
-
-    private void changeItem(){
-
-    }
 
     private void initListAdapter() {
         ListView list = (ListView) findViewById(R.id.shop_list);
@@ -205,6 +136,9 @@ public class Einkaufsliste extends AppCompatActivity {
         }
     }
 
+    /**
+     * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
+     */
     private void enableStartScreenButton() {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -236,11 +170,85 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo info){
+        super.onCreateContextMenu(menu, v, info);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_einkaufsliste_context, menu);
+    }
+
+    /**
+     * Menü, welches beim Longklick geöffnet wird
+     * @param item
+     * @return Zwei Auswahlmöglichkeiten: Item löschen oder bearbeiten
+     */
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = (int) info.id;
+
+        switch (item.getItemId()) {
+            case R.id.item_delete:
+                removeTaskAtPosition(position);
+                break;
+            case R.id.item_change:
+                createEdit(shopItems.get(position));
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    /**
+     * Öffnet Fenster zum Bearbeiten des Eintrags
+     * @param item
+     */
+    public void createEdit(final ShopItem item) {
+        LayoutInflater inflater = LayoutInflater.from(Einkaufsliste.this);
+        View dialogView = inflater.inflate(R.layout.einkaufsliste_context, null);
+        AlertDialog.Builder alertDialog =  new AlertDialog.Builder(Einkaufsliste.this);
+        alertDialog.setView(dialogView);
+        final EditText amountEdit = (EditText) dialogView.findViewById(R.id.edit_dialog_input_amount);
+        amountEdit.setText(item.getAmount());
+        final Spinner unitNew = (Spinner) dialogView.findViewById(R.id.edit_dialog_spinner);
+        unitNew.setPrompt(item.getUnit());
+        final EditText itemEdit = (EditText) dialogView.findViewById(R.id.edit_dialog_input_item);
+        itemEdit.setText(item.getName());
+        final TextView message = (TextView) dialogView.findViewById(R.id.edit_item_head);
+
+        alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+
+                String newAmount = amountEdit.getText().toString();
+                String newUnit = unitNew.getSelectedItem().toString();
+                String newName = itemEdit.getText().toString();
+
+                shopDB.updateShopItem(newAmount,newUnit,newName,item);
+                shopItems_adapter.notifyDataSetChanged();
+                refreshArrayList();
+
+            }
+        }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_einkaufsliste, menu);
         return true;
     }
 
+    /**
+     * Menü in der Actionbar
+     * @param item
+     * @return Welche Aktion ausgelöst werden soll: Entweder Zurück-Pfeil oder Löschen der Liste
+     *
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -262,11 +270,6 @@ public class Einkaufsliste extends AppCompatActivity {
         shopDB.removeAllItems();
         shopItems_adapter.notifyDataSetChanged();
         refreshArrayList();
-    }
-
-    private void sortList() {
-        Collections.sort(shopItems);
-        shopItems_adapter.notifyDataSetChanged();
     }
 
     @Override

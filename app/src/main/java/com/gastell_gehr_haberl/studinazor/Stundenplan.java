@@ -32,8 +32,6 @@ public class Stundenplan extends AppCompatActivity {
         initCourseButtons();
     }
 
-
-
     private void initUI() {
         mondayButton = (Button) findViewById(R.id.button_monday);
         tuesdayButton = (Button) findViewById(R.id.button_tuesday);
@@ -41,7 +39,6 @@ public class Stundenplan extends AppCompatActivity {
         thursdayButton = (Button) findViewById(R.id.button_thursday);
         fridayButton = (Button) findViewById(R.id.button_friday);
     }
-
 
     private void initCourseButtons() {
         mondayButton.setOnClickListener(new View.OnClickListener() {
@@ -83,9 +80,10 @@ public class Stundenplan extends AppCompatActivity {
                 startActivity(startFriday);
             }
         });
-
-        }
-
+    }
+        /**
+        * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
+        */
         private void enableStartScreenButton() {
             int orientation = getResources().getConfiguration().orientation;
             if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -114,10 +112,14 @@ public class Stundenplan extends AppCompatActivity {
                     }
                 });
             }
-
         }
 
-
+    /**
+     * Menü in der Actionbar
+     * @param item
+     * @return Welche Aktion ausgelöst werden soll: Zurück-Pfeil
+     *
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

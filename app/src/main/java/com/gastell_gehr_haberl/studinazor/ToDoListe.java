@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -277,7 +278,7 @@ public class ToDoListe extends AppCompatActivity {
     public void showDatePickerDialog() {
         ///*
         DialogFragment chosenDate = new ToDoListeChosenDate();
-        chosenDate.show(getFragmentManager(), "eat a dick"); //string macht nichts
+        chosenDate.show(getFragmentManager(), "datePicker"); //string macht nichts
         //*/
         /*
         final Calendar c = Calendar.getInstance();
