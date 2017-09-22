@@ -117,7 +117,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
         db.delete(DATABASE_TABLE, null, null);
     }
 
-    public void updateShopItem(String name, ToDoItem item){
+    public void updateToDoItem(String name, ToDoItem item){
         db = dbHelper.getWritableDatabase();
         //the new values
         ContentValues newValues = new ContentValues();

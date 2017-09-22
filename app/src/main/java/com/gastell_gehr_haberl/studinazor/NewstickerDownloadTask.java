@@ -20,13 +20,15 @@ import java.util.ArrayList;
 
 public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
 
+    //Konstanten
     private static final String AUTHOR = "author";
     private static final String TITLE = "title";
     private static final String DESCRIPTION = "description";
     private static final String URL = "url";
     private static final String URLTOIMAGE = "urlToImage";
     private static final String PUBLISHEDAT = "publishedAt";
-    
+
+    //Variabeln
     private ArrayList<NewstickerItem> items;
     private DownloadListener listener;
     

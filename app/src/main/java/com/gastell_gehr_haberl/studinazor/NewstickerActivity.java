@@ -27,6 +27,7 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
      * Orientiert an Übung 7 des Android-Kurses
      */
 
+    //Variabeln
     private ArrayList<NewstickerItem> items;
     private boolean showLinks = false;
     private NewstickerItemAdapterNoLinks adapterNoLinks;
@@ -45,6 +46,9 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
         new NewstickerDownloadTask(this, items).execute(ADDRESS);
     }
 
+    /**
+     * Initiiert die Liste
+     */
     private void prepareListView() {
         items = new ArrayList<NewstickerItem>();
         if (showLinks) {
@@ -74,6 +78,10 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
         }
     }
 
+    /**
+     * Öffnet den Link an der gewählten Stelle
+     * @param position
+     */
     private void openUrl(int position) {
         NewstickerItem item = items.get(position);
         String s = item.getUrl();
@@ -81,6 +89,9 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
         startActivity(browserIntent);
     }
 
+    /**
+     * Stellt die Referenz dar
+     */
     private void setupPoweredBy() {
         poweredBy = (TextView) findViewById(R.id.poweredBy_id);
         poweredBy.setClickable(true);

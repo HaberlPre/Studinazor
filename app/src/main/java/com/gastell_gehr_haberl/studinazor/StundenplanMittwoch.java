@@ -17,6 +17,7 @@ import android.widget.EditText;
 
 public class StundenplanMittwoch extends AppCompatActivity implements View.OnClickListener{
 
+    //Variabeln
     private EditText inputFirstClass;
     private EditText inputSecondClass;
     private EditText inputThirdClass;
