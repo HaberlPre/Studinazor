@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/newsfeed_string"
-                android:background="#CAE1FF"
+                android:background="@color/StartScreen_NewstickerButton"
                 tools:ignore="ButtonStyle,NestedWeights" />
 
 
@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/einkaufsliste_string"
-                android:background="#00C5CD"
+                android:background="@color/StartScreen_EinkaufslisteButton"
                 tools:ignore="ButtonStyle" />
 
         </LinearLayout>
@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/todo_liste_string"
-                android:background="#FF4040"
+                android:background="@color/StartScreen_ToDoListeButton"
                 tools:ignore="ButtonStyle,NestedWeights" />
 
             <Button
@@ -67,7 +67,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/stundenplan_string"
-                android:background="#104E8B"
+                android:background="@color/StartScreen_StundenplanButton"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
 
@@ -89,7 +89,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="@string/button_monday"
-            android:background="#C1FFC1"
+            android:background="@color/stundenplanMontagButton"
             />
 
         <Button
@@ -98,7 +98,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="@string/button_tuesday"
-            android:background="#B4EEB4"/>
+            android:background="@color/stundenplanDienstagButton"/>
 
         <Button
             android:id="@+id/button_wednesday"
@@ -106,7 +106,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="@string/button_wednesday"
-            android:background="#9BCD9B"/>
+            android:background="@color/stundenplanMittwochButton"/>
 
         <Button
             android:id="@+id/button_thursday"
@@ -114,7 +114,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="@string/button_thursday"
-            android:background="#8FBC8F"/>
+            android:background="@color/stundenplanDonnerstagButton"/>
 
         <Button
             android:id="@+id/button_friday"
@@ -122,11 +122,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="@string/button_friday"
-            android:background="#698B69"/>
+            android:background="@color/stundenplanFreitagButton"/>
 
     </LinearLayout>
-
-
-
 
 </LinearLayout>

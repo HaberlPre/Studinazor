@@ -4,8 +4,9 @@ package com.gastell_gehr_haberl.studinazor;
  * Created by Tanja on 23.08.2017.
  */
 
-public class ShopItem implements Comparable<ShopItem> {
+public class ShopItem {
 
+    //Variabeln
     private String amount;
     private String unit;
     private String name;
@@ -38,11 +39,6 @@ public class ShopItem implements Comparable<ShopItem> {
 
     public void setName(String name){
         this.name = name;
-    }
-
-    @Override
-    public int compareTo(ShopItem another) {
-        return 0;
     }
 
     @Override

@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         android:text="@string/todo_text_button"
-        android:background="#FF1493"/>
+        android:background="@color/todolisteButton"/>
 
 
 </LinearLayout>

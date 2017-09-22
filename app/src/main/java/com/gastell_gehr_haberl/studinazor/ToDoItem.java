@@ -83,7 +83,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
     @Override //crashed die app überraschenderweise nicht
     public String toString() {
-        return "Name: " + getName() + ", Date: " + getFormattedDate() + ", Time: " + getFormattedTime();
+        return "Name: " + getName() + ", Date: " + getFormattedDate() + ", Time: ";
     }
 
     /*

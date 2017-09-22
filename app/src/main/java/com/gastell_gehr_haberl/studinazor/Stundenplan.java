@@ -16,6 +16,7 @@ import android.widget.Button;
 
 public class Stundenplan extends AppCompatActivity {
 
+    //Variabeln
     Button mondayButton;
     Button tuesdayButton;
     Button wednesdayButton;
@@ -32,6 +33,9 @@ public class Stundenplan extends AppCompatActivity {
         initCourseButtons();
     }
 
+    /**
+     * Initiiert das User Interface (Benutzeroberfläche)
+     */
     private void initUI() {
         mondayButton = (Button) findViewById(R.id.button_monday);
         tuesdayButton = (Button) findViewById(R.id.button_tuesday);
@@ -40,6 +44,9 @@ public class Stundenplan extends AppCompatActivity {
         fridayButton = (Button) findViewById(R.id.button_friday);
     }
 
+    /**
+     * Legt fest, welcher Button wohin führt und anklickbar ist
+     */
     private void initCourseButtons() {
         mondayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,38 +88,39 @@ public class Stundenplan extends AppCompatActivity {
             }
         });
     }
-        /**
-        * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
-        */
-        private void enableStartScreenButton() {
-            int orientation = getResources().getConfiguration().orientation;
-            if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                Button startEinkauf = (Button) findViewById(R.id.StartToEinkaufButton);
-                Button startTodo = (Button) findViewById(R.id.StartToToDoButton);
-                Button startNewsfeed = (Button) findViewById(R.id.StartToNewsfeedButton);
-                startEinkauf.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent startEinkauf = new Intent(Stundenplan.this, Einkaufsliste.class);
-                        startActivity(startEinkauf);
-                    }
-                });
-                startTodo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent startTodo = new Intent(Stundenplan.this, ToDoListe.class);
-                        startActivity(startTodo);
-                    }
-                });
-                startNewsfeed.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent startNewsfeed = new Intent(Stundenplan.this, NewstickerActivity.class);
-                        startActivity(startNewsfeed);
-                    }
-                });
-            }
+
+    /**
+     * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
+     */
+    private void enableStartScreenButton() {
+        int orientation = getResources().getConfiguration().orientation;
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Button startEinkauf = (Button) findViewById(R.id.StartToEinkaufButton);
+            Button startTodo = (Button) findViewById(R.id.StartToToDoButton);
+            Button startNewsfeed = (Button) findViewById(R.id.StartToNewsfeedButton);
+            startEinkauf.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startEinkauf = new Intent(Stundenplan.this, Einkaufsliste.class);
+                    startActivity(startEinkauf);
+                }
+            });
+            startTodo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startTodo = new Intent(Stundenplan.this, ToDoListe.class);
+                    startActivity(startTodo);
+                }
+            });
+            startNewsfeed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startNewsfeed = new Intent(Stundenplan.this, NewstickerActivity.class);
+                    startActivity(startNewsfeed);
+                }
+            });
         }
+    }
 
     /**
      * Menü in der Actionbar
@@ -133,6 +141,5 @@ public class Stundenplan extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
   }

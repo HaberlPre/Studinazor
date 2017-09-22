@@ -4,6 +4,26 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="grün">#00ff00</color>
-    <color name="rot">#ee2c2c</color>
+    //StartScreen
+    <color name="StartScreen_NewstickerButton">#CAE1FF</color>
+    <color name="StartScreen_EinkaufslisteButton">#00C5CD</color>
+    <color name="StartScreen_ToDoListeButton">#FF4040</color>
+    <color name="StartScreen_StundenplanButton">#104E8B</color>
+    
+    //Einkaufsliste
+    <color name="einkaufslisteBackground">#fafad2</color>
+    <color name="einkaufslisteButton">#ffc125</color>
+    <color name="einkaufslisteHintColor">#aaaaaa</color>
+    
+    //ToDo-Liste
+    <color name="todolisteButton">#FF1493</color>
+
+    //Stundenplan
+    <color name="stundenplanMontagButton">#C1FFC1</color>
+    <color name="stundenplanDienstagButton">#B4EEB4</color>
+    <color name="stundenplanMittwochButton">#9BCD9B</color>
+    <color name="stundenplanDonnerstagButton">#8FBC8F</color>
+    <color name="stundenplanFreitagButton">#698B69</color>
+    <color name="stundenplanTageBackground">#F0FFF0</color>
+
 </resources>

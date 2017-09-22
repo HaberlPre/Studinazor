@@ -8,7 +8,7 @@ android:fillViewport="true">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F0FFF0"
+    android:background="@color/stundenplanTageBackground"
     android:orientation="vertical"
     android:padding="15dp"
     android:paddingBottom="15dp"
@@ -223,7 +223,7 @@ android:fillViewport="true">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#698B69"
+        android:background="@color/stundenplanFreitagButton"
         android:padding="20dp"
         android:text="@string/input_button" />
 

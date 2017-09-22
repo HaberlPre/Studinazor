@@ -15,6 +15,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class EinkaufslisteDatabase {
 
+
+    //Konstanten
     private static final String DATABASE_NAME = "einkaufsliste.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -29,9 +31,11 @@ public class EinkaufslisteDatabase {
     public static final int COLUMN_UNIT_INDEX = 2;
     public static final int COLUMN_ITEM_INDEX = 3;
 
-    private ToDoDBOpenHelper dbHelper;
 
+    //Variabeln
+    private ToDoDBOpenHelper dbHelper;
     private SQLiteDatabase db;
+
 
     public EinkaufslisteDatabase(Context context) {
         dbHelper = new ToDoDBOpenHelper(context, DATABASE_NAME, null,
@@ -50,6 +54,11 @@ public class EinkaufslisteDatabase {
         db.close();
     }
 
+    /**
+     * Fügt einen neuen Artikel hinzu
+     * @param item
+     * @return
+     */
     public long insertItem(ShopItem item) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(KEY_AMOUNT, item.getAmount());
@@ -58,17 +67,31 @@ public class EinkaufslisteDatabase {
         return db.insert(DATABASE_TABLE, null, itemValues);
     }
 
+    /**
+     * Löscht ein Artikel aus der Liste
+     * @param item
+     */
     public void removeShopItem(ShopItem item) {
         String toDelete = KEY_ITEM + "=?";
         String[] deleteArguments = new String[]{item.getName()};
         db.delete(DATABASE_TABLE, toDelete, deleteArguments);
     }
 
+    /**
+     * Löscht alle Artikel aus der Liste
+     */
     public void removeAllItems(){
         db =  dbHelper.getWritableDatabase();
         db.delete(DATABASE_TABLE, null, null);
     }
 
+    /**
+     * Überarbeitet den Artikel und speichert ihn neu
+     * @param amount
+     * @param unit
+     * @param name
+     * @param item
+     */
     public void updateShopItem(String amount, String unit, String name, ShopItem item){
         db = dbHelper.getWritableDatabase();
         //the new values
@@ -83,6 +106,10 @@ public class EinkaufslisteDatabase {
         db.update(DATABASE_TABLE, newValues, toUpdate, updateArgument);
     }
 
+    /**
+     * Gibt alle Artikel in einer Liste zurück, die gespeichert wurden
+     * @return Liste mit den Artikel
+     */
     public ArrayList<ShopItem> getAllShopItems() {
         ArrayList<ShopItem> items = new ArrayList<ShopItem>();
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_AMOUNT, KEY_UNIT,
@@ -100,6 +127,9 @@ public class EinkaufslisteDatabase {
         return items;
     }
 
+    /**
+     * Hilfsklasse für die Datenbank
+     */
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {
         private static final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID

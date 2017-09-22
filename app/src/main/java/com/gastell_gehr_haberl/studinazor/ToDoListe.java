@@ -30,8 +30,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -56,10 +56,6 @@ import java.util.Locale;
  */
 
 public class ToDoListe extends AppCompatActivity {
-
-    public boolean asdf() {
-        return false;
-    }
 
     private Button addButton;
     private Switch switchButton;
@@ -359,8 +355,7 @@ public class ToDoListe extends AppCompatActivity {
         String[] split = date.split("."); //TODO
 
         //chosenDate.set(y, mo, d);
-        Date datetest = new Date(y, mo, d, mHour, mMinute, s);
-        Log.e("year", y + "");
+        Date datetest = new Date(y, mo, d, h, mi, s);
         chosenDate.setTime(dueDate);
         //chosenDate.clear(Calendar.HOUR_OF_DAY);
         //chosenDate.setTime(Calendar.HOUR, mHour);
@@ -371,7 +366,6 @@ public class ToDoListe extends AppCompatActivity {
         ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
                chosenTime.get(Calendar.SECOND), chosenTime.get(Calendar.MINUTE), chosenTime.get(Calendar.HOUR_OF_DAY));
-
 
         //ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
         //chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
@@ -577,7 +571,7 @@ public class ToDoListe extends AppCompatActivity {
 
                 String newName = edit.getText().toString();
 
-                todoDB.updateShopItem(newName,item);
+                todoDB.updateToDoItem(newName,item);
                 todoItemsAdapter.notifyDataSetChanged();
                 updateList();
             }

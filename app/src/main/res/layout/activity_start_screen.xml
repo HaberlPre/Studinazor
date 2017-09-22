@@ -14,16 +14,14 @@
         android:orientation="horizontal">
 
 
-    <Button
+        <Button
             android:id="@+id/StartToNewsfeedButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/newsfeed_string"
-            android:background="#CAE1FF"
+            android:background="@color/StartScreen_NewstickerButton"
             tools:ignore="ButtonStyle,NestedWeights" />
-
-
 
         <Button
             android:id="@+id/StartToEinkaufButton"
@@ -31,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/einkaufsliste_string"
-            android:background="#00C5CD"
+            android:background="@color/StartScreen_EinkaufslisteButton"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
@@ -49,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/todo_liste_string"
-            android:background="#FF4040"
+            android:background="@color/StartScreen_ToDoListeButton"
             tools:ignore="ButtonStyle,NestedWeights" />
 
         <Button
@@ -58,10 +56,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/stundenplan_string"
-            android:background="#104E8B"
+            android:background="@color/StartScreen_StundenplanButton"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
-
-
 
 </LinearLayout>

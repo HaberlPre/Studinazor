@@ -27,8 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/amount"
-            android:inputType="numberDecimal"
-            android:textColorHint="#aaaaaa"/>
+            android:textColorHint="@color/einkaufslisteHintColor"
+            android:inputType="numberDecimal"/>
 
         <Spinner
             android:id="@+id/edit_dialog_spinner"
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/item"
-            android:textColorHint="#aaaaaa"
+            android:textColorHint="@color/einkaufslisteHintColor"
             android:inputType="textCapSentences"/>
 
     </LinearLayout>

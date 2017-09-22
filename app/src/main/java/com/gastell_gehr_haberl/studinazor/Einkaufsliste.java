@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by lucas on 09.08.2017.
@@ -47,32 +46,47 @@ public class Einkaufsliste extends AppCompatActivity {
         initTaskList();
         initDatabase();
         initUI();
-        refreshArrayList();
+        refreshList();
     }
 
 
+    /**
+     * Initiiert die Datenbank
+     */
     private void initDatabase() {
         shopDB = new EinkaufslisteDatabase(this);
         shopDB.open();
     }
 
-    private void refreshArrayList(){
+    /**
+     * Updated die Liste
+     */
+    private void refreshList(){
         ArrayList tempList = shopDB.getAllShopItems();
         shopItems.clear();
         shopItems.addAll(tempList);
         shopItems_adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Initiiert den Inhalt der Liste und führt weiter zum Initiieren des Adapters
+     */
     private void initTaskList() {
         shopItems = new ArrayList<ShopItem>();
         initListAdapter();
     }
 
+    /**
+     * Initiiert das User Interface (Benutzeroberfläche)
+     */
     private void initUI() {
         initTaskButton();
         initListView();
     }
 
+    /**
+     * Initiiert den "Hinzufügen"-Button
+     */
     private void initTaskButton() {
         Button addTaskButton = (Button) findViewById(R.id.add_button);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +97,9 @@ public class Einkaufsliste extends AppCompatActivity {
         });
     }
 
+    /**
+     * Liest die Elemente aus und fügt einen neuen Artikel hinzu
+     */
     private void addInputToList() {
         EditText num = (EditText) findViewById(R.id.item_edit_amount);
         String amount = num.getText().toString();
@@ -110,29 +127,44 @@ public class Einkaufsliste extends AppCompatActivity {
         }
     }
 
+    /**
+     * Initiiert das Listenlayout
+     */
     private void initListView() {
         final ListView list = (ListView) findViewById(R.id.shop_list);
         registerForContextMenu(list);
     }
 
 
+    /**
+     * Initiiert den Adapter
+     */
     private void initListAdapter() {
         ListView list = (ListView) findViewById(R.id.shop_list);
         shopItems_adapter = new EinkaufslisteAdapter(this, shopItems);
         list.setAdapter(shopItems_adapter);
     }
 
+    /**
+     * Fügt einen neuen Artikel hinzu
+     * @param amount
+     * @param unit
+     * @param task
+     */
     private void addNewTask(String amount, String unit, String task) {
         ShopItem newTask = new ShopItem(amount, unit, task);
         shopDB.insertItem(newTask);
-        refreshArrayList();
+        refreshList();
     }
 
-
+    /**
+     * Löscht den Artikel an der gewählten Position
+     * @param position
+     */
     private void removeTaskAtPosition(int position) {
         if (shopItems.get(position) != null) {
             shopDB.removeShopItem(shopItems.get(position));
-            refreshArrayList();
+            refreshList();
         }
     }
 
@@ -169,6 +201,12 @@ public class Einkaufsliste extends AppCompatActivity {
         }
     }
 
+    /**
+     * Erstellt das Context Menü
+     * @param menu
+     * @param v
+     * @param info
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo info){
         super.onCreateContextMenu(menu, v, info);
@@ -177,7 +215,7 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     /**
-     * Menü, welches beim Longklick geöffnet wird
+     * Menü, welches beim Longklick geöffnet wird mit zwei Wahlmöglichkeiten
      * @param item
      * @return Zwei Auswahlmöglichkeiten: Item löschen oder bearbeiten
      */
@@ -224,7 +262,7 @@ public class Einkaufsliste extends AppCompatActivity {
 
                 shopDB.updateShopItem(newAmount,newUnit,newName,item);
                 shopItems_adapter.notifyDataSetChanged();
-                refreshArrayList();
+                refreshList();
 
             }
         }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -237,6 +275,11 @@ public class Einkaufsliste extends AppCompatActivity {
         alert.show();
     }
 
+    /**
+     * Erstellt das Menü in der Actionbar
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_einkaufsliste, menu);
@@ -266,10 +309,13 @@ public class Einkaufsliste extends AppCompatActivity {
         }
     }
 
+    /**
+     * Löscht die ganze Liste
+     */
     private void deleteList(){
         shopDB.removeAllItems();
         shopItems_adapter.notifyDataSetChanged();
-        refreshArrayList();
+        refreshList();
     }
 
     @Override
