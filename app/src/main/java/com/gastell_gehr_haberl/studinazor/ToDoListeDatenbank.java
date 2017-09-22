@@ -30,10 +30,12 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
     public static final String KEY_TASK = "task";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
+    public static final String KEY_BOX = "false";
 
     public static final int COLUMN_TASK_INDEX = 1;
     public static final int COLUMN_DATE_INDEX = 2;
     public static final int COLUMN_TIME_INDEX = 3;
+    public static final int COLUMN_BOX_INDEX = 4;
 
     private ToDoDBOpenHelper dbHelper;
 
@@ -138,7 +140,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
         private static final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID
                 + " integer primary key autoincrement, " + KEY_TASK
-                + " text, " + KEY_DATE + " text, " + KEY_TIME + " text not null);";
+                + " text, " + KEY_DATE + " text, " + KEY_TIME +  " text not null);";
 
         /*private static final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID

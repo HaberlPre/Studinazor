@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class ToDoListeAdapter extends ArrayAdapter<ToDoItem> {
         ToDoItem task = todoList.get(position);
 
         if (task != null) {
+
             TextView textTask = (TextView) v.findViewById(R.id.text_task);
             TextView textDate = (TextView) v.findViewById(R.id.text_date);
             TextView textTime = (TextView) v.findViewById(R.id.text_time);

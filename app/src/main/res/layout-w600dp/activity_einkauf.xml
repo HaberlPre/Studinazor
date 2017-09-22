@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/newsfeed_string"
-                android:background="#CAE1FF"
+                android:background="@color/StartScreen_NewstickerButton"
                 tools:ignore="ButtonStyle,NestedWeights" />
 
 
@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/einkaufsliste_string"
-                android:background="#00C5CD"
+                android:background="@color/StartScreen_EinkaufslisteButton"
                 tools:ignore="ButtonStyle" />
 
         </LinearLayout>
@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/todo_liste_string"
-                android:background="#FF4040"
+                android:background="@color/StartScreen_ToDoListeButton"
                 tools:ignore="ButtonStyle,NestedWeights" />
 
             <Button
@@ -67,7 +67,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/stundenplan_string"
-                android:background="#104E8B"
+                android:background="@color/StartScreen_StundenplanButton"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
 
@@ -81,7 +81,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:background="#fafad2">
+        android:background="@color/einkaufslisteBackground">
 
 
         <TextView
@@ -89,14 +89,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="@string/einkauf_text_wip" />
+            android:text="@string/einkaufsliste_head" />
 
         <Button
             android:id="@+id/add_button"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="@string/add_button"
-            android:background="#ffc125"
+            android:background="@color/einkaufslisteButton"
             android:layout_gravity="right"
             android:layout_margin="10dp"/>
 
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/amount"
                 android:inputType="numberDecimal"
-                android:textColorHint="#aaaaaa"/>
+                android:textColorHint="@color/einkaufslisteHintColor"/>
 
             <Spinner
                 android:id="@+id/item_spinner_unit"
@@ -123,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/item"
-                android:textColorHint="#aaaaaa"
+                android:textColorHint="@color/einkaufslisteHintColor"
                 android:inputType="textCapSentences"/>
 
         </LinearLayout>
