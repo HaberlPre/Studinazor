@@ -22,7 +22,7 @@ import java.util.Locale;
 public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
 
     private static final String DATABASE_NAME = "toDoList.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String DATABASE_TABLE = "todoListItems";
 
@@ -79,10 +79,10 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
                 try {
                     //formattedDate = new SimpleDateFormat("dd.MM.yyyy",
                     //        Locale.GERMAN).parse(date);
-                    formattedDate = DateFormat.getDateInstance(DateFormat.SHORT,
+                    formattedDate = DateFormat.getDateInstance(DateFormat.SHORT, //TODO long?
                             Locale.GERMANY).parse(date);
                     formattedTime = DateFormat.getTimeInstance(DateFormat.LONG,
-                            Locale.GERMANY).parse(time);
+                           Locale.GERMANY).parse(time); //date?
                 } catch(ParseException e) {
                     e.printStackTrace();
                 }
@@ -91,9 +91,11 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
                 Calendar chosenTime = Calendar.getInstance(Locale.GERMAN);
                 chosenTime.setTime(formattedTime);
 
-                items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
-                        chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR),
-                        chosenTime.get(Calendar.SECOND), chosenTime.get(Calendar.MINUTE),chosenTime.get(Calendar.HOUR)));
+                items.add(new ToDoItem(task,
+                                //chosenDate.get(Calendar.SECOND), chosenDate.get(Calendar.MINUTE),chosenDate.get(Calendar.HOUR)),
+                        chosenDate.get(Calendar.DAY_OF_MONTH), chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR),
+                        chosenDate.get(Calendar.SECOND), chosenDate.get(Calendar.MINUTE),chosenDate.get(Calendar.HOUR)));
+                        //chosenTime.get(Calendar.SECOND), chosenTime.get(Calendar.MINUTE),chosenTime.get(Calendar.HOUR)));
                 //items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                 //        chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR)));
 

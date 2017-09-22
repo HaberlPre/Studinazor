@@ -27,6 +27,9 @@
         <activity android:name=".StundenplanMittwoch"></activity>
         <activity android:name=".StundenplanDonnerstag"></activity>
         <activity android:name=".StundenplanFreitag"></activity>
+
+        <receiver android:name="com.gastell_gehr_haberl.studinazor.NotiPublisher"></receiver>
     </application>
+
 
 </manifest>

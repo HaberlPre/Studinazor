@@ -7,4 +7,9 @@
         android:title="@string/newsticker_toggle_links_string"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/newsticker_newspaper"
+        android:title="Zeitung wählen"
+        app:showAsAction="never"/>
+
 </menu>

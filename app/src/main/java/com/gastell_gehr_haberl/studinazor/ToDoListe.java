@@ -1,14 +1,27 @@
 package com.gastell_gehr_haberl.studinazor;
 
+import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DialogFragment;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.text.format.Time;
+import android.util.AndroidException;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,9 +57,13 @@ import java.util.Locale;
 
 public class ToDoListe extends AppCompatActivity {
 
+    public boolean asdf() {
+        return false;
+    }
+
     private Button addButton;
-    private EditText todoText;
     private Switch switchButton;
+    private EditText todoText;
     private LinearLayout dateAndTimeLayout;
     private boolean userHasReminder;
     private ToDoItem userToDoItem;
@@ -55,9 +72,12 @@ public class ToDoListe extends AppCompatActivity {
     private ToDoListeAdapter todoItemsAdapter;
     private ToDoListeDatenbank todoDB;
     private EditText mTimeEditText; //oder textview?
-    private int seconds = 12;
+    private int seconds = 0;
+    private boolean Notifaction = false;
+    private int hourOfDayNoti = 12;
 
-    private int mHour, mMinute;
+    private int mYear, mMonth, mDate, mHour, mMinute;
+    private int tHour, tMinute;
 
     Calendar selecteddate;
 
@@ -92,7 +112,7 @@ public class ToDoListe extends AppCompatActivity {
 
     private void initUI() {
         initTaskButton();
-        //switchButton(); //TODO wenn aus, geht add button nicht (passiert nix); an: crashed weil timepicker
+        switchButton();
         initListView();
         initDateField();
         //initTimeField();
@@ -114,6 +134,7 @@ public class ToDoListe extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         mHour = hourOfDay;
                         mMinute = minute;
+
                         mTimeEditText.setText(hourOfDay+":"+minute+":"+ seconds);
                         /*GregorianCalendar t = new GregorianCalendar(hourOfDay, minute, 12); //(hour, minute);
                         long timeinmilis = 0;
@@ -162,31 +183,139 @@ public class ToDoListe extends AppCompatActivity {
         String task = todoText.getText().toString();
         String date = dateEdit.getText().toString();
         String time = timeEdit.getText().toString();
+
         if (!task.equals("") && !date.equals("") && !time.equals("")) {
         //if (!task.equals("") && !date.equals("")) {
             todoText.setText("");
             dateEdit.setText("");
             timeEdit.setText("");
             addNewTask(task, date, time);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Notifaction) {
+
+                //createNotification("Studinazor", task, date); //noti geht, aber sofort
+                //String content = getContent();
+                Notification notification = getNoti(task);
+                scheduleNoti(notification, getTime()); //nix passiert(mit noti)
+            }
             //addNewTask(task, date);
         }
     }
 
+    private void scheduleNoti(Notification notification, long time) {
+        Intent notiIntent = new Intent(this, NotiPublisher.class);
+        notiIntent.putExtra(NotiPublisher.NOTI_ID, 1);
+        notiIntent.putExtra(NotiPublisher.NOTI, notification);
+        PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, notiIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        //alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, pIntent);
+        //alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+5000, pIntent);
+        alarm.set(AlarmManager.RTC_WAKEUP, time, pIntent); //TODO mathe
+        //datum in zukunft - sys currenttime -> ersetzt realtime
+    }
+
+    private long getTime() {
+        EditText dateEdit = (EditText) findViewById(R.id.notification_date);
+        String date = dateEdit.getText().toString();
+        Date dueDate = getDateFromString(date);
+        GregorianCalendar chosenDate = new GregorianCalendar();
+        chosenDate.setTime(dueDate);
+        int timeOfDay = hourOfDayNoti*60*60*1000;
+        long notiTime = chosenDate.getTimeInMillis()+timeOfDay;
+        return notiTime;
+    }
+
+    private String getContent() {
+        todoText = (EditText) findViewById(R.id.todo_text_task);
+        String task = todoText.getText().toString();
+        return task;
+    }
+
+    private Notification getNoti(String content) {
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle("Studinazor");
+        builder.setContentText(content);
+        builder.setSmallIcon(R.drawable.ic_today_black_48dp);
+        return builder.build();
+    }
+
     private void switchButton() {
         switchButton = (Switch) findViewById(R.id.notification_switch);
-        dateAndTimeLayout = (LinearLayout) findViewById(R.id.todoDateAndTimeLayout);
-        dateAndTimeLayout.setVisibility(View.INVISIBLE);
         switchButton.setChecked(false);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    dateAndTimeLayout.setVisibility(View.VISIBLE);
+                    Notifaction = true;
                 } else {
-                    dateAndTimeLayout.setVisibility(View.INVISIBLE);
+                    Notifaction = false;
                 }
             }
         });
+    }
+
+    private void createNotification(String title, String text, String date) {
+    //private Notification createNotification(String title, String text, String date) {
+        /*todoText = (EditText) findViewById(R.id.todo_text_task);
+        EditText dateEdit = (EditText) findViewById(R.id.notification_date);
+        String date = dateEdit.getText().toString();
+        Date dueDate = getDateFromString(date);
+        GregorianCalendar chosenDate = new GregorianCalendar();
+        chosenDate.setTime(dueDate);*/
+
+        /*Notification.Builder mBuilder =
+                new Notification.Builder(this).setContentTitle(getString(R.string.app_name)).setContentText(title)
+                        .setStyle(new Notification.BigTextStyle().bigText(text))
+                        .setAutoCancel(true);
+        Intent intent = new Intent(this, NotificationReceiverActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+        mBuilder.setContentIntent(pIntent);
+        NotificationManager mNotiMan = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotiMan.notify(0, mBuilder.build());*/
+
+        /*Intent intent = new Intent(this, NotificationReceiverActivity.class);
+        //PendingIntent pIntent = PendingIntent.getActivity(this,(int) chosenDate.getTimeInMillis(), intent, 0);
+        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            Notification noti = new Notification.Builder(this).setContentTitle(title).setContentText(text)
+                    .setContentIntent(pIntent).build();
+            NotificationManager notiMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            noti.flags |= Notification.FLAG_AUTO_CANCEL; //?
+            notiMan.notify(0, noti); //?
+        }*/
+
+        Date dueDate = getDateFromString(date);
+        //Intent intent = new Intent(this, ToDoListe.class);
+        GregorianCalendar chosenDate = new GregorianCalendar();
+        chosenDate.setTime(dueDate);
+        int timeOfDay = hourOfDayNoti*60*60*1000;
+        //PendingIntent pIntent = PendingIntent.getActivity(this,(int) chosenDate.getTimeInMillis()+timeOfDay, intent, 0);
+
+        NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                //.setContentTitle(title).setContentText(text).setContentIntent(pIntent).setAutoCancel(true)
+                .setContentTitle(title).setContentText(text).setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_today_black_48dp);//https://material.io/icons/#ic_today
+
+        Intent intent = new Intent(this, NotiPublisher.class);
+        intent.putExtra(NotiPublisher.NOTI_ID, 1);
+        intent.putExtra(NotiPublisher.NOTI, (Parcelable) mBuilder.build());
+        //PendingIntent pIntent = PendingIntent.getActivity(this,(int) chosenDate.getTimeInMillis()+timeOfDay, intent, 0);
+        PendingIntent pIntent = PendingIntent.getActivity(this,(int) System.currentTimeMillis()+5000, intent, 0);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(ToDoListe.class);
+        stackBuilder.addNextIntent(intent);
+        //PendingIntent pIntent  = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        //PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+
+        mBuilder.setContentIntent(pIntent);
+        NotificationManager mNotiMan = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotiMan.notify(42, mBuilder.build());
+        //return mBuilder.build();
+
+        //AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        //alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, chosenDate.getTimeInMillis()+timeOfDay, pIntent);
     }
 
 
@@ -227,9 +356,14 @@ public class ToDoListe extends AppCompatActivity {
         int h = dueTime.getHours();
         int mi = dueTime.getMinutes();
         int s = dueTime.getSeconds();
+        String[] split = date.split("."); //TODO
+
         //chosenDate.set(y, mo, d);
-        Date datetest = new Date(y, mo, d, h, mi, s);
+        Date datetest = new Date(y, mo, d, mHour, mMinute, s);
+        Log.e("year", y + "");
         chosenDate.setTime(dueDate);
+        //chosenDate.clear(Calendar.HOUR_OF_DAY);
+        //chosenDate.setTime(Calendar.HOUR, mHour);
         //chosenTime.set(y, mo, d, h, mi);
         chosenTime.setTime(datetest);
 
@@ -237,6 +371,7 @@ public class ToDoListe extends AppCompatActivity {
         ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
                chosenTime.get(Calendar.SECOND), chosenTime.get(Calendar.MINUTE), chosenTime.get(Calendar.HOUR_OF_DAY));
+
 
         //ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
         //chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));

@@ -17,7 +17,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
     private boolean hasReminder;
 
 
-    public ToDoItem(String name, int day, int month, int year, int hourOfDay, int minute, int seconds) {
+    public ToDoItem(String name, int day, int month, int year, int seconds, int minute, int hourOfDay) {
         this.name = name;
         this.date = new GregorianCalendar(year, month, day);
         //this.date = new GregorianCalendar(year, month, day, hourOfDay, minute, seconds);
@@ -34,6 +34,8 @@ public class ToDoItem implements Comparable<ToDoItem> {
         this.name = name;
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -44,7 +46,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
 
     public String getFormattedDate() {
-        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, //TODO long?
                 Locale.GERMANY);
         return df.format(date.getTime());
     }
@@ -53,6 +55,8 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
         DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG,
                 Locale.GERMANY);
+        //return df.format(date.getTime());
+
         return df.format(time.getTime());
     }
 
