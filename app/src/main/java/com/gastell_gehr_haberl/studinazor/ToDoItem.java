@@ -15,15 +15,12 @@ public class ToDoItem implements Comparable<ToDoItem> {
     private String dateString;
     private GregorianCalendar time;
     private String timeString;
-    private boolean hasReminder;
 
 
     public ToDoItem(String name, int day, int month, int year, int seconds, int minute, int hourOfDay) {
         this.name = name;
         this.date = new GregorianCalendar(year, month, day);
-        //this.date = new GregorianCalendar(year, month, day, hourOfDay, minute, seconds);
         this.time = new GregorianCalendar(hourOfDay, minute, seconds);
-        //this.time = ""+hourOfDay+":"+minute;
     }
 
     public ToDoItem(String name, String date, String time) {
@@ -49,36 +46,14 @@ public class ToDoItem implements Comparable<ToDoItem> {
         this.name = name;
     }
 
-
     public String getFormattedDate() {
-        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, //TODO long?
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
                 Locale.GERMANY);
         return df.format(date.getTime());
     }
 
-    public String getFormattedTime() {
-
-        DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG,
-                Locale.GERMANY);
-        //return df.format(date.getTime());
-
-        return df.format(time.getTime());
-    }
-
     public Date getDueDate() {
         return date.getTime();
-    }
-
-    public Date getDueTime() {
-        return time.getTime();
-    }
-
-    public boolean hasReminder() {
-        return hasReminder;
-    }
-
-    public void setHasReminder(boolean hasReminder) {
-        this.hasReminder = hasReminder;
     }
 
     @Override
@@ -86,16 +61,10 @@ public class ToDoItem implements Comparable<ToDoItem> {
         return getDueDate().compareTo(newItem.getDueDate());
     }
 
-    @Override //crashed die app überraschenderweise nicht
+    @Override
     public String toString() {
         return "Name: " + getName() + ", Date: " + getFormattedDate() + ", Time: ";
     }
 
-    /*
-    @Override
-    public String toString() {
-        return "Name: " + getName() + ", Date: " + getFormattedDate();
-    }
-    */
 }
 

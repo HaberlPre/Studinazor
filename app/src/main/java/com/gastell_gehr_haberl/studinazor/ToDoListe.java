@@ -3,9 +3,7 @@ package com.gastell_gehr_haberl.studinazor;
 import android.app.AlarmManager;
 import android.app.DialogFragment;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,27 +14,22 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -56,28 +49,21 @@ public class ToDoListe extends AppCompatActivity {
     private EditText todoText;
     private EditText dateEdit;
     private EditText timeEdit;
-    private LinearLayout dateAndTimeLayout;
-    private boolean userHasReminder;
-    private ToDoItem userToDoItem;
-    private Date userReminderDate;
     private ArrayList<ToDoItem> items;
     private ToDoListeAdapter todoItemsAdapter;
     private ToDoListeDatenbank todoDB;
-    private EditText mTimeEditText; //oder textview?
-    private int seconds = 0;
+    private EditText mTimeEditText;
     private boolean Notifaction = false;
-    private int hourOfDayNoti = 12;
 
-    private int mYear, mMonth, mDate, mHour, mMinute;
+    private int mHour, mMinute;
     private int tHour, tMinute;
 
-    Calendar selecteddate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //was macht die fkt? antworten bitte an lucas
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         enableStartScreenButton();
         initTaskList();
         initDataBase();
@@ -107,13 +93,11 @@ public class ToDoListe extends AppCompatActivity {
         switchButton();
         initListView();
         initDateField();
-        //initTimeField();
         initTimeEditText();
     }
 
     private void initTimeEditText() {
         mTimeEditText = (EditText) findViewById(R.id.notification_time);
-        //TextView textView = (TextView) getActivity().findViewById(R.id.notification_date); //?!? vom chosendate
         mTimeEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,33 +128,11 @@ public class ToDoListe extends AppCompatActivity {
                         }
 
                         mTimeEditText.setText(hourString+":"+minuteString);
-                        /*GregorianCalendar t = new GregorianCalendar(hourOfDay, minute, 12); //(hour, minute);
-                        long timeinmilis = 0;
-                        timeinmilis += minute*60*1000;
-                        timeinmilis += hourOfDay*3600*1000;
-                        Calendar c1 = Calendar.getInstance();
-                        c1.setTimeInMillis(timeinmilis);
-                        DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG,
-                                Locale.GERMANY);
-                        //String timeString = df.format(c1.getTimeInMillis());
-                        String timeString = (""+hourOfDay+":"+minute);
-                        //mTimeEditText.setText(timeString);*/
                     }
                 }, mHour, mMinute, true);
-                //mTimePicker.setTitle("Select Time"); // //?
                 mTimePicker.show();
             }
         });
-        //idee: textview machen wie chosendate fragment, meine implementieren (=hier) crashed to do bei aufruf
-        /*
-                TextView textView = (TextView) getActivity().findViewById(R.id.notification_time);
-        ///*
-        GregorianCalendar time = new GregorianCalendar(hourOfDay, minute, 0); //(hour, minute);
-        DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG,
-                Locale.GERMANY);
-        String timeString = df.format(time.getTime());
-        textView.setText(timeString);
-         */
     }
 
 
@@ -194,15 +156,10 @@ public class ToDoListe extends AppCompatActivity {
         String time = timeEdit.getText().toString();
 
         if (!task.equals("") && !date.equals("") && !time.equals("")) {
-        //if (!task.equals("") && !date.equals("")) {
             addNewTask(task, date, time);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Notifaction) {
-
-                //createNotification("Studinazor", task, date); //noti geht, aber sofort
-                //String content = getContent();
-                scheduleNoti(getNoti(task), getTime()); //nix passiert(mit noti)
+                scheduleNoti(getNoti(task), getTime());
             }
-            //addNewTask(task, date);
             todoText.setText("");
             dateEdit.setText("");
             timeEdit.setText("");
@@ -216,55 +173,39 @@ public class ToDoListe extends AppCompatActivity {
         PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, notiIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        //alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, pIntent);
         alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+time, pIntent);
-        //alarm.set(AlarmManager.RTC_WAKEUP, time, pIntent); //TODO mathe
-        //datum in zukunft - sys currenttime -> ersetzt realtime
     }
 
     private long getTime() {
         dateEdit = (EditText) findViewById(R.id.notification_date);
         timeEdit = (EditText) findViewById(R.id.notification_time);
         String date = dateEdit.getText().toString();
-        String time = timeEdit.getText().toString();
-        /*String[] dateInts = date.split(".");
-        int day = Integer.valueOf(dateInts[0]); //TODO crashed die app?!?
-        int month = Integer.valueOf(dateInts[1]);
-        int year = Integer.valueOf(dateInts[2]);
-        String[] timeInts = time.split(":");
-        int hour = Integer.valueOf(timeInts[0]);
-        int min = Integer.valueOf(timeInts[1]);*/
 
-        //Calendar chosenDate = new GregorianCalendar();
-        //chosenDate.set(year, month, day, hour, min);
         Date dueDate = getDateFromString(date);
         GregorianCalendar chosenDate = new GregorianCalendar();
         chosenDate.setTime(dueDate);
         chosenDate.set(Calendar.HOUR_OF_DAY, tHour);
         chosenDate.set(Calendar.MINUTE, tMinute);
-        //neu
+
         Date currDate = new Date();
         GregorianCalendar currentDate = new GregorianCalendar();
         currentDate.setTime(currDate);
-        //int timeOfDay = hourOfDayNoti*60*60*1000;
-        //long notiTime = chosenDate.getTimeInMillis() - currentDate.getTimeInMillis();
-        //long notiTime = chosenDate.getTimeInMillis() - SystemClock.elapsedRealtime();
+
         long notiTime = chosenDate.getTimeInMillis() - System.currentTimeMillis();
-        //long notiTime = chosenDate.getTimeInMillis();
         return notiTime;
     }
 
-    private String getContent() {
-        todoText = (EditText) findViewById(R.id.todo_text_task);
-        String task = todoText.getText().toString();
-        return task;
-    }
-
     private Notification getNoti(String content) {
+        Intent i = new Intent(this, ToDoListe.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        //PendingIntent pIntent = TaskStackBuilder.create(ToDoListe.this).addNextIntent(i).addParentStack(StartScreen.class).getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        //todo startscreen in backtast
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle("Studinazor");
         builder.setContentText(content);
         builder.setSmallIcon(R.drawable.ic_today_black_48dp);
+        builder.setContentIntent(pIntent);
+        builder.setAutoCancel(true);
         return builder.build();
     }
 
@@ -279,79 +220,8 @@ public class ToDoListe extends AppCompatActivity {
         });
     }
 
-    private void createNotification(String title, String text, String date) {
-    //private Notification createNotification(String title, String text, String date) {
-        /*todoText = (EditText) findViewById(R.id.todo_text_task);
-        EditText dateEdit = (EditText) findViewById(R.id.notification_date);
-        String date = dateEdit.getText().toString();
-        Date dueDate = getDateFromString(date);
-        GregorianCalendar chosenDate = new GregorianCalendar();
-        chosenDate.setTime(dueDate);*/
-
-        /*Notification.Builder mBuilder =
-                new Notification.Builder(this).setContentTitle(getString(R.string.app_name)).setContentText(title)
-                        .setStyle(new Notification.BigTextStyle().bigText(text))
-                        .setAutoCancel(true);
-        Intent intent = new Intent(this, NotificationReceiverActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
-        mBuilder.setContentIntent(pIntent);
-        NotificationManager mNotiMan = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotiMan.notify(0, mBuilder.build());*/
-
-        /*Intent intent = new Intent(this, NotificationReceiverActivity.class);
-        //PendingIntent pIntent = PendingIntent.getActivity(this,(int) chosenDate.getTimeInMillis(), intent, 0);
-        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            Notification noti = new Notification.Builder(this).setContentTitle(title).setContentText(text)
-                    .setContentIntent(pIntent).build();
-            NotificationManager notiMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            noti.flags |= Notification.FLAG_AUTO_CANCEL; //?
-            notiMan.notify(0, noti); //?
-        }*/
-
-        Date dueDate = getDateFromString(date);
-        //Intent intent = new Intent(this, ToDoListe.class);
-        GregorianCalendar chosenDate = new GregorianCalendar();
-        chosenDate.setTime(dueDate);
-        int timeOfDay = hourOfDayNoti*60*60*1000;
-        //PendingIntent pIntent = PendingIntent.getActivity(this,(int) chosenDate.getTimeInMillis()+timeOfDay, intent, 0);
-
-        NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                //.setContentTitle(title).setContentText(text).setContentIntent(pIntent).setAutoCancel(true)
-                .setContentTitle(title).setContentText(text).setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_today_black_48dp);//https://material.io/icons/#ic_today
-
-        Intent intent = new Intent(this, NotiPublisher.class);
-        intent.putExtra(NotiPublisher.NOTI_ID, 1);
-        intent.putExtra(NotiPublisher.NOTI, mBuilder.build());
-        //PendingIntent pIntent = PendingIntent.getActivity(this,(int) chosenDate.getTimeInMillis()+timeOfDay, intent, 0);
-        PendingIntent pIntent = PendingIntent.getActivity(this,(int) System.currentTimeMillis()+5000, intent, 0);
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(ToDoListe.class);
-        stackBuilder.addNextIntent(intent);
-        //PendingIntent pIntent  = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        //PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
-
-        mBuilder.setContentIntent(pIntent);
-        NotificationManager mNotiMan = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        mNotiMan.notify(42, mBuilder.build());
-        //return mBuilder.build();
-
-        //AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        //alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, chosenDate.getTimeInMillis()+timeOfDay, pIntent);
-    }
-
-
-    private void hideKeyBoard(EditText editText) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-    }
-
     private void initListView() {
         ListView list = (ListView) findViewById(R.id.todo_list);
-        //registerForContextMenu(list);
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
@@ -369,39 +239,7 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void addNewTask(String task, String date, String time) {
-    //private void addNewTask(String task, String date) {
-    /*    Date dueDate = getDateFromString(date);
-        Date dueTime = getTimeFromString(time);
-        GregorianCalendar chosenDate = new GregorianCalendar();
-        GregorianCalendar chosenTime = new GregorianCalendar();
-        //Calendar chosenTime = Calendar.getInstance();
-        int y = dueDate.getYear();
-        int mo = dueDate.getMonth();
-        int d = dueDate.getDay();
-        int h = dueTime.getHours();
-        int mi = dueTime.getMinutes();
-        int s = dueTime.getSeconds();
-        String[] split = date.split("."); //TODO
-
-        //chosenDate.set(y, mo, d);
-        Date datetest = new Date(y, mo, d, h, mi, s);
-        chosenDate.setTime(dueDate);
-        //chosenDate.clear(Calendar.HOUR_OF_DAY);
-        //chosenDate.setTime(Calendar.HOUR, mHour);
-        //chosenTime.set(y, mo, d, h, mi);
-        chosenTime.setTime(datetest);
-
-
-        ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
-               chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
-               chosenTime.get(Calendar.SECOND), chosenTime.get(Calendar.MINUTE), chosenTime.get(Calendar.HOUR_OF_DAY));
-               */
-
-        //ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
-        //chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
-
         ToDoItem newTask = new ToDoItem(task, date, time);
-
         todoDB.insertItem(newTask);
         updateList();
     }
@@ -417,17 +255,6 @@ public class ToDoListe extends AppCompatActivity {
 
     }
 
-    private void initTimeField() {
-        EditText timeEdit = (EditText) findViewById(R.id.notification_time);
-        timeEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                showTimePickerDialog();
-            }
-        });
-
-    }
-
 
     private void removeTaskAtPosition(int position) {
         if (items.get(position) != null) {
@@ -437,48 +264,8 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     public void showDatePickerDialog() {
-        ///*
         DialogFragment chosenDate = new ToDoListeChosenDate();
-        chosenDate.show(getFragmentManager(), "datePicker"); //string macht nichts
-        //*/
-        /*
-        final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog startdatepicker = new DatePickerDialog(this,
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-
-                        final Calendar c = Calendar.getInstance();
-                        c.set(year, monthOfYear, dayOfMonth);
-                        selecteddate = c;
-                    }
-                }, mYear, mMonth, mDay);
-        startdatepicker.show();*/
-    }
-
-    public void showTimePickerDialog() {
-        ///*
-        DialogFragment chosenTime = new ToDoListeChosenTime();
-        chosenTime.show(getFragmentManager(), "timePicker"); //was macht der string? ^ siehe oben
-        //*/
-        /*
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                new TimePickerDialog.OnTimeSetListener() {
-
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        selecteddate.set(selecteddate.get(Calendar.YEAR), selecteddate.get(Calendar.MONTH), selecteddate.get(Calendar.DAY_OF_MONTH), hourOfDay, minute);
-                    }
-                }
-                , 10, 10, false
-
-        );
-        timePickerDialog.show();*/
+        chosenDate.show(getFragmentManager(), "datePicker");
     }
 
     private Date getDateFromString(String dateString) {
@@ -487,17 +274,6 @@ public class ToDoListe extends AppCompatActivity {
         try {
             return df.parse(dateString);
         } catch (ParseException e) {
-            return new Date();
-        }
-    }
-
-    private Date getTimeFromString(String timeString) {
-        //DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG, //Long/Short
-        //        Locale.GERMANY);
-        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-        try {
-            return df.parse(timeString);
-        } catch(ParseException e) {
             return new Date();
         }
     }
@@ -595,7 +371,6 @@ public class ToDoListe extends AppCompatActivity {
         alertDialog.setView(dialogView);
         final EditText edit = (EditText) dialogView.findViewById(R.id.edit_dialog_input);
         edit.setText(item.getName());
-        final TextView message = (TextView) dialogView.findViewById(R.id.edit_old_task);
 
         alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
 
