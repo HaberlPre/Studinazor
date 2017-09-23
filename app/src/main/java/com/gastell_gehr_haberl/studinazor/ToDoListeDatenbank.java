@@ -21,6 +21,8 @@ import java.util.Locale;
 
 public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
 
+
+    //Konstanten
     private static final String DATABASE_NAME = "toDoList.db";
     private static final int DATABASE_VERSION = 2;
 
@@ -47,9 +49,10 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
 
     public static final int COLUMN_TIME_INDEX = 5;
 
+    //Variablen
     private ToDoDBOpenHelper dbHelper;
-
     private SQLiteDatabase db;
+
 
     public ToDoListeDatenbank(Context context) {
         dbHelper = new ToDoDBOpenHelper(context, DATABASE_NAME, null,
@@ -69,6 +72,11 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
         db.close();
     }
 
+    /**
+     * Fügt eine neue Aufgabe hinzu
+     * @param item
+     * @return
+     */
     public long insertItem(ToDoItem item) {
         ContentValues newItems = new ContentValues();
         newItems.put(KEY_TASK, item.getName());
@@ -82,6 +90,47 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
         return db.insert(DATABASE_TABLE, null, newItems);
     }
 
+    /**
+     * Löscht eine Aufgabe aus der Liste
+     * @param item
+     */
+    public void removeToDoItem(ToDoItem item) {
+
+        String toDelete = KEY_TASK + "=?";
+        String[] deleteArguments = new String[]{item.getName()};
+        db.delete(DATABASE_TABLE, toDelete, deleteArguments);
+
+    }
+
+    /**
+     * Löscht alle Aufgaben aus der Liste
+     */
+    public void removeAllItems(){
+        db =  dbHelper.getWritableDatabase();
+        db.delete(DATABASE_TABLE, null, null);
+    }
+
+    /**
+     * Überarbeitet die Aufgabe und speicher sie neu
+     * @param name
+     * @param item
+     */
+    public void updateToDoItem(String name, ToDoItem item){
+        db = dbHelper.getWritableDatabase();
+        //the new values
+        ContentValues newValues = new ContentValues();
+        newValues.put(KEY_TASK,name);
+        //which row should be updated (the ? will be the item.getName()-Argument)
+        String toUpdate = KEY_TASK + "=?";
+        String[] updateArgument = new String[]{item.getName()};
+
+        db.update(DATABASE_TABLE, newValues, toUpdate, updateArgument);
+    }
+
+    /**
+     * Gibt alle Aufgaben in einer Liste zurück die gespeichert wurden
+     * @return Liste mit den Artikeln
+     */
     public ArrayList<ToDoItem> getAllToDoItems() {
         ArrayList<ToDoItem> items = new ArrayList<ToDoItem>();
         //Cursor cursor = db.query(DATABASE_TABLE, new String[] {KEY_ID, KEY_TASK, KEY_DATE, KEY_TIME}, null, null, null, null, null);
@@ -110,44 +159,24 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
                 items.add(new ToDoItem(task, chosenDate.get(Calendar.YEAR), chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.DAY_OF_MONTH),
                         Integer.valueOf(hour), Integer.valueOf(minute), time));
 
-                //items.add(new ToDoItem(task, date, time));
             } while (cursor.moveToNext());
         }
         return items;
     }
 
-    public void removeToDoItem(ToDoItem item) {
-
-        String toDelete = KEY_TASK + "=?";
-        String[] deleteArguments = new String[]{item.getName()};
-        db.delete(DATABASE_TABLE, toDelete, deleteArguments);
-
-    }
-
-
-    //Neue Version, alles löschen und bearbeiten
-    public void removeAllItems(){
-        db =  dbHelper.getWritableDatabase();
-        db.delete(DATABASE_TABLE, null, null);
-    }
-
-    public void updateToDoItem(String name, ToDoItem item){
-        db = dbHelper.getWritableDatabase();
-        //the new values
-        ContentValues newValues = new ContentValues();
-        newValues.put(KEY_TASK,name);
-        //which row should be updated (the ? will be the item.getName()-Argument)
-        String toUpdate = KEY_TASK + "=?";
-        String[] updateArgument = new String[]{item.getName()};
-
-        db.update(DATABASE_TABLE, newValues, toUpdate, updateArgument);
-    }
-
+    /**
+     * Vergleicht die Einträge miteinadern
+     * @param o
+     * @return
+     */
     @Override
     public int compareTo(@NonNull ToDoListeDatenbank o) {
         return 0;
     }
 
+    /**
+     * Hilfsklasse für die Datenbank
+     */
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {
         private static final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID

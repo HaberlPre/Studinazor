@@ -44,6 +44,7 @@ import java.util.Locale;
 
 public class ToDoListe extends AppCompatActivity {
 
+    //Variablen
     private Button addButton;
     private Switch switchButton;
     private EditText todoText;
@@ -71,11 +72,17 @@ public class ToDoListe extends AppCompatActivity {
         updateList();
     }
 
+    /**
+     * Initiiert die Datenbank
+     */
     private void initDataBase() {
         todoDB = new ToDoListeDatenbank(this);
         todoDB.open();
     }
 
+    /**
+     * Updated die Liste
+     */
     private void updateList() {
         ArrayList tempList = todoDB.getAllToDoItems();
         items.clear();
@@ -83,11 +90,17 @@ public class ToDoListe extends AppCompatActivity {
         todoItemsAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Initiiert den Inhalt der Liste und führt weiter zum Initiieren des Adapters
+     */
     private void initTaskList() {
         items = new ArrayList<ToDoItem>();
         initListAdapter();
     }
 
+    /**
+     * Initiiert das User Interface (Benutzeroberfläche)
+     */
     private void initUI() {
         initTaskButton();
         switchButton();
@@ -96,6 +109,9 @@ public class ToDoListe extends AppCompatActivity {
         initTimeEditText();
     }
 
+    /**
+     * Initiiert das Feld in dem das Datum eingegeben/gewählt werden kann
+     */
     private void initTimeEditText() {
         mTimeEditText = (EditText) findViewById(R.id.notification_time);
         mTimeEditText.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +152,9 @@ public class ToDoListe extends AppCompatActivity {
     }
 
 
+    /**
+     * Initiiert den Hinzufügen-("+")-Button
+     */
     private void initTaskButton() {
         addButton = (Button) findViewById(R.id.todo_text_button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +165,11 @@ public class ToDoListe extends AppCompatActivity {
         });
     }
 
+    /**
+     * Methode die aufgerufen wird wenn der Button gedrückt wurde:
+     * Liest alle Felder aus, fügt sie der Liste hinzu, frägt ab ob eine Erinnerung eingestellt wurde
+     * und setzt zuletzt die Felder wieder auf leer.
+     */
     private void buttonClicked() {
 
         todoText = (EditText) findViewById(R.id.todo_text_task);
@@ -166,6 +190,11 @@ public class ToDoListe extends AppCompatActivity {
         }
     }
 
+    /**
+     * Verschiebt die Erinnerung bis auf 12 Uhr mittags
+     * @param notification
+     * @param time
+     */
     private void scheduleNoti(Notification notification, long time) {
         Intent notiIntent = new Intent(this, NotiPublisher.class);
         notiIntent.putExtra(NotiPublisher.NOTI_ID, 1);
@@ -176,6 +205,10 @@ public class ToDoListe extends AppCompatActivity {
         alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+time, pIntent);
     }
 
+    /**
+     * Berechnet die Zeit wie lange die Notification warten muss, bis sie erscheint
+     * @return die Zeit in Millisekunden
+     */
     private long getTime() {
         dateEdit = (EditText) findViewById(R.id.notification_date);
         timeEdit = (EditText) findViewById(R.id.notification_time);
@@ -195,6 +228,11 @@ public class ToDoListe extends AppCompatActivity {
         return notiTime;
     }
 
+    /**
+     * Erstellt die Notification
+     * @param content
+     * @return die Notification
+     */
     private Notification getNoti(String content) {
         Intent i = new Intent(this, ToDoListe.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -209,6 +247,9 @@ public class ToDoListe extends AppCompatActivity {
         return builder.build();
     }
 
+    /**
+     * Switch-Button der kontrolliert ob der Benutzer eine Erinnerung haben will oder nicht
+     */
     private void switchButton() {
         switchButton = (Switch) findViewById(R.id.notification_switch);
         switchButton.setChecked(false);
@@ -220,24 +261,29 @@ public class ToDoListe extends AppCompatActivity {
         });
     }
 
+    /**
+     * Intiiert das Listenlayout
+     */
     private void initListView() {
         ListView list = (ListView) findViewById(R.id.todo_list);
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                removeTaskAtPosition(position);
-                return true;
-            }
-        });
+        registerForContextMenu(list);
     }
 
+    /**
+     * Initiiert den Adapter
+     */
     private void initListAdapter() {
         ListView list = (ListView) findViewById(R.id.todo_list);
         todoItemsAdapter = new ToDoListeAdapter(this, items);
         list.setAdapter(todoItemsAdapter);
     }
 
+    /**
+     * Fügt eine neue Aufgabe hinzu
+     * @param task
+     * @param date
+     * @param time
+     */
     private void addNewTask(String task, String date, String time, int hour, int minute) {
         Date dueDate = getDateFromString(date);
         Calendar c = new GregorianCalendar();
@@ -246,11 +292,13 @@ public class ToDoListe extends AppCompatActivity {
         ToDoItem newTask = new ToDoItem(task, c.get(Calendar.YEAR), c.get(Calendar.MONTH),
                 c.get(Calendar.DAY_OF_MONTH), hour, minute, time);
 
-        //ToDoItem newTask = new ToDoItem(task, date, time);
         todoDB.insertItem(newTask);
         updateList();
     }
 
+    /**
+     * Initiiert das Feld, in welchem man das Datum auswählen in einem Kalender auswählen kann
+     */
     private void initDateField() {
         EditText dateEdit = (EditText) findViewById(R.id.notification_date);
         dateEdit.setOnClickListener(new View.OnClickListener() {
@@ -262,7 +310,10 @@ public class ToDoListe extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Löscht die Aufgabe an der gewählten Position
+     * @param position
+     */
     private void removeTaskAtPosition(int position) {
         if (items.get(position) != null) {
             todoDB.removeToDoItem(items.get(position));
@@ -270,11 +321,19 @@ public class ToDoListe extends AppCompatActivity {
         }
     }
 
+    /**
+     * Öffnet den Kalender zum auswählen des Datums
+     */
     public void showDatePickerDialog() {
         DialogFragment chosenDate = new ToDoListeChosenDate();
         chosenDate.show(getFragmentManager(), "datePicker");
     }
 
+    /**
+     * Extrahiert das Datum von dem übergebenen String
+     * @param dateString
+     * @return das Datum im Datumformat xx.xx.xxxx
+     */
     private Date getDateFromString(String dateString) {
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
                 Locale.GERMANY);
@@ -285,7 +344,131 @@ public class ToDoListe extends AppCompatActivity {
         }
     }
 
+    /**
+     * Erstellt das Context Menü
+     * @param menu
+     * @param v
+     * @param menuInfo
+     */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_todoliste_context, menu);
+    }
 
+    /**
+     * Menü, welches beim Longklick geöffnet wird mit zwei Wahlmöglichkeiten
+     * @param item
+     * @return Zwei Auswahlmöglichkeiten: Item löschen oder bearbeiten
+     */
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo adapterInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = (int) adapterInfo.id;
+
+        switch(item.getItemId()) {
+            case R.id.menu_delete_task:
+                removeTaskAtPosition(position);
+                break;
+            case R.id.menu_edit_task:
+                createEdit(items.get(position));
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    /**
+     * Öffnet Fenster zum Bearbeiten des Eintrags
+     * @param item
+     */
+    public void createEdit(final ToDoItem item) {
+        LayoutInflater inflater = LayoutInflater.from(ToDoListe.this);
+        View dialogView = inflater.inflate(R.layout.todoliste_context, null);
+        AlertDialog.Builder alertDialog =  new AlertDialog.Builder(ToDoListe.this);
+        alertDialog.setView(dialogView);
+        final EditText edit = (EditText) dialogView.findViewById(R.id.edit_dialog_input);
+        edit.setText(item.getName());
+
+        alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+
+                String newName = edit.getText().toString();
+
+                todoDB.updateToDoItem(newName,item);
+                todoItemsAdapter.notifyDataSetChanged();
+                updateList();
+            }
+        }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alert = alertDialog.create();
+        alert.show();
+
+    }
+
+    /**
+     * Erstellt das Menü in der Actionbar
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_todoliste, menu);
+        return true;
+    }
+
+    /**
+     * Menü in der Actionbar
+     * @param item
+     * @return Welche Aktion ausgelöst werden soll: Entweder Zurück-Pfeil oder Löschen der Liste
+     *
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_todo_sort:
+                sortList();
+                return true;
+            case R.id.menu_delete_all:
+                deleteAll();
+                return true;
+            case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(), StartScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * Sortiert die Liste
+     */
+    private void sortList() {
+        Collections.sort(items);
+        todoItemsAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Löscht die ganze Liste
+     */
+    private void deleteAll() {
+        todoDB.removeAllItems();
+        todoItemsAdapter.notifyDataSetChanged();
+        updateList();
+    }
+
+    /**
+     * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
+     */
     private void enableStartScreenButton() {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -317,103 +500,9 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_todoliste, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_todo_sort:
-                sortList();
-                return true;
-            case R.id.menu_delete_all:
-                deleteAll();
-                return true;
-            case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(), StartScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("EXIT", true);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-
-        }
-
-    }
-
-    private void sortList() {
-        Collections.sort(items);
-        todoItemsAdapter.notifyDataSetChanged();
-    }
-
-    private void deleteAll() {
-        todoDB.removeAllItems();
-        todoItemsAdapter.notifyDataSetChanged();
-        updateList();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         todoDB.close();
 
     }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_todoliste_context, menu);
-    }
-
-    public void createEdit(final ToDoItem item) {
-        LayoutInflater inflater = LayoutInflater.from(ToDoListe.this);
-        View dialogView = inflater.inflate(R.layout.todoliste_context, null);
-        AlertDialog.Builder alertDialog =  new AlertDialog.Builder(ToDoListe.this);
-        alertDialog.setView(dialogView);
-        final EditText edit = (EditText) dialogView.findViewById(R.id.edit_dialog_input);
-        edit.setText(item.getName());
-
-        alertDialog.setCancelable(true).setPositiveButton("Save", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int id) {
-
-                String newName = edit.getText().toString();
-
-                todoDB.updateToDoItem(newName,item);
-                todoItemsAdapter.notifyDataSetChanged();
-                updateList();
-            }
-        }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-        final AlertDialog alert = alertDialog.create();
-        alert.show();
-
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo adapterInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int position = (int) adapterInfo.id;
-
-        switch(item.getItemId()) {
-            case R.id.menu_delete_task:
-                removeTaskAtPosition(position);
-                break;
-            case R.id.menu_edit_task:
-                createEdit(items.get(position));
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
-
 }

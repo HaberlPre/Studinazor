@@ -33,8 +33,8 @@ public class ToDoListeAdapter extends ArrayAdapter<ToDoItem> {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.todolist_itemlist, null);
-
         }
+
         ToDoItem task = todoList.get(position);
 
         if (task != null) {
@@ -44,7 +44,6 @@ public class ToDoListeAdapter extends ArrayAdapter<ToDoItem> {
             TextView textTime = (TextView) v.findViewById(R.id.text_time);
 
             textTask.setText(task.getName());
-            //textDate.setText(task.getDateString());
             textDate.setText(task.getFormattedDate());
             textTime.setText(task.getTimeString());
         }

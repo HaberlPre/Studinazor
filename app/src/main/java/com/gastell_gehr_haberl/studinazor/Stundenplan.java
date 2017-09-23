@@ -16,7 +16,7 @@ import android.widget.Button;
 
 public class Stundenplan extends AppCompatActivity {
 
-    //Variabeln
+    //Variablen
     Button mondayButton;
     Button tuesdayButton;
     Button wednesdayButton;
@@ -90,6 +90,26 @@ public class Stundenplan extends AppCompatActivity {
     }
 
     /**
+     * Menü in der Actionbar
+     * @param item
+     * @return Welche Aktion ausgelöst werden soll: Zurück-Pfeil
+     *
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(), StartScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
      * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
      */
     private void enableStartScreenButton() {
@@ -121,25 +141,4 @@ public class Stundenplan extends AppCompatActivity {
             });
         }
     }
-
-    /**
-     * Menü in der Actionbar
-     * @param item
-     * @return Welche Aktion ausgelöst werden soll: Zurück-Pfeil
-     *
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(), StartScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("EXIT", true);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
   }

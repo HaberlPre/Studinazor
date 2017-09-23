@@ -6,7 +6,7 @@ package com.gastell_gehr_haberl.studinazor;
 
 public class ShopItem {
 
-    //Variabeln
+    //Variablen
     private String amount;
     private String unit;
     private String name;
@@ -27,18 +27,6 @@ public class ShopItem {
 
     public String getName(){
         return name;
-    }
-
-    public void setAmount(String amount){
-        this.amount = amount;
-    }
-
-    public void setUnit(String unit){
-        this.unit = unit;
-    }
-
-    public void setName(String name){
-        this.name = name;
     }
 
     @Override

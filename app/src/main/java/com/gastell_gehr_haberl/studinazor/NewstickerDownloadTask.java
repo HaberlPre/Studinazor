@@ -28,7 +28,7 @@ public class NewstickerDownloadTask extends AsyncTask<String, Void, Void> {
     private static final String URLTOIMAGE = "urlToImage";
     private static final String PUBLISHEDAT = "publishedAt";
 
-    //Variabeln
+    //Variablen
     private ArrayList<NewstickerItem> items;
     private DownloadListener listener;
     

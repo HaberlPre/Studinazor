@@ -17,7 +17,7 @@ import android.widget.EditText;
 
 public class StundenplanDienstag extends AppCompatActivity implements View.OnClickListener{
 
-    //Variabeln
+    //Variablen
     private EditText inputFirstClass;
     private EditText inputSecondClass;
     private EditText inputThirdClass;
@@ -111,7 +111,7 @@ public class StundenplanDienstag extends AppCompatActivity implements View.OnCli
         savePreferences("thirdRoomTuesday", inputThirdRoom.getText().toString());
         savePreferences("fourthRoomTuesday", inputFourthRoom.getText().toString());
         savePreferences("fifthRoomTuesday", inputFifthRoom.getText().toString());
-        savePreferences("sixthRoomTuesday", inputSecondRoom.getText().toString());
+        savePreferences("sixthRoomTuesday", inputSixthRoom.getText().toString());
 
     }
 

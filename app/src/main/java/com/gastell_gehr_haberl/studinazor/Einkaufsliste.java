@@ -32,7 +32,7 @@ public class Einkaufsliste extends AppCompatActivity {
      * Orientiert an Übung 5 des Android-Kurses
      */
 
-
+    //Variablen
     private ArrayList<ShopItem> shopItems;
     private EinkaufslisteAdapter shopItems_adapter;
     private EinkaufslisteDatabase shopDB;
@@ -169,39 +169,6 @@ public class Einkaufsliste extends AppCompatActivity {
     }
 
     /**
-     * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
-     */
-    private void enableStartScreenButton() {
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
-            Button startNewsfeed = (Button) findViewById(R.id.StartToNewsfeedButton);
-            Button startToDo = (Button) findViewById(R.id.StartToToDoButton);
-            Button startStundenplan = (Button) findViewById(R.id.StartToStundenplanButton);
-            startNewsfeed.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent newsfeedStart = new Intent(Einkaufsliste.this, NewstickerActivity.class);
-                    startActivity(newsfeedStart);
-                }
-            });
-            startToDo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent toDoStart = new Intent(Einkaufsliste.this, ToDoListe.class);
-                    startActivity(toDoStart);
-                }
-            });
-            startStundenplan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent stundenplanStart = new Intent(Einkaufsliste.this, Stundenplan.class);
-                    startActivity(stundenplanStart);
-                }
-            });
-        }
-    }
-
-    /**
      * Erstellt das Context Menü
      * @param menu
      * @param v
@@ -316,6 +283,39 @@ public class Einkaufsliste extends AppCompatActivity {
         shopDB.removeAllItems();
         shopItems_adapter.notifyDataSetChanged();
         refreshList();
+    }
+
+    /**
+     * Macht im Landscape-Modus die Benutzung der StartScreen-Buttons möglich
+     */
+    private void enableStartScreenButton() {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Button startNewsfeed = (Button) findViewById(R.id.StartToNewsfeedButton);
+            Button startToDo = (Button) findViewById(R.id.StartToToDoButton);
+            Button startStundenplan = (Button) findViewById(R.id.StartToStundenplanButton);
+            startNewsfeed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent newsfeedStart = new Intent(Einkaufsliste.this, NewstickerActivity.class);
+                    startActivity(newsfeedStart);
+                }
+            });
+            startToDo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent toDoStart = new Intent(Einkaufsliste.this, ToDoListe.class);
+                    startActivity(toDoStart);
+                }
+            });
+            startStundenplan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent stundenplanStart = new Intent(Einkaufsliste.this, Stundenplan.class);
+                    startActivity(stundenplanStart);
+                }
+            });
+        }
     }
 
     @Override

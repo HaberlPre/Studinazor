@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class StartScreen extends AppCompatActivity {
 
-    //Variabeln
+    //Variablen
     Button toDoButton;
     Button einkaufsButton;
     Button stundenplanButton;
@@ -24,7 +24,7 @@ public class StartScreen extends AppCompatActivity {
     }
 
     /**
-     * Legt fest wohin die Buttons beim Anklicken führen
+     * Legt fest, wohin die Buttons beim Anklicken führen
      */
     private void setListeners() {
         toDoButton.setOnClickListener(new View.OnClickListener() {

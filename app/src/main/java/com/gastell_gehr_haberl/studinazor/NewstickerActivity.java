@@ -31,7 +31,7 @@ public class NewstickerActivity extends AppCompatActivity implements DownloadLis
      * Orientiert an Übung 7 des Android-Kurses
      */
 
-    //Variabeln
+    //Variablen
     private ArrayList<NewstickerItem> items;
     private boolean showLinks = false;
     private NewstickerItemAdapterNoLinks adapterNoLinks;

@@ -12,8 +12,15 @@ import android.content.Intent;
 
 public class NotiPublisher extends BroadcastReceiver {
 
+    //Statische Variablen
     public static String NOTI_ID = "notification-id";
     public static String NOTI = "notification";
+
+    /**
+     * Löst die Notification aus
+     * @param context
+     * @param intent
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationManager notiMan = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

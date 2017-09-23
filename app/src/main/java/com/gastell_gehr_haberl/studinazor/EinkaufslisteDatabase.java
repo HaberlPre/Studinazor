@@ -32,7 +32,7 @@ public class EinkaufslisteDatabase {
     public static final int COLUMN_ITEM_INDEX = 3;
 
 
-    //Variabeln
+    //Variablen
     private ToDoDBOpenHelper dbHelper;
     private SQLiteDatabase db;
 

@@ -6,7 +6,7 @@ package com.gastell_gehr_haberl.studinazor;
 
 public class NewstickerItem {
 
-    //Variabeln
+    //Variablen
     private String author;
     private String title;
     private String description;

@@ -16,10 +16,9 @@ import java.util.Locale;
  * Created by Juliane on 05.09.2017.
  */
 
-public class ToDoListeChosenDate   extends DialogFragment implements
-        DatePickerDialog.OnDateSetListener {
+public class ToDoListeChosenDate extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    //final Calendar c = Calendar.getInstance();
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Calendar c = Calendar.getInstance();
@@ -32,6 +31,13 @@ public class ToDoListeChosenDate   extends DialogFragment implements
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
+    /**
+     * Stellt das gewählte Datum im Textfeld dar
+     * @param view
+     * @param year
+     * @param month
+     * @param day
+     */
     public void onDateSet(DatePicker view,  int year, int month, int day) {
         TextView textView = (TextView) getActivity().findViewById(R.id.notification_date);
 

@@ -11,6 +11,7 @@ import java.util.Locale;
  */
 public class ToDoItem implements Comparable<ToDoItem> {
 
+    //Variablen
     private String name;
     private GregorianCalendar date;
     private String timeString;
@@ -28,7 +29,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
         date.set(Calendar.MINUTE, minute);
     }
 
-    public String getHour() { //int auch mgl
+    public String getHour() {
         return hour+"";
     }
 
@@ -42,10 +43,6 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
     public String getTimeString() {
         return timeString;
-    }
-
-    public void setName(String name){
-        this.name = name;
     }
 
     public String getFormattedDate() {
@@ -69,3 +66,4 @@ public class ToDoItem implements Comparable<ToDoItem> {
     }
 
 }
+
