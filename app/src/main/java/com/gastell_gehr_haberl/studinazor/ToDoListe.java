@@ -239,7 +239,14 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void addNewTask(String task, String date, String time) {
-        ToDoItem newTask = new ToDoItem(task, date, time);
+        Date dueDate = getDateFromString(date);
+        Calendar c = new GregorianCalendar();
+        c.setTime(dueDate);
+
+        ToDoItem newTask = new ToDoItem(task, c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+                c.get(Calendar.DAY_OF_MONTH), time);
+
+        //ToDoItem newTask = new ToDoItem(task, date, time);
         todoDB.insertItem(newTask);
         updateList();
     }

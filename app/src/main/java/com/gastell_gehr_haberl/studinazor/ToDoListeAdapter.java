@@ -17,8 +17,6 @@ public class ToDoListeAdapter extends ArrayAdapter<ToDoItem> {
 
     private ArrayList<ToDoItem> todoList;
     private Context context;
-    //private TextView item;
-    //private TextView date;
 
     public ToDoListeAdapter(Context context, ArrayList<ToDoItem> listItems) {
         super(context, R.layout.todolist_itemlist, listItems);
@@ -46,7 +44,8 @@ public class ToDoListeAdapter extends ArrayAdapter<ToDoItem> {
             TextView textTime = (TextView) v.findViewById(R.id.text_time);
 
             textTask.setText(task.getName());
-            textDate.setText(task.getDateString());
+            //textDate.setText(task.getDateString());
+            textDate.setText(task.getFormattedDate());
             textTime.setText(task.getTimeString());
         }
 

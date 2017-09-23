@@ -8,7 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Juliane on 05.09.2017.
@@ -55,7 +60,8 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
     public long insertItem(ToDoItem item) {
         ContentValues newItems = new ContentValues();
         newItems.put(KEY_TASK, item.getName());
-        newItems.put(KEY_DATE, item.getDateString());
+        //newItems.put(KEY_DATE, item.getDateString());
+        newItems.put(KEY_DATE, item.getFormattedDate());
         newItems.put(KEY_TIME, item.getTimeString());
         return db.insert(DATABASE_TABLE, null, newItems);
     }
@@ -68,7 +74,22 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
                 String task = cursor.getString(COLUMN_TASK_INDEX);
                 String date = cursor.getString(COLUMN_DATE_INDEX);
                 String time = cursor.getString(COLUMN_TIME_INDEX);
-                items.add(new ToDoItem(task, date, time));
+
+                Date formattedDate = null;
+                try {
+                    formattedDate = DateFormat.getDateInstance(DateFormat.SHORT,
+                            Locale.GERMANY).parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Calendar chosenDate = Calendar.getInstance(Locale.GERMANY);
+                chosenDate.setTime(formattedDate);
+
+                items.add(new ToDoItem(task, chosenDate.get(Calendar.YEAR), chosenDate.get(Calendar.DAY_OF_MONTH),
+                        chosenDate.get(Calendar.DAY_OF_MONTH), time));
+
+                //items.add(new ToDoItem(task, date, time));
             } while (cursor.moveToNext());
         }
         return items;

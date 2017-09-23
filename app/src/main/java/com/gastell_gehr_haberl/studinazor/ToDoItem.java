@@ -23,6 +23,12 @@ public class ToDoItem implements Comparable<ToDoItem> {
         this.time = new GregorianCalendar(hourOfDay, minute, seconds);
     }
 
+    public ToDoItem(String name, int year, int month, int day, String time) {
+        this.name = name;
+        date = new GregorianCalendar(year, month, day);
+        timeString = time;
+    }
+
     public ToDoItem(String name, String date, String time) {
         this.name = name;
         dateString = date;
