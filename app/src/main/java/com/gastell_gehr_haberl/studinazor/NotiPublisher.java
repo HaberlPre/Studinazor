@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 /**
  * Created by lucas on 21.09.2017.
@@ -17,7 +16,6 @@ public class NotiPublisher extends BroadcastReceiver {
     public static String NOTI = "notification";
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.e("onReceive", "asdf");
         NotificationManager notiMan = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification noti = intent.getParcelableExtra(NOTI);
         int id = intent.getIntExtra(NOTI_ID, 0);

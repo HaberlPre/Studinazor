@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
@@ -53,6 +54,8 @@ public class ToDoListe extends AppCompatActivity {
     private Button addButton;
     private Switch switchButton;
     private EditText todoText;
+    private EditText dateEdit;
+    private EditText timeEdit;
     private LinearLayout dateAndTimeLayout;
     private boolean userHasReminder;
     private ToDoItem userToDoItem;
@@ -122,9 +125,25 @@ public class ToDoListe extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         mHour = hourOfDay;
+                        tHour = hourOfDay;
                         mMinute = minute;
+                        tMinute = minute;
+                        String hourString;
+                        String minuteString;
+                        if (hourOfDay < 10) {
+                            hourString = "0"+hourOfDay;
+                        }
+                        else {
+                            hourString = hourOfDay+"";
+                        }
 
-                        mTimeEditText.setText(hourOfDay+":"+minute);
+                        if (minute < 10) {
+                            minuteString = "0"+minute;
+                        } else {
+                            minuteString = minute+"";
+                        }
+
+                        mTimeEditText.setText(hourString+":"+minuteString);
                         /*GregorianCalendar t = new GregorianCalendar(hourOfDay, minute, 12); //(hour, minute);
                         long timeinmilis = 0;
                         timeinmilis += minute*60*1000;
@@ -166,27 +185,27 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void buttonClicked() {
+
         todoText = (EditText) findViewById(R.id.todo_text_task);
-        EditText dateEdit = (EditText) findViewById(R.id.notification_date);
-        EditText timeEdit = (EditText) findViewById(R.id.notification_time);
+        dateEdit = (EditText) findViewById(R.id.notification_date);
+        timeEdit = (EditText) findViewById(R.id.notification_time);
         String task = todoText.getText().toString();
         String date = dateEdit.getText().toString();
         String time = timeEdit.getText().toString();
 
         if (!task.equals("") && !date.equals("") && !time.equals("")) {
         //if (!task.equals("") && !date.equals("")) {
-            todoText.setText("");
-            dateEdit.setText("");
-            timeEdit.setText("");
             addNewTask(task, date, time);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Notifaction) {
 
                 //createNotification("Studinazor", task, date); //noti geht, aber sofort
                 //String content = getContent();
-                Notification notification = getNoti(task);
-                scheduleNoti(notification, getTime()); //nix passiert(mit noti)
+                scheduleNoti(getNoti(task), getTime()); //nix passiert(mit noti)
             }
             //addNewTask(task, date);
+            todoText.setText("");
+            dateEdit.setText("");
+            timeEdit.setText("");
         }
     }
 
@@ -198,23 +217,40 @@ public class ToDoListe extends AppCompatActivity {
 
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         //alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, pIntent);
-        //alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+5000, pIntent);
-        alarm.set(AlarmManager.RTC_WAKEUP, time, pIntent); //TODO mathe
+        alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+time, pIntent);
+        //alarm.set(AlarmManager.RTC_WAKEUP, time, pIntent); //TODO mathe
         //datum in zukunft - sys currenttime -> ersetzt realtime
     }
 
     private long getTime() {
-        EditText dateEdit = (EditText) findViewById(R.id.notification_date);
+        dateEdit = (EditText) findViewById(R.id.notification_date);
+        timeEdit = (EditText) findViewById(R.id.notification_time);
         String date = dateEdit.getText().toString();
+        String time = timeEdit.getText().toString();
+        /*String[] dateInts = date.split(".");
+        int day = Integer.valueOf(dateInts[0]); //TODO crashed die app?!?
+        int month = Integer.valueOf(dateInts[1]);
+        int year = Integer.valueOf(dateInts[2]);
+        String[] timeInts = time.split(":");
+        int hour = Integer.valueOf(timeInts[0]);
+        int min = Integer.valueOf(timeInts[1]);*/
+
+        //Calendar chosenDate = new GregorianCalendar();
+        //chosenDate.set(year, month, day, hour, min);
         Date dueDate = getDateFromString(date);
         GregorianCalendar chosenDate = new GregorianCalendar();
         chosenDate.setTime(dueDate);
+        chosenDate.set(Calendar.HOUR_OF_DAY, tHour);
+        chosenDate.set(Calendar.MINUTE, tMinute);
         //neu
         Date currDate = new Date();
         GregorianCalendar currentDate = new GregorianCalendar();
         currentDate.setTime(currDate);
         //int timeOfDay = hourOfDayNoti*60*60*1000;
-        long notiTime = chosenDate.getTimeInMillis() - currentDate.getTimeInMillis();
+        //long notiTime = chosenDate.getTimeInMillis() - currentDate.getTimeInMillis();
+        //long notiTime = chosenDate.getTimeInMillis() - SystemClock.elapsedRealtime();
+        long notiTime = chosenDate.getTimeInMillis() - System.currentTimeMillis();
+        //long notiTime = chosenDate.getTimeInMillis();
         return notiTime;
     }
 
