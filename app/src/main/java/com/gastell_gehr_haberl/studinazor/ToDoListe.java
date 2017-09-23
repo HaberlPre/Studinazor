@@ -56,7 +56,7 @@ public class ToDoListe extends AppCompatActivity {
     private boolean Notifaction = false;
 
     private int mHour, mMinute;
-    private int tHour, tMinute;
+    public int tHour, tMinute;
 
 
     @Override
@@ -156,7 +156,7 @@ public class ToDoListe extends AppCompatActivity {
         String time = timeEdit.getText().toString();
 
         if (!task.equals("") && !date.equals("") && !time.equals("")) {
-            addNewTask(task, date, time);
+            addNewTask(task, date, time, tHour, tMinute);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Notifaction) {
                 scheduleNoti(getNoti(task), getTime());
             }
@@ -238,13 +238,13 @@ public class ToDoListe extends AppCompatActivity {
         list.setAdapter(todoItemsAdapter);
     }
 
-    private void addNewTask(String task, String date, String time) {
+    private void addNewTask(String task, String date, String time, int hour, int minute) {
         Date dueDate = getDateFromString(date);
         Calendar c = new GregorianCalendar();
         c.setTime(dueDate);
 
         ToDoItem newTask = new ToDoItem(task, c.get(Calendar.YEAR), c.get(Calendar.MONTH),
-                c.get(Calendar.DAY_OF_MONTH), time);
+                c.get(Calendar.DAY_OF_MONTH), hour, minute, time);
 
         //ToDoItem newTask = new ToDoItem(task, date, time);
         todoDB.insertItem(newTask);

@@ -1,6 +1,7 @@
 package com.gastell_gehr_haberl.studinazor;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -12,36 +13,34 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
     private String name;
     private GregorianCalendar date;
-    private String dateString;
-    private GregorianCalendar time;
     private String timeString;
+    private int hour;
+    private int minute;
 
 
-    public ToDoItem(String name, int day, int month, int year, int seconds, int minute, int hourOfDay) {
-        this.name = name;
-        this.date = new GregorianCalendar(year, month, day);
-        this.time = new GregorianCalendar(hourOfDay, minute, seconds);
-    }
-
-    public ToDoItem(String name, int year, int month, int day, String time) {
+    public ToDoItem (String name, int year, int month, int day, int hour, int minute, String time) {
         this.name = name;
         date = new GregorianCalendar(year, month, day);
         timeString = time;
+        this.hour = hour;
+        this.minute = minute;
     }
 
-    public ToDoItem(String name, String date, String time) {
-        this.name = name;
-        dateString = date;
-        timeString = time;
+    private void addHourAndMinute() {
+        date.set(Calendar.HOUR_OF_DAY, hour);
+        date.set(Calendar.MINUTE, minute);
     }
 
+    public String getHour() { //int auch mgl
+        return hour+"";
+    }
+
+    public String getMinute() {
+        return minute+"";
+    }
 
     public String getName() {
         return name;
-    }
-
-    public String getDateString() {
-        return dateString;
     }
 
     public String getTimeString() {
@@ -59,6 +58,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
     }
 
     public Date getDueDate() {
+        addHourAndMinute();
         return date.getTime();
     }
 
@@ -69,8 +69,7 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
     @Override
     public String toString() {
-        return "Name: " + getName() + ", Date: " + getFormattedDate() + ", Time: ";
+        return "Name: " + getName() + ", Date: " + getFormattedDate() + ", Time: "+ timeString;
     }
 
 }
-
