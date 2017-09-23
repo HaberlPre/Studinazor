@@ -209,8 +209,12 @@ public class ToDoListe extends AppCompatActivity {
         Date dueDate = getDateFromString(date);
         GregorianCalendar chosenDate = new GregorianCalendar();
         chosenDate.setTime(dueDate);
-        int timeOfDay = hourOfDayNoti*60*60*1000;
-        long notiTime = chosenDate.getTimeInMillis()+timeOfDay;
+        //neu
+        Date currDate = new Date();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.setTime(currDate);
+        //int timeOfDay = hourOfDayNoti*60*60*1000;
+        long notiTime = chosenDate.getTimeInMillis() - currentDate.getTimeInMillis();
         return notiTime;
     }
 
