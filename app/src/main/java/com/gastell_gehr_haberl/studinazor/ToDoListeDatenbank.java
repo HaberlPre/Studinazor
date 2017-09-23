@@ -8,12 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by Juliane on 05.09.2017.
@@ -30,12 +25,12 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
     public static final String KEY_TASK = "task";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
-    public static final String KEY_BOX = "false";
+    //public static final String KEY_BOX = "false";
 
     public static final int COLUMN_TASK_INDEX = 1;
     public static final int COLUMN_DATE_INDEX = 2;
     public static final int COLUMN_TIME_INDEX = 3;
-    public static final int COLUMN_BOX_INDEX = 4;
+    //public static final int COLUMN_BOX_INDEX = 4;
 
     private ToDoDBOpenHelper dbHelper;
 
@@ -62,8 +57,10 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
     public long insertItem(ToDoItem item) {
         ContentValues newItems = new ContentValues();
         newItems.put(KEY_TASK, item.getName());
-        newItems.put(KEY_DATE, item.getFormattedDate());
-        newItems.put(KEY_TIME, item.getFormattedTime());
+        //newItems.put(KEY_DATE, item.getFormattedDate());
+        //newItems.put(KEY_TIME, item.getFormattedTime());
+        newItems.put(KEY_DATE, item.getDateString());
+        newItems.put(KEY_TIME, item.getTimeString());
         return db.insert(DATABASE_TABLE, null, newItems);
     }
 
@@ -76,7 +73,7 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
                 String task = cursor.getString(COLUMN_TASK_INDEX);
                 String date = cursor.getString(COLUMN_DATE_INDEX);
                 String time = cursor.getString(COLUMN_TIME_INDEX);
-                Date formattedDate = null;
+                /*Date formattedDate = null;
                 Date formattedTime = null;
                 try {
                     //formattedDate = new SimpleDateFormat("dd.MM.yyyy",
@@ -100,7 +97,8 @@ public class ToDoListeDatenbank implements Comparable<ToDoListeDatenbank> {
                         //chosenTime.get(Calendar.SECOND), chosenTime.get(Calendar.MINUTE),chosenTime.get(Calendar.HOUR)));
                 //items.add(new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                 //        chosenDate.get(Calendar.MONTH), chosenDate.get(Calendar.YEAR)));
-
+                */
+                items.add(new ToDoItem(task, date, time));
             } while (cursor.moveToNext());
         }
         return items;

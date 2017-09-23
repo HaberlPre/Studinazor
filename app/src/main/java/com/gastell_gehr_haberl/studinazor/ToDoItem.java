@@ -12,8 +12,9 @@ public class ToDoItem implements Comparable<ToDoItem> {
 
     private String name;
     private GregorianCalendar date;
+    private String dateString;
     private GregorianCalendar time;
-    //private String time;
+    private String timeString;
     private boolean hasReminder;
 
 
@@ -25,19 +26,23 @@ public class ToDoItem implements Comparable<ToDoItem> {
         //this.time = ""+hourOfDay+":"+minute;
     }
 
-    public ToDoItem(String name, int day, int month, int year) {
+    public ToDoItem(String name, String date, String time) {
         this.name = name;
-        this.date = new GregorianCalendar(year, month, day);
+        dateString = date;
+        timeString = time;
     }
-
-    public ToDoItem(String name) {
-        this.name = name;
-    }
-
 
 
     public String getName() {
         return name;
+    }
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public String getTimeString() {
+        return timeString;
     }
 
     public void setName(String name){

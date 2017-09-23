@@ -1,6 +1,5 @@
 package com.gastell_gehr_haberl.studinazor;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DialogFragment;
 import android.app.Notification;
@@ -14,14 +13,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
-import android.text.format.Time;
-import android.util.AndroidException;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,7 +25,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -131,7 +124,7 @@ public class ToDoListe extends AppCompatActivity {
                         mHour = hourOfDay;
                         mMinute = minute;
 
-                        mTimeEditText.setText(hourOfDay+":"+minute+":"+ seconds);
+                        mTimeEditText.setText(hourOfDay+":"+minute);
                         /*GregorianCalendar t = new GregorianCalendar(hourOfDay, minute, 12); //(hour, minute);
                         long timeinmilis = 0;
                         timeinmilis += minute*60*1000;
@@ -241,11 +234,7 @@ public class ToDoListe extends AppCompatActivity {
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    Notifaction = true;
-                } else {
-                    Notifaction = false;
-                }
+                Notifaction = isChecked;
             }
         });
     }
@@ -294,7 +283,7 @@ public class ToDoListe extends AppCompatActivity {
 
         Intent intent = new Intent(this, NotiPublisher.class);
         intent.putExtra(NotiPublisher.NOTI_ID, 1);
-        intent.putExtra(NotiPublisher.NOTI, (Parcelable) mBuilder.build());
+        intent.putExtra(NotiPublisher.NOTI, mBuilder.build());
         //PendingIntent pIntent = PendingIntent.getActivity(this,(int) chosenDate.getTimeInMillis()+timeOfDay, intent, 0);
         PendingIntent pIntent = PendingIntent.getActivity(this,(int) System.currentTimeMillis()+5000, intent, 0);
 
@@ -340,8 +329,8 @@ public class ToDoListe extends AppCompatActivity {
     }
 
     private void addNewTask(String task, String date, String time) {
-    ///private void addNewTask(String task, String date) {
-        Date dueDate = getDateFromString(date);
+    //private void addNewTask(String task, String date) {
+    /*    Date dueDate = getDateFromString(date);
         Date dueTime = getTimeFromString(time);
         GregorianCalendar chosenDate = new GregorianCalendar();
         GregorianCalendar chosenTime = new GregorianCalendar();
@@ -366,9 +355,12 @@ public class ToDoListe extends AppCompatActivity {
         ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
                chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR),
                chosenTime.get(Calendar.SECOND), chosenTime.get(Calendar.MINUTE), chosenTime.get(Calendar.HOUR_OF_DAY));
+               */
 
         //ToDoItem newTask = new ToDoItem(task, chosenDate.get(Calendar.DAY_OF_MONTH),
         //chosenDate.get(Calendar.MONTH),chosenDate.get(Calendar.YEAR));
+
+        ToDoItem newTask = new ToDoItem(task, date, time);
 
         todoDB.insertItem(newTask);
         updateList();
