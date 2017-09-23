@@ -24,9 +24,6 @@ public class ToDoItem implements Comparable<ToDoItem> {
         timeString = time;
         this.hour = hour;
         this.minute = minute;
-    }
-
-    private void addHourAndMinute() {
         date.set(Calendar.HOUR_OF_DAY, hour);
         date.set(Calendar.MINUTE, minute);
     }
@@ -58,7 +55,6 @@ public class ToDoItem implements Comparable<ToDoItem> {
     }
 
     public Date getDueDate() {
-        addHourAndMinute();
         return date.getTime();
     }
 
